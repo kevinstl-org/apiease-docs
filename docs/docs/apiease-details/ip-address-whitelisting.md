@@ -2,9 +2,16 @@
 title: APIEase IP address for whitelisting
 description: IP address details if upstream services require allowlists.
 ---
-
 # APIEase IP address for whitelisting
 
-List the IPs or ranges to allow when your upstream services enforce IP allowlists. Include any environment-specific differences (production, staging, local).
+APIEase makes API calls from a fixed IP address. This is useful if the external system you are calling requires IP whitelisting for security purposes.
 
-Source article: [Source article](https://apiease.tawk.help/article/apiease-ip-address-for-whitelisting).
+The IP address used by APIEase for all outgoing requests is **34.117.76.19**.
+
+This address is static and does not change.
+
+Use Case ExampleSome systems, like ERP or warehouse management platforms, require incoming API calls to originate from a known IP address. Shopify does not provide a fixed IP address range for native webhook or Flow executions, but APIEase gives you a reliable, fixed IP for secure integration.
+
+By using APIEase to make your API calls, you can meet the IP whitelisting requirements of your external systems while still reacting to events in Shopify such as new orders, inventory changes, or customer updates.
+
+Source article: [APIEase IP address for whitelisting](https://apiease.tawk.help/article/apiease-ip-address-for-whitelisting).

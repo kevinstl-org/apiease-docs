@@ -2,12 +2,26 @@
 title: Customer authenticated requests
 description: Cover how APIEase supports customer-authenticated calls and what headers are required.
 ---
-
 # Customer authenticated requests
 
-Explain how to run requests on behalf of a customer:
-- Which headers/tokens are required from Shopify or upstream systems.
-- How customer context is passed through chained requests.
-- Error states to expect when authentication is missing or invalid.
+You can authenticate request calls from your storefront.
 
-Source article: [Source article](https://apiease.tawk.help/article/customer-authentication-details).
+Http calls from your storefront to APIEase are made using the [Shopify App Proxy](https://shopify.dev/docs/apps/online-store/app-proxies). If the customer is logged into your store then the customer id is sent to APIEase.
+
+You can restrict api calls to a particular request in APIEase by logged in customer in one of 2 ways:
+
+1. Automatically validate all logged in customers.
+
+Set "validateCustomer" to true as a System parameter.
+
+With "validateCustomer" set to true the customer must be logged into your store in order for the api call to pass validation and return a response to your storefront.
+
+2. Validate individual customer ids by associating requests with individual customer ids.
+
+Include customer id as System parameter with name: "customerId" and value: "individual customer id".
+
+If request parameters are owned by individual customer you will need to add a separate request with each particular customer's parameters and customer id as a System parameter.
+
+If you add customer id to a request that customer must be logged into the store in order for the api call to pass validation and return a response to your storefront.
+
+Source article: [Customer authenticated requests](https://apiease.tawk.help/article/customer-authentication-details).

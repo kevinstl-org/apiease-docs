@@ -2,12 +2,30 @@
 title: In-app body parameters
 description: Define request bodies and templates stored in APIEase.
 ---
-
 # In-app body parameters
 
-Cover how to build bodies for HTTP requests:
-- Supported formats (JSON, form, raw) and templating rules.
-- Referencing previous responses, Flow parameters, or in-app values.
-- Safety tips for secrets and PII.
+You can add body content to any APIEase request directly from the request editor. Body parameters are used to send structured data to the receiving system, usually when making a POST, PUT, or PATCH request.
 
-Source article: [Source article](https://apiease.tawk.help/article/in-app-body-parameters).
+Body parameters are always entered as a complete JSON object. The name of the parameter is automatically set to body, so you only need to provide the value.
+
+**How to Add a Body Parameter**
+
+While editing your request:
+- Click the plus icon in the Parameter column.
+- Select the Body radio button.
+- Enter your JSON body in the Value field.
+- Click the Save button at the top of the request editor.
+
+**Example Body Parameter**:
+
+**Name**: body (The body parameter name is systematically set to "body" and cannot be changed.)
+
+**Value**:
+
+```json
+{"arg1":"value1","arg2":"value2","arg3":"value3"}
+```
+
+You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic-embedded-parameters-from-storefront) to dynamically set parameters from your storefront.
+
+Source article: [In-app body parameters](https://apiease.tawk.help/article/in-app-body-parameters).

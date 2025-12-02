@@ -2,12 +2,33 @@
 title: Dynamic embedded query parameters
 description: Supply query string values at runtime from Flow or storefront inputs.
 ---
-
 # Dynamic embedded query parameters
 
-Explain how callers can set query parameters dynamically:
-- Accepted sources (Flow, storefront, webhook).
-- Encoding rules and validation to avoid injection.
-- Examples for Shopify Admin/Storefront APIs and third-party services.
+Query parameters can be passed dynamically from the storefront using embedded values. This allows you to include real-time data in your request URLs, such as customer email addresses, cart information, or other storefront-specific details. Dynamic embedded query parameters are added directly to your request at execution time.
 
-Source article: [Source article](https://apiease.tawk.help/article/query-parameters-example).
+Dynamic embedded parameters are added as query parameters to calls made to APIEase from custom liquid in your storefront.
+
+**Example Javascript Snippet:**
+
+```javascript
+const queryParamsEmbeddedVar = JSON.stringify({
+  exampleParameter1: "exampleParameterValue1",
+  exampleParameter2: "exampleParameterValue2",
+  exampleParameter3: "exampleParameterValue3",
+});
+
+const queryParams = new URLSearchParams({
+  requestId: "a1dd1880-ewsd-sdss-8f48-27f04dbadc30",
+  queryParamsEmbedded: queryParamsEmbeddedVar,
+});
+
+fetch('/apps/apiease/integration/caller/call?' + queryParams)
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+
+In the above javascript snippet we see that **queryParamsEmbedded**  is set to the stringified "queryParamsEmbeddedVar".  APIEase looks for a query parameter named **queryParamsEmbedded**  to hold the dynamic embedded query parameters.
+
+Source article: [Dynamic embedded query parameters](https://apiease.tawk.help/article/query-parameters-example).

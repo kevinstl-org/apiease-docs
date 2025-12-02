@@ -2,12 +2,36 @@
 title: In-app flow parameters
 description: Flow-specific parameters stored and referenced inside APIEase.
 ---
+# In-app flow parameters
 
-# In-app Flow parameters
+Flow parameters allow you to define the input data that will be passed to a Shopify Flow workflow when the request is executed. These parameters must match the input fields defined in your Flow template.
 
-Document how Flow parameters are exposed in APIEase:
-- Which Flow inputs are persisted and how to reference them.
-- How to safely pass data from Flow into downstream HTTP calls.
-- Error handling when expected Flow data is missing.
+Flow parameters are configured directly in the request editor and entered as valid JSON.
 
-Source article: [Source article](https://apiease.tawk.help/article/in-app-flow-parameters).
+**How to Add a Flow Parameter**
+
+While editing your Flow request:
+- Click the plus icon in the Parameter column.
+- Select the Flow radio button.
+- Enter the Name you will use to access the flow parameter within your workflow.
+- In the Value field, enter your Flow input in JSON format.
+- Click the Save button at the top of the request editor.
+
+**Flow Parameter Example:**
+
+If your Flow expects a variable named `customer_data` that contains both an email and a customer tag, you could enter:
+
+**Name**: customer_data
+
+**Value**:
+
+```json
+{
+  "email": "user@example.com",
+  "tag": "VIP"
+}
+```
+
+You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic-embedded-parameters-from-storefront) to dynamically set parameters from your storefront.
+
+Source article: [In-app flow parameters](https://apiease.tawk.help/article/in-app-flow-parameters).

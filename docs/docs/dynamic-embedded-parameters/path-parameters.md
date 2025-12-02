@@ -2,12 +2,31 @@
 title: Dynamic embedded path parameters
 description: Inject runtime values into request paths.
 ---
-
 # Dynamic embedded path parameters
 
-Describe how to pass path parameters from the caller at runtime:
-- Placeholder syntax and validation.
-- How storefront or Flow inputs map to these placeholders.
-- Safety guidance for URL encoding and whitelist patterns.
+Unlike query, header and body embedded parameters that are always added as parameters to your request, path parameters are used exclusively for replacing path variables.
 
-Source article: [Source article](https://apiease.tawk.help/article/path-parameters-example).
+Dynamic embedded parameters are added as query parameters to calls made to APIEase from custom liquid in your storefront.
+
+**Example Javascript Snippet:**
+
+```javascript
+const pathParamsEmbeddedVar = JSON.stringify({
+  exampleParameter1: "exampleParameterValue1",
+  exampleParameter2: "exampleParameterValue2",
+  exampleParameter3: "exampleParameterValue3",
+});
+const pathParams = new URLSearchParams({
+  requestId: "a1dd1880-ewsd-sdss-8f48-27f04dbadc32",
+  pathParamsEmbedded: pathParamsEmbeddedVar,
+});
+fetch('/apps/apiease/integration/caller/call?' + pathParams)
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+
+In the above javascript snippet we see that  "**pathParamsEmbedded**" is set to the stringified "pathParamsEmbeddedVar".   APIEase looks for a query parameter named **pathParamsEmbedded**  to hold the dynamic embedded path parameters.
+
+Source article: [Dynamic embedded path parameters](https://apiease.tawk.help/article/path-parameters-example).

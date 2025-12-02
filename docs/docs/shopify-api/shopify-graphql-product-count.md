@@ -2,12 +2,40 @@
 title: Shopify GraphQL API - Product count
 description: Example for counting products via the Shopify GraphQL Admin API.
 ---
+# Shopify GraphQL API - Product count
 
-# Shopify GraphQL API - product count
+Demonstration of calling the Shopify GraphQL API to get a count of products in your Shopify product inventory:
 
-Capture the sample request for counting products:
-- Required headers (`X-Shopify-Access-Token`, `Content-Type`).
-- GraphQL query payload for product counts.
-- Notes on versioning and rate limits.
+Demo store password: eacoht
 
-Source article: [Source article](https://apiease.tawk.help/article/shopify-graphql-api-product-count).
+[https://apiease-demo.myshopify.com/pages/shopify-graphql-api-products](https://apiease-demo.myshopify.com/pages/shopify-rest-api-products)
+
+Example of APIEase Request for Shopify Product Count
+
+**Address**: [https://apiease-demo.myshopify.com/admin/api/2024-07/graphql.json](https://apiease-demo.myshopify.com/admin/api/2024-01/products/count.json)
+
+**
+**
+
+**Method**: POST
+
+**Header Parameters:**
+**
+
+**   Name**: X-Shopify-Access-Token
+
+   **Value**: your-shopify-access-token (Follow these instructions to get your Shopify access token: [https://apiease.tawk.help/article/shopify-access-token](https://apiease.tawk.help/article/shopify-access-token))
+
+   **Name**:  Content-Type
+
+   **Value**:  application/json
+
+**Body Parameters**:
+
+**Value**:
+
+```json
+{ "query": "query { productsCount { count } }" }
+```
+
+Source article: [Shopify GraphQL API - Product count](https://apiease.tawk.help/article/shopify-graphql-api-product-count).
