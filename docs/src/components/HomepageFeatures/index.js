@@ -4,32 +4,32 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Secure API automation',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Store credentials once, reuse them across requests, and keep secrets out
+        of storefronts and Flow Run Code steps.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Shopify-native workflows',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Trigger calls from Shopify Flow, webhooks, or scheduled jobs, then pass
+        results back to your store or other systems.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Chaining without glue code',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Build multi-step automations by chaining HTTP, Flow, and Liquid requests
+        — no new servers or middleware required.
       </>
     ),
   },

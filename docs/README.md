@@ -1,41 +1,37 @@
-# Website
+# APIEase documentation site
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This workspace hosts the APIEase docs built with [Docusaurus](https://docusaurus.io/).
 
-## Installation
+## Install dependencies
 
-```bash
-yarn
-```
-
-## Local Development
+From the `docs/` directory:
 
 ```bash
-yarn start
+npm install
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
+## Local development
 
 ```bash
-yarn build
+npm run start
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+The dev server opens on `http://localhost:3000` and hot-reloads as you edit Markdown or React pages.
 
-## Deployment
-
-Using SSH:
+## Build for production
 
 ```bash
-USE_SSH=true yarn deploy
+npm run build
 ```
 
-Not using SSH:
+Static assets are written to `build/`. Serve them with any static host or the built-in preview:
 
 ```bash
-GIT_USER=<Your GitHub username> yarn deploy
+npm run serve
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+## Adding content
+
+- Docs live under `docs/docs/` and the homepage under `docs/src/pages/`.
+- The sidebar is defined in `docs/sidebars.js` and references the apiease-specific pages.
+- Edit links in the UI point back to this repository for easy PRs.

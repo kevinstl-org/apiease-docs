@@ -10,8 +10,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'APIEase Docs',
-  tagline: 'API & App Dev Agent',
+  title: 'APIEase',
+  tagline: 'Secure automation for Shopify teams',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -47,26 +47,12 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
+          exclude: ['tutorial-basics/**', 'tutorial-extras/**'],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/kevinstl-org/apiease/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/kevinstl-org/apiease/tree/main/docs/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/kevinstl-org/apiease/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -91,11 +77,15 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'docsSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            href: 'https://apiease.tawk.help',
+            label: 'Help center',
+            position: 'left',
+          },
           {
             href: 'https://github.com/kevinstl-org/apiease',
             label: 'GitHub',
@@ -110,25 +100,29 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Overview',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Getting started',
+                to: '/docs/getting-started',
+              },
+              {
+                label: 'Requests & automation',
+                to: '/docs/requests',
               },
             ],
           },
           {
-            title: 'Community',
+            title: 'Resources',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'Help center',
+                href: 'https://apiease.tawk.help',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
+                label: 'Shopify App Store',
+                href: 'https://apps.shopify.com/apiease-admin',
               },
             ],
           },
@@ -136,17 +130,17 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
                 href: 'https://github.com/kevinstl-org/apiease',
+              },
+              {
+                label: 'Support',
+                href: 'mailto:support@apiease.com',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} APIEase.`,
       },
       prism: {
         theme: prismThemes.github,

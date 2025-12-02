@@ -2,46 +2,26 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# APIEase documentation
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to the APIEase docs. APIEase helps Shopify teams orchestrate secure API calls, connect workflows across systems, and centralize credentials without building and hosting their own middleware.
 
-## Getting Started
+Use this site to document how your team installs, configures, and extends APIEase. The sections below outline what belongs where so you can drop in the real content as it’s written.
 
-Get started by **creating a new site**.
+## What you can document here
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+- **Getting started**: onboarding steps for merchants and developers, including prerequisites, environment variables, and how to log into the admin.
+- **Requests and automation**: how to model API calls, map parameters, chain requests, and trigger runs from flows, webhooks, or schedules.
+- **Shopify Flow integration**: how to use the APIEase Flow trigger/action pair, pass parameters, and return data back to Flow.
+- **Remote execution**: how to call APIEase requests from outside Shopify via secure API keys and request IDs.
 
-### What you'll need
+## Recommended structure
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- Start at [Getting started](./getting-started.md) for prerequisites and install notes.
+- Use [Requests & automation](./requests.md) to describe how requests, parameters, and triggers work in your app.
+- Capture Flow-specific guidance in [Shopify Flow](./shopify-flow.md).
+- Add more sections as you build out the product (billing, observability, troubleshooting, release notes, and so on).
 
-## Generate a new site
+## Contributing to these docs
 
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Docs live in the `docs/` workspace in this repository. Use the edit links in the header or run the site locally to preview changes. Keep examples Shopify-specific and avoid leaking secrets—API keys and store domains should use placeholders unless explicitly public.
