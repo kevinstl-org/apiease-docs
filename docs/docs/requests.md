@@ -39,3 +39,11 @@ x-apiease-api-key: <generated_api_key>
 ```
 
 Use this section to document the supported headers, expected responses, and how to rotate keys safely.
+
+## Help Center source articles
+
+Reference articles mirrored into this docs site:
+- Requests description: [Source article](https://apiease.tawk.help/article/apiease-request-description)
+- How to add requests: [Source article](https://apiease.tawk.help/article/how-to-add-requests)
+- Calling requests remotely: [Source article](https://apiease.tawk.help/article/calling-apiease-requests-remotely)
+- Customer authenticated requests: [Source article](https://apiease.tawk.help/article/customer-authentication-details)
