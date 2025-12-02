@@ -47,7 +47,7 @@ Type: Header
 
 Name: Authorization
 
-Value: Bearer {auth_token}
+Value: `Bearer {auth_token}`
 
 Or include it in the body:
 

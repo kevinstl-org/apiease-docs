@@ -10,13 +10,13 @@ You include variables in your path surrounded with double braces.
 
 Example Address Path Containing a Variable:
 
-https://ex.com/{variable1}
+`https://ex.com/{variable1}`
 
 Any in app path parameter or pathParamsEmbedded with the name variable1 will replace the path variables value you place in your address path. Multiple path variables can be added.
 
 In the example above we have:
 
-Address:  https://ex.com/{variable1}
+Address:  `https://ex.com/{variable1}`
 
 Path Parameter:  
 
@@ -26,7 +26,7 @@ Path Parameter:
 
 When the request is executed the address will resolve to:  https://ex.com/inAppValue1
 
-The system replaces variables in the path within curly brackets {} with the value specified in a path parameter.
+The system replaces variables in the path within curly brackets `{}` with the value specified in a path parameter.
 
 For storefront APIEase calls via app proxy you can also set the path variable via a dynamic embedded path parameter.
 
@@ -45,14 +45,14 @@ fetch('/apps/apiease/integration/caller/call?' + queryParams)
   });
 ```
 
-The parameter named "variable1" in pathParamsEmbedded will replace {variable1} in your address path.
+The parameter named `variable1` in `pathParamsEmbedded` will replace `{variable1}` in your address path.
 
-When the request is executed from your storefront via app proxy the address will resolve to: https://ex.com/dynamicEmbeddedPathValue1
+When the request is executed from your storefront via app proxy the address will resolve to: `https://ex.com/dynamicEmbeddedPathValue1`
 
 In app path parameters act as the default parameter. Dynamic embedded parameters override the in app parameter values.
 
-If you only have the in app variable1=inAppValue1 then address  https://ex.com/{variable1} will resolve to https://ex.com/inAppValue1.
+If you only have the in app `variable1=inAppValue1` then address  `https://ex.com/{variable1}` will resolve to `https://ex.com/inAppValue1`.
 
-If you have the in app variable1 = inAppValue1 and pathParamsEmbedded = `JSON.stringify({ variable1: "dynamicEmbeddedPathValue1" })` then address https://ex.com/{variable1} will resolve to https://ex.com/dynamicEmbeddedPathValue1. So dynamic embedded parameters override the default in app path parameters of the same name.
+If you have the in app `variable1 = inAppValue1` and `pathParamsEmbedded = JSON.stringify({ variable1: "dynamicEmbeddedPathValue1" })` then address `https://ex.com/{variable1}` will resolve to `https://ex.com/dynamicEmbeddedPathValue1`. So dynamic embedded parameters override the default in app path parameters of the same name.
 
 Source article: [Path variables](https://apiease.tawk.help/article/path-variables).

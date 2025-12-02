@@ -39,7 +39,7 @@ Here's an example of what the JSON response from Request A might look like:
 ```
 In Request B, you can reference the token value using curly braces:
 
-Authorization: Bearer {auth.token}
+`Authorization: Bearer {auth.token}`
 This tells APIEase to pull the token field from the auth object in the JSON response and insert it into the header of the second request.
 
 **Flexible Use of Response Data**
@@ -66,9 +66,9 @@ For example, suppose Request A returns the following JSON:
 ```
 You could then use those values in Request B like this:
 
-In a query string: ?user_ref={user.id}
+In a query string: `?user_ref={user.id}`
 
-In a header: X-User-Email: {user.email}
+In a header: `X-User-Email: {user.email}`
 
 In the body:
 
