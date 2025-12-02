@@ -6,6 +6,8 @@ description: How to configure HTTP requests in APIEase.
 
 HTTP API requests are highly configurable with many options.  HTTP requests allow you to securely call any external API directly from your Shopify store or through other trigger methods such as webhooks, storefront app proxy, or a recurring schedule.
 
+![HTTP request editor](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/add-http-api-requests.png?v=1744748372)
+
 **HTTP API Request Fields**
 
 **
@@ -35,6 +37,12 @@ Automatically via [webhook](https://apiease.tawk.help/article/trigger-requests-f
 From your storefront using Shopify's app proxy
 
 On a recurring schedule using [cron](https://apiease.tawk.help/article/trigger-requests-via-cron-schedule)
+
+![HTTP webhook trigger](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/trigger-webhook-http.png?v=1744409941)
+
+![Flow webhook trigger](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/trigger-webhook-flow.png?v=1744409941)
+
+![Cron schedule trigger](https://drive.google.com/thumbnail?id=1lImze5kX1IgQLmDd6tzgoKoQN2fezNc_&sz=w1000)
 
 **
 **

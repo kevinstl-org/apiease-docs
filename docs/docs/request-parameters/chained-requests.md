@@ -42,6 +42,8 @@ In Request B, you can reference the token value using curly braces:
 `Authorization: Bearer {auth.token}`
 This tells APIEase to pull the token field from the auth object in the JSON response and insert it into the header of the second request.
 
+![Chained request editor overview](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/chained-requests-description.png?v=1744331402)
+
 **Flexible Use of Response Data**
 
 You can use response values from Request A in multiple parts of Request B:

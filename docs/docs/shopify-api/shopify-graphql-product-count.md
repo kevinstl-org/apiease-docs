@@ -38,4 +38,6 @@ Example of APIEase Request for Shopify Product Count
 { "query": "query { productsCount { count } }" }
 ```
 
+![Shopify GraphQL product count request example](https://drive.google.com/thumbnail?id=1-xKsXIifiNrIK57216BSKcc1XMP2kG2L&sz=w1000)
+
 Source article: [Shopify GraphQL API - Product count](https://apiease.tawk.help/article/shopify-graphql-api-product-count).

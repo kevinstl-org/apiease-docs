@@ -12,4 +12,6 @@ These parameters are managed directly in the request editor.
 
 **Name**: validateCustomer**Value**: trueWith "validateCustomer" set to true the customer must be logged into your store in order for the api call to pass validation and return a response to your storefront.
 
+![In-app system parameter configuration](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/in-app-system-parameters.png?v=1744837315)
+
 Source article: [In-app system parameters](https://apiease.tawk.help/article/in-app-system-parameters).

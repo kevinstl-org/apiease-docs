@@ -18,4 +18,6 @@ Example of APIEase Request for Shopify Product Count
 
 Follow these instructions to get your Shopify access token: [https://apiease.tawk.help/article/shopify-access-token](https://apiease.tawk.help/article/shopify-access-token)
 
+![Shopify REST product count request example](https://drive.google.com/thumbnail?id=1Tld5MtdsMOXzwPI2YN5ggRjp8AvlBRb5&sz=w1000)
+
 Source article: [Shopify REST API - Product count](https://apiease.tawk.help/article/shopify-rest-api-product-count).

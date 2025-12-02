@@ -26,6 +26,8 @@ Path Parameter:
 
 When the request is executed the address will resolve to:  https://ex.com/inAppValue1
 
+![Path variable editing in APIEase](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/path-variable-edit.png?v=1744137415)
+
 The system replaces variables in the path within curly brackets `{}` with the value specified in a path parameter.
 
 For storefront APIEase calls via app proxy you can also set the path variable via a dynamic embedded path parameter.

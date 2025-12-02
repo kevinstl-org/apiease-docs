@@ -82,12 +82,7 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://apiease.tawk.help',
-            label: 'Help center',
-            position: 'left',
-          },
-          {
-            href: 'https://github.com/kevinstl-org/apiease',
+            href: 'https://github.com/kevinstl-org/apiease-docs',
             label: 'GitHub',
             position: 'right',
           },
@@ -117,10 +112,6 @@ const config = {
             title: 'Resources',
             items: [
               {
-                label: 'Help center',
-                href: 'https://apiease.tawk.help',
-              },
-              {
                 label: 'Shopify App Store',
                 href: 'https://apps.shopify.com/apiease-admin',
               },
@@ -129,10 +120,6 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/kevinstl-org/apiease',
-              },
               {
                 label: 'Support',
                 href: 'mailto:support@apiease.com',

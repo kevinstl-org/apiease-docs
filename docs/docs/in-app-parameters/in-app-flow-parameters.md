@@ -34,4 +34,6 @@ If your Flow expects a variable named `customer_data` that contains both an emai
 
 You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic-embedded-parameters-from-storefront) to dynamically set parameters from your storefront.
 
+![In-app flow parameter fields](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/in-app-flow-parameters.png?v=1744838680)
+
 Source article: [In-app flow parameters](https://apiease.tawk.help/article/in-app-flow-parameters).

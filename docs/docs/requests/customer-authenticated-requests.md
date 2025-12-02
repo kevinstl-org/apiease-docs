@@ -24,4 +24,8 @@ If request parameters are owned by individual customer you will need to add a se
 
 If you add customer id to a request that customer must be logged into the store in order for the api call to pass validation and return a response to your storefront.
 
+![Validate customer system parameter toggle](https://tawk.link/65552a3acec6a91282103248/kb/attachments/zy4MAt-qUF.png)
+
+![Customer id system parameter example](https://tawk.link/65552a3acec6a91282103248/kb/attachments/zFgy2rIovc.png)
+
 Source article: [Customer authenticated requests](https://apiease.tawk.help/article/customer-authentication-details).

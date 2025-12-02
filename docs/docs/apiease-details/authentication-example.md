@@ -67,6 +67,8 @@ Go back to your authentication request and set the Next Request field to the nam
 
 When the authentication request completes successfully, APIEase will automatically execute the next request and insert the token where specified.
 
+![Chained requests example](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/chained-requests-example.png?v=1744331402)
+
 **Secure by Design**
 
 All credentials and tokens stay on the server and are never exposed to the storefront or customer browser. This ensures a secure authentication flow without needing to build your own app or server.

@@ -25,4 +25,6 @@ If your API endpoint is structured as `https://ex.com/products/{pathVariable1}` 
 
 You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic-embedded-parameters-from-storefront) to dynamically set parameters from your storefront.
 
+![In-app path parameter configuration](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/path-variable-edit.png?v=1744137415)
+
 Source article: [In-app path parameters](https://apiease.tawk.help/article/in-app-path-parameters).
