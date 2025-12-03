@@ -140,10 +140,10 @@ Assign and capture:
 **Triggers**
 
 Choose how the request should be triggered:
-  - Automatically via [webhook](https://apiease.tawk.help/article/trigger-requests-from-a-webhook)
-  - On a recurring schedule using [cron](https://apiease.tawk.help/article/trigger-requests-via-cron-schedule)
-  - As an endpoint served by APIEase via [Proxy Endpoints](https://apiease.tawk.help/article/proxy-endpoint-trigger)
-  - [Remotely](https://apiease.tawk.help/article/calling-apiease-requests-remotely) from any http client.
+  - Automatically via [webhook](../requests/trigger-requests-from-a-webhook.md)
+  - On a recurring schedule using [cron](../requests/trigger-requests-via-cron-schedule.md)
+  - As an endpoint served by APIEase via [Proxy Endpoints](../requests/proxy-endpoint-trigger.md)
+  - [Remotely](../requests/calling-requests-remotely.md) from any http client.
   - Manually via the "Copy and Execute" link on the requests admin page
   - From your storefront using Shopify's app proxy
 

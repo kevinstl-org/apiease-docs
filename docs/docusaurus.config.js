@@ -50,7 +50,7 @@ const config = {
           exclude: ['tutorial-basics/**', 'tutorial-extras/**'],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/kevinstl-org/apiease/tree/main/docs/',
+          // editUrl: 'https://github.com/kevinstl-org/apiease/tree/main/docs/',
         },
         blog: false,
         theme: {

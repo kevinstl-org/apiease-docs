@@ -8,7 +8,7 @@ Shopify gives you powerful tools to run an online store, but it does not provide
 
 APIEase fills this gap by allowing you to make secure, authenticated API requests and integrate with Shopify Flow without needing to build your own Shopify app.
 
-All calls from APIEase originate from a [static ip address](https://apiease.tawk.help/article/apiease-ip-address-for-whitelisting) for external systems that require whitelisted ip addresses.
+All calls from APIEase originate from a [static ip address](../apiease-details/ip-address-whitelisting.md) for external systems that require whitelisted ip addresses.
 
 **HTTP API Integration**
 

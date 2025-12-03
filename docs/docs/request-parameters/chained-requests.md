@@ -77,7 +77,7 @@ The curly brace syntax tells APIEase to substitute in the corresponding value fr
 
 If you want to see this in action, we've created a walkthrough of a common use case: authenticating with a service, storing the returned access token, and using it in a follow-up request.
 
-[View Authentication Example](https://apiease.tawk.help/article/authentication-example)
+[View Authentication Example](../apiease-details/authentication-example.md)
 
 **When to Use Chained Requests**
 

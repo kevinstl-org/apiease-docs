@@ -20,7 +20,7 @@ To add `status=active` to a request URL:
 - **Value**: `active`
 Result: `https://ex.com/items?status=active` (additional query params are appended automatically).
 
-You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic-embedded-parameters-from-storefront) to dynamically set parameters from your storefront.
+You can also use [embedded parameters](../dynamic-embedded-parameters/overview.md) to dynamically set parameters from your storefront.
 
 ![In-app query parameter configuration](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/in-app-query-parameters.png?v=1744835524)
 

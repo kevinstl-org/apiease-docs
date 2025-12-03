@@ -4,7 +4,7 @@ description: Example for importing external products into Shopify with APIEase.
 ---
 # Importing products from a third-party system
 
-You can use APIEase's  [Shopify Flow Integration](https://apiease.tawk.help/category/requests/shopify-flow-integration) to automate the import of products and inventory data from third-party systems into your Shopify store. Whether syncing from a warehouse API, supplier feed, or internal catalog, APIEase enables this process without requiring custom app development or hosting.
+You can use APIEase's  [Shopify Flow Integration](../requests/shopify-flow-integration/architecture.md) to automate the import of products and inventory data from third-party systems into your Shopify store. Whether syncing from a warehouse API, supplier feed, or internal catalog, APIEase enables this process without requiring custom app development or hosting.
 
 **How It Works**
 1. **Start with an APIEase Request**: Create an APIEase request to fetch product and inventory data from the third-party system. Trigger it manually, on a schedule, or via a Shopify webhook event.
