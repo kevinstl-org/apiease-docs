@@ -48,11 +48,11 @@ const sidebars = {
             'request-types/liquid-requests',
           ],
         },
-        {
-          type: 'category',
-          label: 'Triggers',
-          items: [
             {
+              type: 'category',
+              label: 'Triggers',
+              items: [
+                {
               type: 'category',
               label: 'Webhooks',
               items: [
@@ -66,9 +66,8 @@ const sidebars = {
               items: ['requests/trigger-requests-via-cron-schedule'],
             },
             {
-              type: 'link',
-              label: 'Proxy endpoint trigger',
-              href: 'https://apiease.tawk.help/article/proxy-endpoint-trigger',
+              type: 'doc',
+              id: 'requests/proxy-endpoint-trigger',
             },
           ],
         },
@@ -76,52 +75,20 @@ const sidebars = {
           type: 'category',
           label: 'Shopify Flow integration',
           items: [
-            {
-              type: 'link',
-              label: 'APIEase + Shopify Flow integration architecture',
-              href: 'https://apiease.tawk.help/article/apiease-shopify-flow-integration-architecture',
-            },
-            {
-              type: 'link',
-              label: 'How to add a Flow request in APIEase',
-              href: 'https://apiease.tawk.help/article/how-to-add-a-flow-request-in-apiease',
-            },
-            {
-              type: 'link',
-              label: 'Minimal Flow integration with APIEase',
-              href: 'https://apiease.tawk.help/article/minimal-flow-integration-with-apiease',
-            },
-            {
-              type: 'link',
-              label: 'APIEase integrated with Shopify Flow - Cat Image Inventory',
-              href: 'https://apiease.tawk.help/article/apiease-integrated-with-shopify-flow-cat-image-inventory',
-            },
+            'requests/shopify-flow-integration/architecture',
+            'requests/shopify-flow-integration/add-flow-request',
+            'requests/shopify-flow-integration/minimal-flow-integration',
+            'requests/shopify-flow-integration/cat-image-inventory',
           ],
         },
         {
           type: 'category',
           label: 'Examples',
           items: [
-            {
-              type: 'link',
-              label: 'Facebook Graph API example',
-              href: 'https://apiease.tawk.help/article/facebook-graph-api-example',
-            },
-            {
-              type: 'link',
-              label: 'HTTP dump example',
-              href: 'https://apiease.tawk.help/article/http-dump-example',
-            },
-            {
-              type: 'link',
-              label: 'Cat API example',
-              href: 'https://apiease.tawk.help/article/cat-api-example',
-            },
-            {
-              type: 'link',
-              label: 'Agify API example',
-              href: 'https://apiease.tawk.help/article/agify-api-example',
-            },
+            'requests/examples/facebook-graph-api',
+            'requests/examples/http-dump',
+            'requests/examples/cat-api',
+            'requests/examples/agify-api',
           ],
         },
         {

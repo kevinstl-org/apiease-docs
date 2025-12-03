@@ -69,7 +69,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'APIEase Docs',
+        title: 'APIEase',
         logo: {
           alt: 'APIEase Logo',
           src: 'img/logo.svg',
