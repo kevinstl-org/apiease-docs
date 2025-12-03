@@ -96,15 +96,15 @@ const config = {
             items: [
               {
                 label: 'Overview',
-                to: '/docs/intro',
+                to: '/docs/overview/apiease-summary',
               },
               {
-                label: 'Getting started',
-                to: '/docs/getting-started',
+                label: 'How it works',
+                to: '/docs/overview/how-it-works',
               },
               {
-                label: 'Requests & automation',
-                to: '/docs/requests',
+                label: 'Request description',
+                to: '/docs/requests/request-description',
               },
             ],
           },
@@ -113,6 +113,10 @@ const config = {
             items: [
               {
                 label: 'Shopify App Store',
+                href: 'https://apps.shopify.com/apiease-admin',
+              },
+              {
+                label: 'Product Site',
                 href: 'https://apps.shopify.com/apiease-admin',
               },
             ],
