@@ -4,12 +4,12 @@ description: Run an APIEase request whenever Shopify sends a webhook event.
 ---
 # Trigger requests from a webhook
 
-You can configure a request in APIEase to automatically run when a Shopify webhook event is received. This connects real-time store events (orders created, customers updated, carts changed, and more) to external APIs or Flow automations without manual polling.
+You can configure a request in APIEase to automatically run when a Shopify webhook event is received. This connects real-time store events (orders created, customers updated, carts changed, and more) to external APIs or Flow automations without manual polling. You can add a webhook trigger to any request. See the [Shopify webhook topics](https://shopify.dev/docs/api/admin-graphql/2023-10/enums/WebhookSubscriptionTopic) for available events.
 
 ![Webhook trigger selection](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/trigger-webhook-http.png?v=1744409941)
 
 ## Add a webhook trigger
-1. Open the request you want to trigger and click the edit icon if needed.
+1. In the APIEase admin, open the request (click the edit icon if needed).
 2. In the **Trigger** column, click the plus icon.
 3. Select **Webhook**.
 4. Choose the Shopify webhook event (for example `orders/create`, `customers/update`, or `carts/update`).
@@ -20,13 +20,48 @@ After saving, APIEase will execute the request every time that event is received
 
 ## Example: webhook-triggered Flow request
 If you want to start a Shopify Flow automation whenever a cart updates:
-- Create a new request and select **Flow** as the request type.
-- Choose your Flow template and fill required parameters.
-- Add a webhook trigger and select `carts/update`.
+1. Create a new request and select **Flow** as the request type.
+2. Choose your Flow template and fill required parameters.
+3. Add a webhook trigger and select `carts/update`.
 
 Each cart update triggers the request and starts the Flow. Any webhook fields you need can also be mapped into Flow input parameters.
 
 ## Webhook payload as body
-When the request is triggered, the webhook payload is passed as the body. If you add body parameters to the request, they are merged into that body. To pull specific payload values into headers, query params, or body fields, see [Mapping webhook parameters](./mapping-webhook-parameters.md).
+When the request is triggered, the webhook payload is passed as the body.
+
+- Base body (example from `discounts/create`):
+```json
+{
+  "admin_graphql_api_id": "gid://shopify/DiscountAutomaticNode/1",
+  "title": "Automatic free shipping",
+  "status": "ACTIVE",
+  "created_at": "2016-08-29T12:00:00-04:00",
+  "updated_at": "2016-08-29T12:00:00-04:00"
+}
+```
+- If you add body parameters, they are merged:
+```json
+{
+  "admin_graphql_api_id": "gid://shopify/DiscountAutomaticNode/1",
+  "title": "Automatic free shipping",
+  "status": "ACTIVE",
+  "created_at": "2016-08-29T12:00:00-04:00",
+  "updated_at": "2016-08-29T12:00:00-04:00",
+  "additional_body_parameter": "some_value"
+}
+```
+- If your body parameters override a webhook field, the original is preserved with `_0` suffix:
+```json
+{
+  "admin_graphql_api_id": "gid://shopify/DiscountAutomaticNode/1",
+  "title": "Title that I prefer",
+  "title_0": "Automatic free shipping",
+  "status": "ACTIVE",
+  "created_at": "2016-08-29T12:00:00-04:00",
+  "updated_at": "2016-08-29T12:00:00-04:00"
+}
+```
+
+To pull specific payload values into headers, query params, or body fields, see [Mapping webhook parameters](./mapping-webhook-parameters.md).
 
 Source article: [Trigger Requests From a Webhook](https://apiease.tawk.help/article/trigger-requests-from-a-webhook).

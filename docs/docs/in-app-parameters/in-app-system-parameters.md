@@ -8,9 +8,19 @@ System parameters are special values that control how a request is handled by AP
 
 These parameters are managed directly in the request editor.
 
-**How to Add a System Parameter**While editing your request, click the plus icon in the Parameter column.Select the System radio button.Enter the name of the system parameter in the Name field.Enter the desired value in the Value field.Click the Save button at the top of the request editor.**System Parameter Example:**To automatically validate all logged in customers set "validateCustomer" to true as a System parameter.
+**How to Add a System Parameter**  
+While editing your request:
+1. Click the plus icon in the Parameter column.
+2. Select the **System** radio button.
+3. Enter the system parameter name in the **Name** field.
+4. Enter the desired value in the **Value** field.
+5. Click **Save** at the top of the request editor.
 
-**Name**: validateCustomer**Value**: trueWith "validateCustomer" set to true the customer must be logged into your store in order for the api call to pass validation and return a response to your storefront.
+**System Parameter Example:**  
+To require logged-in customers for validation, set `validateCustomer` to `true`.
+- **Name**: `validateCustomer`
+- **Value**: `true`
+With `validateCustomer` set to true, the customer must be logged in for the call to pass validation and return a response to the storefront.
 
 ![In-app system parameter configuration](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/in-app-system-parameters.png?v=1744837315)
 

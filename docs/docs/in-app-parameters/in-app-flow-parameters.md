@@ -11,19 +11,17 @@ Flow parameters are configured directly in the request editor and entered as val
 **How to Add a Flow Parameter**
 
 While editing your Flow request:
-- Click the plus icon in the Parameter column.
-- Select the Flow radio button.
-- Enter the Name you will use to access the flow parameter within your workflow.
-- In the Value field, enter your Flow input in JSON format.
-- Click the Save button at the top of the request editor.
+1. Click the plus icon in the Parameter column.
+2. Select the **Flow** radio button.
+3. Enter the **Name** you will use to access the flow parameter within your workflow.
+4. In the **Value** field, enter your Flow input in JSON format.
+5. Click **Save** at the top of the request editor.
 
 **Flow Parameter Example:**
 
 If your Flow expects a variable named `customer_data` that contains both an email and a customer tag, you could enter:
-
-**Name**: customer_data
-
-**Value**:
+- **Name**: customer_data
+- **Value**:
 
 ```json
 {

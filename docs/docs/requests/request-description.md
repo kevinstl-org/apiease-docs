@@ -10,23 +10,17 @@ A request is a configuration that defines how APIEase should securely call an ex
 
 Requests can be used for a wide variety of purposes, including:
 
-Calling third party APIs from your Shopify storefront
-
-Receiving webhook events and responding with external actions
-
-Scheduling recurring data syncs with external systems
-
-Triggering Shopify Flow automations
-
-Executing multiple requests in sequence based on API responses
+- Calling third-party APIs from your Shopify storefront
+- Receiving webhook events and responding with external actions
+- Scheduling recurring data syncs with external systems
+- Triggering Shopify Flow automations
+- Executing multiple requests in sequence based on API responses
 
 There are two types of requests:
 
-**HTTP requests**: These are standard API calls to external services. You define the endpoint, method, headers, and body content.
-
-**Liquid requests**:  Liquid requests let you run a Liquid template that can call any APIEase request and shape the output. This is useful when you want logic, variable substitution, or to combine multiple requests into one response without building a custom app.
-
-**Shopify Flow requests**: These initiate or continue a Shopify Flow automation and can include data pulled from other API calls or the storefront.
+- **HTTP requests**: Standard API calls to external services. You define the endpoint, method, headers, and body content.
+- **Liquid requests**: Run a Liquid template that can call any APIEase request and shape the output—useful for logic or combining multiple requests without a custom app.
+- **Shopify Flow requests**: Initiate or continue a Shopify Flow automation and can include data pulled from other API calls or the storefront.
 
 Every request you create can include embedded parameters, dynamic storefront values, or confidential credentials stored securely on the server.
 

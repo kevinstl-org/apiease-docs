@@ -12,32 +12,18 @@ Demo store password: eacoht
 
 Example of APIEase Request for Shopify Product Count
 
-**Address**: [https://apiease-demo.myshopify.com/admin/api/2024-07/graphql.json](https://apiease-demo.myshopify.com/admin/api/2024-01/products/count.json)
-
-**
-**
-
-**Method**: POST
-
-**Header Parameters:**
-**
-
-**   Name**: X-Shopify-Access-Token
-
-   **Value**: your-shopify-access-token (Follow these instructions to get your Shopify access token: [https://apiease.tawk.help/article/shopify-access-token](https://apiease.tawk.help/article/shopify-access-token))
-
-   **Name**:  Content-Type
-
-   **Value**:  application/json
-
-**Body Parameters**:
-
-**Value**:
+- **Address**: [https://apiease-demo.myshopify.com/admin/api/2024-07/graphql.json](https://apiease-demo.myshopify.com/admin/api/2024-01/products/count.json)
+- **Method**: `POST`
+- **Header parameters:**
+  - **Name**: `X-Shopify-Access-Token`  
+    **Value**: `your-shopify-access-token` (see [Shopify access token](https://apiease.tawk.help/article/shopify-access-token))
+  - **Name**: `Content-Type`  
+    **Value**: `application/json`
+- **Body parameters:**
+  - **Value**:
 
 ```json
 { "query": "query { productsCount { count } }" }
 ```
-
-![Shopify GraphQL product count request example](https://drive.google.com/thumbnail?id=1-xKsXIifiNrIK57216BSKcc1XMP2kG2L&sz=w1000)
 
 Source article: [Shopify GraphQL API - Product count](https://apiease.tawk.help/article/shopify-graphql-api-product-count).

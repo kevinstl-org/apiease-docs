@@ -8,27 +8,24 @@ Flow requests allow you to securely trigger or continue a Shopify Flow workflow.
 
 ![Flow request editor](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/add-http-api-requests.png?v=1744748372)
 
-Flow Request Fields
+**Flow Request Fields**
 
-**Name**: You can optionally give your request a name for your reference. If you plan to call this request from another request using a [chained request](https://apiease.tawk.help/category/chained-requests), the name will be used by the calling request.
-
-**Type**: Set this to flow to create a request that triggers a Shopify Flow workflow that you will configure as needed.
-
-**Parameters ([?](https://apiease.tawk.help/category/request-parameters))**: You can provide [in app parameters](https://apiease.tawk.help/category/requests/request-parameters/in-app-parameters) directly in the request configuration. If you need values that depend on customer activity or storefront context, you can pass [dynamic embedded parameters](https://apiease.tawk.help/category/requests/request-parameters/dynamic-embedded-parameters-from-storefront) from the storefront.
-
-Flow: Flow parameters are json key value pairs that are passed to your workflow.System: System parameters are used by APIEase in special cases such as [Customer Authentication](https://apiease.tawk.help/article/customer-authentication-details).
-
-If your request includes confidential values such as API keys or credentials, check the "Sensitive" checkbox. These values are stored on the server and are never exposed to the storefront or even the admin screen. Once they have been submitted they are encrypted in our database and only decrypted for use at runtime.
+- **Name**: Optional display name. Needed when another request calls this one via a [chained request](https://apiease.tawk.help/category/chained-requests).
+- **Type**: Set to `flow` to trigger a Shopify Flow workflow.
+- **Parameters ([?](https://apiease.tawk.help/category/request-parameters))**:
+  - **Flow**: JSON key/value pairs passed to your workflow.
+  - **System**: Used by APIEase in cases such as [Customer Authentication](https://apiease.tawk.help/article/customer-authentication-details).
+  - Supply [in app parameters](https://apiease.tawk.help/category/requests/request-parameters/in-app-parameters) or [dynamic embedded parameters](https://apiease.tawk.help/category/requests/request-parameters/dynamic-embedded-parameters-from-storefront) from the storefront.
+  - Mark credentials or secrets as **Sensitive** so they are encrypted and never exposed in the storefront or admin UI.
 
 **Triggers ([?](https://apiease.tawk.help/category/requests/triggers))**: Choose how the request should be triggered:
 
-Manually via the "Copy and Request" link on the requests admin page
-
-Automatically via [webhook](https://apiease.tawk.help/article/trigger-requests-from-a-webhook)
-
-From your storefront using Shopify's app proxy
-
-On a recurring schedule using [cron](https://apiease.tawk.help/article/trigger-requests-via-cron-schedule)
+- Automatically via [webhook](https://apiease.tawk.help/article/trigger-requests-from-a-webhook)
+- On a recurring schedule using [cron](https://apiease.tawk.help/article/trigger-requests-via-cron-schedule)
+- As an endpoint served by APIEase via [Proxy Endpoints](https://apiease.tawk.help/article/proxy-endpoint-trigger)
+- [Remotely](https://apiease.tawk.help/article/calling-apiease-requests-remotely) from any http client.
+- Manually via the "Copy and Execute" link on the requests admin page
+- From your storefront using Shopify's app proxy
 
 **Next Request**: You can specify the name of another request to run after this request finishes. This allows you to build multi-step workflows using [chained requests](https://apiease.tawk.help/article/chained-requests).
 

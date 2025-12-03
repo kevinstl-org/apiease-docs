@@ -12,12 +12,11 @@ Demo store password: eacoht
 
 Example of APIEase Request for Shopify Product Count
 
-**Address**: [https://apiease-demo.myshopify.com/admin/api/2024-01/products/count.json](https://apiease-demo.myshopify.com/admin/api/2024-01/products/count.json)**Method**: GET
+- **Address**: [https://apiease-demo.myshopify.com/admin/api/2024-01/products/count.json](https://apiease-demo.myshopify.com/admin/api/2024-01/products/count.json)
+- **Method**: `GET`
+- **Header**:
+  - **Name**: `X-Shopify-Access-Token`
+  - **Value**: your access token (see [Shopify access token](https://apiease.tawk.help/article/shopify-access-token))
 
-**Header Parameter Name**: X-Shopify-Access-Token
-
-Follow these instructions to get your Shopify access token: [https://apiease.tawk.help/article/shopify-access-token](https://apiease.tawk.help/article/shopify-access-token)
-
-![Shopify REST product count request example](https://drive.google.com/thumbnail?id=1Tld5MtdsMOXzwPI2YN5ggRjp8AvlBRb5&sz=w1000)
 
 Source article: [Shopify REST API - Product count](https://apiease.tawk.help/article/shopify-rest-api-product-count).

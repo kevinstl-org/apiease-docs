@@ -6,6 +6,8 @@ description: Demo showing APIEase chained requests with Shopify Flow to adjust i
 
 This demo shows how a storefront button triggers APIEase, Shopify Flow, and a chained GraphQL call to adjust inventory based on a cat image’s width.
 
+![APIEase request chain](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/flow-cat-image-inventory-requests.png?v=1743029544)
+
 ## How the demo works
 1. A storefront button calls an APIEase proxy endpoint.
 2. APIEase calls The Cat API to fetch a random image (includes width/height).
@@ -115,6 +117,8 @@ This demo shows how a storefront button triggers APIEase, Shopify Flow, and a ch
 4. Action: **Run Code** to classify image size and select the matching inventory item.
 5. Action: **apiease-flow-action** to return Flow parameters (including `incrementInventoryParameter`) to APIEase.
 
+![Shopify Flow workflow](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/flow-cat-image-inventory-workflow.png?v=1743029544)
+
 ### Run Code inputs
 ```graphql
 query {
@@ -179,5 +183,11 @@ export default function main(input) {
 ```
 
 The Run Code step classifies the image size and attaches `incrementInventoryParameter` so APIEase can substitute those values in the GraphQL mutation.
+
+![Run Code setup](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/flow-cat-image-inventory-run-code.png?v=1743118558)
+
+### APIEase Flow Action
+
+![APIEase Flow Action variables](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/flow-cat-image-inventory-action-variable.png?v=1743120408)
 
 Source article: [APIEase Integrated With Shopify Flow - Cat Image Inventory](https://apiease.tawk.help/article/apiease-integrated-with-shopify-flow-cat-image-inventory).

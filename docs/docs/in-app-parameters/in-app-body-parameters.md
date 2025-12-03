@@ -11,16 +11,15 @@ Body parameters are always entered as a complete JSON object. The name of the pa
 **How to Add a Body Parameter**
 
 While editing your request:
-- Click the plus icon in the Parameter column.
-- Select the Body radio button.
-- Enter your JSON body in the Value field.
-- Click the Save button at the top of the request editor.
+1. Click the plus icon in the Parameter column.
+2. Select the **Body** radio button.
+3. Enter your JSON body in the **Value** field.
+4. Click **Save** at the top of the request editor.
 
 **Example Body Parameter**:
 
-**Name**: body (The body parameter name is systematically set to "body" and cannot be changed.)
-
-**Value**:
+- **Name**: body (The body parameter name is systematically set to "body" and cannot be changed.)
+- **Value**:
 
 ```json
 {"arg1":"value1","arg2":"value2","arg3":"value3"}

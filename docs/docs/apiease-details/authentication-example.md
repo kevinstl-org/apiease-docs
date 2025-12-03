@@ -14,11 +14,9 @@ Start by setting up your first request to authenticate with the external service
 
 Example:
 
-Method: POST
-
-URL: [https://example.com/api/authenticate](https://example.com/api/authenticate)
-
-Body:
+- Method: `POST`
+- URL: [https://example.com/api/authenticate](https://example.com/api/authenticate)
+- Body:
 
 ```json
 {
@@ -43,17 +41,14 @@ This request will use the auth_token returned from the authentication request.
 
 For example, you might need to include the token in a header:
 
-Type: Header
-
-Name: Authorization
-
-Value: `Bearer {auth_token}`
+- Type: Header  
+- Name: `Authorization`
+- Value: `Bearer {auth_token}`
 
 Or include it in the body:
 
-Type: Body
-
-Value:
+- Type: Body  
+- Value:
 
 ```json
 {

@@ -11,8 +11,7 @@ Use the built-in scheduler when you need a request to run at fixed times without
 2. In the **Trigger** column, click the plus icon.
 3. Select **Cron**.
 4. Enter a cron expression (minute, hour, day-of-month, month, day-of-week) such as `0 * * * *` for hourly or `0 2 * * *` for 2 AM daily.
-5. Choose the timezone that matches when the request should run.
-6. Save. APIEase will run the request whenever the expression matches.
+5. Save. APIEase will run the request whenever the expression matches.
 
 ## Tips
 - Cron uses a 5-field format: minute, hour, day of month, month, day of week.

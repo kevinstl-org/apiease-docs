@@ -22,13 +22,10 @@ You can structure automations where APIEase calls Flow or combines Flow logic wi
 
 Each request in APIEase can be triggered in four ways:
 
-Manually from the APIEase admin interface
-
-From your storefront using Shopify's API proxy
-
-Automatically through Shopify webhooks
-
-On a recurring schedule using built-in cron settings
+- Manually from the APIEase admin interface
+- From your storefront using Shopify's API proxy
+- Automatically through Shopify webhooks
+- On a recurring schedule using built-in cron settings
 
 These flexible options apply to both HTTP and Flow requests. They allow you to integrate APIEase into a wide range of workflows, from interactive storefront experiences to background automation.
 

@@ -8,7 +8,9 @@ You can call any APIEase request from any http client by making a direct HTTP re
 
 **Step 1**: Create an API Key
 
-Navigate to the Settings page in the APIEase admin.Click Generate API Key.Copy and store the key securely. You will use this key to authenticate your external calls.
+1. Navigate to the Settings page in the APIEase admin.
+2. Click **Generate API Key**.
+3. Copy and store the key securely. You will use this key to authenticate your external calls.
 
 **Step 2**: Make the Remote Call
 

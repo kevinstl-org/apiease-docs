@@ -8,11 +8,9 @@ Chained requests allow you to call one request after another, using the response
 
 For example, you might need to:
 
-Authenticate with an external service
-
-Receive an access token in the response
-
-Use that token to make a second request to retrieve data or perform an action
+- Authenticate with an external service
+- Receive an access token in the response
+- Use that token to make a second request to retrieve data or perform an action
 
 **Setting Next Request**
 
@@ -24,9 +22,8 @@ Each request in APIEase can optionally trigger another request once it completes
 
 Let's say you have two requests:
 
-Request A: Authenticates with a service and receives a token
-
-Request B: Uses that token to call a protected endpoint
+- Request A: Authenticates with a service and receives a token
+- Request B: Uses that token to call a protected endpoint
 
 Here's an example of what the JSON response from Request A might look like:
 
@@ -48,13 +45,10 @@ This tells APIEase to pull the token field from the auth object in the JSON resp
 
 You can use response values from Request A in multiple parts of Request B:
 
-Query parameters
-
-Headers
-
-Request body
-
-URL paths
+- Query parameters
+- Headers
+- Request body
+- URL paths
 
 For example, suppose Request A returns the following JSON:
 
@@ -68,11 +62,9 @@ For example, suppose Request A returns the following JSON:
 ```
 You could then use those values in Request B like this:
 
-In a query string: `?user_ref={user.id}`
-
-In a header: `X-User-Email: {user.email}`
-
-In the body:
+- In a query string: `?user_ref={user.id}`
+- In a header: `X-User-Email: {user.email}`
+- In the body:
 
 ```json
 {
@@ -91,10 +83,8 @@ If you want to see this in action, we've created a walkthrough of a common use c
 
 Use chained requests when:
 
-You need to authenticate before calling a protected API
-
-You need to transform or fetch dynamic data before continuing
-
-You want to build multi-step workflows inside APIEase without building and hosting a custom backend
+- You need to authenticate before calling a protected API
+- You need to transform or fetch dynamic data before continuing
+- You want to build multi-step workflows inside APIEase without building and hosting a custom backend
 
 Source article: [Chained requests](https://apiease.tawk.help/article/chained-requests).

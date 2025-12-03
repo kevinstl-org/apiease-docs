@@ -14,17 +14,14 @@ Liquid requests let you run a Liquid template that can call any APIEase request 
 
 **Liquid**: The Liquid code that will run when this request is triggered. Your template can:
 
-Use standard Liquid tags like assign, if, elsif, else, for, and capture.
-
-Call other APIEase requests using the custom call tag shown below.
-
-Read parameters passed in from the storefront or other triggers.
+- Use standard Liquid tags like assign, if, elsif, else, for, and capture.
+- Call other APIEase requests using the custom call tag shown below.
+- Read parameters passed in from the storefront or other triggers.
 
 **Parameters**: You can provide in app parameters directly in the request configuration. If you need values that depend on customer activity or storefront context, you can pass dynamic embedded parameters from the storefront.
 
-Liquid: Key value pairs you want available to the template as variables.
-
-System: System parameters are used by APIEase in special cases such as Customer Authentication.
+- **Liquid**: Key value pairs you want available to the template as variables.
+- **System**: System parameters used by APIEase in special cases such as Customer Authentication.
 
 If your request includes confidential values such as API keys or credentials, check the Sensitive checkbox. These values are stored on the server and are never exposed to the storefront or even the admin screen. Once they have been submitted they are encrypted in our database and only decrypted for use at runtime.
 
@@ -32,19 +29,13 @@ If your request includes confidential values such as API keys or credentials, ch
 
 When you invoke a request from a Liquid template using the call tag, you can include embedded parameters that override or add to the saved request configuration at runtime.
 
-headersEmbedded: Object of header key value pairs to merge with the saved request headers.
-
-queryParamsEmbedded: Object of query key value pairs to merge with the saved request query parameters.
-
-pathParamsEmbedded: Object of path key value pairs to substitute into the saved request address path.
-
-bodyEmbedded: Object or raw string to use as the saved request body.
-
-flowParamsEmbedded: Object of key value pairs passed into a Flow request.
-
-liquidParamsEmbedded: Object of key value pairs made available to another Liquid request.
-
-systemParamsEmbedded: Object of key value pairs used by APIEase for special features such as Customer Authentication.
+- `headersEmbedded`: Object of header key/value pairs to merge with saved request headers.
+- `queryParamsEmbedded`: Object of query key/value pairs to merge with saved request query parameters.
+- `pathParamsEmbedded`: Object of path key/value pairs to substitute into the saved request address path.
+- `bodyEmbedded`: Object or raw string to use as the saved request body.
+- `flowParamsEmbedded`: Object of key/value pairs passed into a Flow request.
+- `liquidParamsEmbedded`: Object of key/value pairs made available to another Liquid request.
+- `systemParamsEmbedded`: Object of key/value pairs used by APIEase for special features such as Customer Authentication.
 
 At runtime, embedded parameters take precedence over in app parameters for the matching scope.
 
@@ -85,9 +76,8 @@ You can also pass a single JSON object. This is convenient when you want to embe
 
 Response fields:
 
-response.status: The numeric status returned by the request.
-
-response.data: The response payload. Use the json filter to print full objects.
+- `response.status`: The numeric status returned by the request.
+- `response.data`: The response payload. Use the json filter to print full objects.
 
 **Using values from a previous response**
 
@@ -150,10 +140,12 @@ Assign and capture:
 **Triggers**
 
 Choose how the request should be triggered:
-- Manually via the Copy and Request link on the requests admin page
-- Automatically via webhook
-- From your storefront using Shopify app proxy
-- On a recurring schedule using cron
+  - Automatically via [webhook](https://apiease.tawk.help/article/trigger-requests-from-a-webhook)
+  - On a recurring schedule using [cron](https://apiease.tawk.help/article/trigger-requests-via-cron-schedule)
+  - As an endpoint served by APIEase via [Proxy Endpoints](https://apiease.tawk.help/article/proxy-endpoint-trigger)
+  - [Remotely](https://apiease.tawk.help/article/calling-apiease-requests-remotely) from any http client.
+  - Manually via the "Copy and Execute" link on the requests admin page
+  - From your storefront using Shopify's app proxy
 
 **Next Request**
 
