@@ -31,4 +31,3 @@ fetch('/apps/apiease/integration/caller/call?' + queryParams)
 
 In the above javascript snippet we see that **queryParamsEmbedded**  is set to the stringified "queryParamsEmbeddedVar".  APIEase looks for a query parameter named **queryParamsEmbedded**  to hold the dynamic embedded query parameters.
 
-Source article: [Dynamic embedded query parameters](https://apiease.tawk.help/article/query-parameters-example).

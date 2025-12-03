@@ -50,4 +50,3 @@ You can embed dynamic values into:
 
 Each of these can be populated using JavaScript embedded in your storefront snippet. The data you pass is merged into the request structure when it is triggered, ensuring both flexibility and security.
 
-Source article: [Dynamic embedded parameters overview](https://apiease.tawk.help/article/dynamic-embedded-parameters-from-storefront).

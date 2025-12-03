@@ -18,4 +18,3 @@ Use the built-in scheduler when you need a request to run at fixed times without
 - Use `*/15 * * * *` for every 15 minutes, `0 9 * * 1-5` for 9 AM on weekdays, and `0 0 1 * *` for the first day of each month.
 - Make sure the request has all required parameters so the scheduled runs succeed without manual input.
 
-Source article: [Trigger requests via cron schedule](https://apiease.tawk.help/article/trigger-requests-via-cron-schedule).

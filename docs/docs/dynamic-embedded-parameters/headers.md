@@ -31,4 +31,3 @@ fetch('/apps/apiease/integration/caller/call?' + queryParams)
 
 In the above javascript snippet we see that **headersEmbedded**  is set to the stringified "headersEmbeddedVar". APIEase looks for a query parameter named **headersEmbedded**  to hold the dynamic embedded header parameters.
 
-Source article: [Dynamic embedded headers](https://apiease.tawk.help/article/headers-example).

@@ -74,4 +74,3 @@ document.getElementById('agifyInputName').addEventListener('keydown', (event) =>
 }
 ```
 
-Source article: [Agify API Example](https://apiease.tawk.help/article/agify-api-example).

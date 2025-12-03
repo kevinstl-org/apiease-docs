@@ -14,4 +14,3 @@ Follow these instructions to get your Shopify access token.
 6. Click **Install app** (top right).
 7. Click **Reveal token once**. Copy and save your access token—this is the only time it will be shown.
 
-Source article: [Shopify access token](https://apiease.tawk.help/article/shopify-access-token).

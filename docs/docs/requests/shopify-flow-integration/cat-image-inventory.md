@@ -190,4 +190,3 @@ The Run Code step classifies the image size and attaches `incrementInventoryPara
 
 ![APIEase Flow Action variables](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/flow-cat-image-inventory-action-variable.png?v=1743120408)
 
-Source article: [APIEase Integrated With Shopify Flow - Cat Image Inventory](https://apiease.tawk.help/article/apiease-integrated-with-shopify-flow-cat-image-inventory).

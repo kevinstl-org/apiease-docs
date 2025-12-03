@@ -28,4 +28,3 @@ Once created, each request can be triggered in several ways. You can run it manu
 
 Requests are the core building blocks of APIEase. They give you a simple and secure way to create integrations, automate tasks, and connect your storefront with external services without the need to host your own app.
 
-Source article: [APIEase Requests Description](https://apiease.tawk.help/article/apiease-request-description).

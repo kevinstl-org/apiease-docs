@@ -120,4 +120,3 @@ document.getElementById('queryParameter').addEventListener('keydown', (event) =>
 }
 ```
 
-Source article: [HTTP Dump Example](https://apiease.tawk.help/article/http-dump-example).

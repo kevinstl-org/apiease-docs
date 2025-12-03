@@ -22,4 +22,3 @@ You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic
 
 ![In-app header parameter example](https://tawk.link/65552a3acec6a91282103248/kb/attachments/dbGjN5Waw6.png)
 
-Source article: [In-app header parameters](https://apiease.tawk.help/article/in-app-header-parameters).

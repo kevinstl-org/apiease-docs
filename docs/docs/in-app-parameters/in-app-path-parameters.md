@@ -25,4 +25,3 @@ You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic
 
 ![In-app path parameter configuration](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/path-variable-edit.png?v=1744137415)
 
-Source article: [In-app path parameters](https://apiease.tawk.help/article/in-app-path-parameters).

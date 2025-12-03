@@ -29,4 +29,3 @@ Flow requests allow you to securely trigger or continue a Shopify Flow workflow.
 
 **Next Request**: You can specify the name of another request to run after this request finishes. This allows you to build multi-step workflows using [chained requests](https://apiease.tawk.help/article/chained-requests).
 
-Source article: [Flow request configuration](https://apiease.tawk.help/article/flow-request-configuration).

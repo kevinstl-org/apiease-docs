@@ -35,4 +35,3 @@ HTTP API requests are highly configurable with many options.  HTTP requests allo
 
 - **Next Request**: You can implement [chained requests](https://apiease.tawk.help/category/requests/chained-requests) by setting the Next Request field to the name of a request to run after this one completes.
 
-Source article: [HTTP API request configuration](https://apiease.tawk.help/article/http-api-request-configuration).

@@ -24,4 +24,3 @@ You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic
 
 ![In-app query parameter configuration](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/in-app-query-parameters.png?v=1744835524)
 
-Source article: [In-app query parameters](https://apiease.tawk.help/article/in-app-query-parameters).

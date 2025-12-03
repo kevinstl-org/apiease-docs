@@ -31,4 +31,3 @@ These flexible options apply to both HTTP and Flow requests. They allow you to i
 
 When using the storefront trigger, APIEase provides a customizable HTML/JavaScript snippet. This snippet is used with Shopify's app proxy and can be added to a Custom Liquid section in your storefront. When a customer visits or interacts with the page, APIEase securely executes the associated request.
 
-Source article: [How It Works](https://apiease.tawk.help/article/how-it-works).

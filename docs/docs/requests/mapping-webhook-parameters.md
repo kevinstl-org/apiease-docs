@@ -48,4 +48,3 @@ To pass the nested `product_id` value to your endpoint, set the parameter value 
 - The webhook payload is already the request body; additional body parameters you add are merged into that body.
 - Use descriptive parameter names so the rendered request matches what your downstream API expects.
 
-Source article: [Mapping Webhook Parameters](https://apiease.tawk.help/article/mapping-webhook-parameters).

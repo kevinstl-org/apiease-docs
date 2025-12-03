@@ -37,4 +37,3 @@ APIEase and Shopify Flow play different roles. Use Flow for logic and native Sho
 ## Summary
 Put APIEase at the edges (inbound/outbound APIs, credentials, chaining) and Flow in the middle as the logic engine. If a workflow touches external services or credentialed calls, start or end in APIEase and run the logic in Flow.
 
-Source article: [APIEase + Shopify Flow Integration Architecture](https://apiease.tawk.help/article/apiease-shopify-flow-integration-architecture).

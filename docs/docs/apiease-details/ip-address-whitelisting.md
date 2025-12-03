@@ -14,4 +14,3 @@ Use Case ExampleSome systems, like ERP or warehouse management platforms, requir
 
 By using APIEase to make your API calls, you can meet the IP whitelisting requirements of your external systems while still reacting to events in Shopify such as new orders, inventory changes, or customer updates.
 
-Source article: [APIEase IP address for whitelisting](https://apiease.tawk.help/article/apiease-ip-address-for-whitelisting).

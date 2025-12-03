@@ -68,4 +68,3 @@ When the authentication request completes successfully, APIEase will automatical
 
 All credentials and tokens stay on the server and are never exposed to the storefront or customer browser. This ensures a secure authentication flow without needing to build your own app or server.
 
-Source article: [Authentication example](https://apiease.tawk.help/article/authentication-example).

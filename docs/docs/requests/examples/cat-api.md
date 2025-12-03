@@ -64,4 +64,3 @@ function callApi() {
 }
 ```
 
-Source article: [Cat API Example](https://apiease.tawk.help/article/cat-api-example).

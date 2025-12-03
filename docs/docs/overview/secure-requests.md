@@ -38,4 +38,3 @@ While some implementations may still benefit from developer support, APIEase rem
 
 You gain flexibility, control, and peace of mind, all while keeping your store's sensitive data out of public view.
 
-Source article: [Protecting credentials and secure requests](https://apiease.tawk.help/article/protecting-confidential-credentials-and-making-secure-requests-with-apiease).

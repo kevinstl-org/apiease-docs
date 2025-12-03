@@ -22,4 +22,3 @@ You can call any APIEase request from any http client by making a direct HTTP re
 
 Replace `<your_request_id>` with the ID of the request you want to call. You can find the `requestId` in the APIEase request admin page.
 
-Source article: [Calling APIEase Requests Remotely](https://apiease.tawk.help/article/calling-apiease-requests-remotely).

@@ -13,4 +13,3 @@ Use this quick setup to trigger Shopify Flow from APIEase and capture Flow outpu
 
 > Important: If Flow does not return `flowParameters`, APIEase still responds, but the Flow-produced details are omitted. APIEase waits for the Flow action runtime call to finish before sending the final response to the original requester.
 
-Source article: [Minimal Flow Integration with APIEase](https://apiease.tawk.help/article/minimal-flow-integration-with-apiease).

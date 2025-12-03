@@ -87,4 +87,3 @@ Use chained requests when:
 - You need to transform or fetch dynamic data before continuing
 - You want to build multi-step workflows inside APIEase without building and hosting a custom backend
 
-Source article: [Chained requests](https://apiease.tawk.help/article/chained-requests).

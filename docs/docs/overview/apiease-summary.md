@@ -28,4 +28,3 @@ APIEase removes that burden. It gives merchants and developers a straightforward
 
 [Watch this video for a quick summary of APIEase](https://www.youtube.com/watch?v=-I1ggiJ-DKs&ab_channel=APIEase)
 
-Source article: [APIEase Summary](https://apiease.tawk.help/article/apiease-summary).

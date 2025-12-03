@@ -13,4 +13,3 @@ Follow these steps to create a request in APIEase.
 3. Configure the [HTTP](https://apiease.tawk.help/article/http-api-request-configuration) or [Flow](https://apiease.tawk.help/article/flow-request-configuration) request.
 4. Click **Save**. The request is ready to run based on the triggers you selected.
 
-Source article: [How to Add Requests](https://apiease.tawk.help/article/how-to-add-requests).

@@ -57,4 +57,3 @@ If you only have the in app `variable1=inAppValue1` then address  `https://ex.co
 
 If you have the in app `variable1 = inAppValue1` and `pathParamsEmbedded = JSON.stringify({ variable1: "dynamicEmbeddedPathValue1" })` then address `https://ex.com/{variable1}` will resolve to `https://ex.com/dynamicEmbeddedPathValue1`. So dynamic embedded parameters override the default in app path parameters of the same name.
 
-Source article: [Path variables](https://apiease.tawk.help/article/path-variables).

@@ -32,4 +32,3 @@ If you add customer id to a request that customer must be logged into the store 
 
 
 
-Source article: [Customer authenticated requests](https://apiease.tawk.help/article/customer-authentication-details).

@@ -14,4 +14,3 @@ Follow these steps to create a Flow request and send data into Shopify Flow.
 6. (Optional) Chain this Flow request from another request by setting it as the **Next Request** of the prior step.
 7. Save the request.
 
-Source article: [How to Add a Flow Request in APIEase](https://apiease.tawk.help/article/how-to-add-a-flow-request-in-apiease).

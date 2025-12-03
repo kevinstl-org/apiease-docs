@@ -64,4 +64,3 @@ When the request is triggered, the webhook payload is passed as the body.
 
 To pull specific payload values into headers, query params, or body fields, see [Mapping webhook parameters](./mapping-webhook-parameters.md).
 
-Source article: [Trigger Requests From a Webhook](https://apiease.tawk.help/article/trigger-requests-from-a-webhook).

@@ -115,4 +115,3 @@ callApi();
 }
 ```
 
-Source article: [Facebook Graph API Example](https://apiease.tawk.help/article/facebook-graph-api-example).

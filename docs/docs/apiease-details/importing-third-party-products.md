@@ -21,4 +21,3 @@ While Shopify Flow provides native actions for updating product data, most real-
 
 APIEase handles these responsibilities, enabling you to build a complete product import pipeline within your Shopify environment.
 
-Source article: [Importing products from a third-party system](https://apiease.tawk.help/article/importing-products-from-a-third-party-system-into-my-shopify-store).

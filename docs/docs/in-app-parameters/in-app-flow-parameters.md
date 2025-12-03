@@ -34,4 +34,3 @@ You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic
 
 ![In-app flow parameter fields](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/in-app-flow-parameters.png?v=1744838680)
 
-Source article: [In-app flow parameters](https://apiease.tawk.help/article/in-app-flow-parameters).

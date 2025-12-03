@@ -33,4 +33,3 @@ Dynamic embedded parameters are added as query parameters to calls made to APIEa
 
 In the snippet above, `flowParamsEmbedded` is set to the stringified `flowParamsEmbeddedVar`. APIEase looks for a query parameter named `flowParamsEmbedded` to hold the dynamic embedded flow parameters.
 
-Source article: [Dynamic Embedded Flow Parameters](https://apiease.tawk.help/article/dynamic-embedded-flow-parameters).

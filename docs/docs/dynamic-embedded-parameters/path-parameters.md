@@ -29,4 +29,3 @@ fetch('/apps/apiease/integration/caller/call?' + pathParams)
 
 In the above javascript snippet we see that  "**pathParamsEmbedded**" is set to the stringified "pathParamsEmbeddedVar".   APIEase looks for a query parameter named **pathParamsEmbedded**  to hold the dynamic embedded path parameters.
 
-Source article: [Dynamic embedded path parameters](https://apiease.tawk.help/article/path-parameters-example).

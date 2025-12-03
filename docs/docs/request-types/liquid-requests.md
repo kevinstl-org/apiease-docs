@@ -190,4 +190,3 @@ POST with a dynamic body:
 {{ sub.status }}
 ```
 
-Source article: [Liquid requests](https://apiease.tawk.help/article/liquid-requests).

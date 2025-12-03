@@ -19,4 +19,3 @@ Example of APIEase Request for Shopify Product Count
   - **Value**: your access token (see [Shopify access token](https://apiease.tawk.help/article/shopify-access-token))
 
 
-Source article: [Shopify REST API - Product count](https://apiease.tawk.help/article/shopify-rest-api-product-count).

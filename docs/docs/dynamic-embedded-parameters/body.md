@@ -31,4 +31,3 @@ fetch('/apps/apiease/integration/caller/call?' + queryParams)
 
 In the above javascript snippet we see that **bodyEmbedded**  is set to the stringified "bodyEmbeddedVar". APIEase looks for a query parameter named **bodyEmbedded**  to hold the dynamic embedded body parameters.
 
-Source article: [Dynamic embedded body](https://apiease.tawk.help/article/body-example).

@@ -37,4 +37,3 @@ When someone calls this URL using the HTTP method you specify (GET, POST, etc.),
    - **Authenticated**: `true` or `false`.
 5. Save. Your public API endpoint is ready to use.
 
-Source article: [Proxy Endpoint](https://apiease.tawk.help/article/proxy-endpoint-trigger).

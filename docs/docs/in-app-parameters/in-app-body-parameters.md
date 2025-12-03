@@ -29,4 +29,3 @@ You can also use [embedded parameters](https://apiease.tawk.help/article/dynamic
 
 ![In-app body parameter entry](https://tawk.link/65552a3acec6a91282103248/kb/attachments/i0yOK5rG4k.png)
 
-Source article: [In-app body parameters](https://apiease.tawk.help/article/in-app-body-parameters).
