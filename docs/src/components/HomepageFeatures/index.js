@@ -4,32 +4,51 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Secure API automation',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Secure API Integration',
+    // Use hosted illustration to avoid bundling the old local SVG.
+    Svg: () => (
+      <img
+        src="https://cdn.shopify.com/s/files/1/0733/1820/3680/files/secure-api-3.png?v=1764885770"
+        alt="Secure API illustration"
+        className={styles.featureSvg}
+      />
+    ),
     description: (
       <>
-        Store credentials once, reuse them across requests, and keep secrets out
-        of storefronts and Flow Run Code steps.
+        Store request credentials securely. Execute authenticated API calls
+        without exposing sensitive information.
       </>
     ),
   },
   {
-    title: 'Shopify-native workflows',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'AI Assisted UI and App Server Solutions',
+    Svg: () => (
+      <img
+        src="https://cdn.shopify.com/s/files/1/0733/1820/3680/files/ai-app-7.png?v=1764886079"
+        alt="AI Assisted App illustration"
+        className={styles.featureSvg}
+      />
+    ),
     description: (
       <>
-        Trigger calls from Shopify Flow, webhooks, or scheduled jobs, then pass
-        results back to your store or other systems.
+        Get the power of a custom app without the cost. AI assisted UI and
+        server solutions with no hosting or maintenance required.
       </>
     ),
   },
   {
-    title: 'Chaining without glue code',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Multiple Ways to Trigger Your Requests',
+    Svg: () => (
+      <img
+        src="https://cdn.shopify.com/s/files/1/0733/1820/3680/files/triggers-3.png?v=1764886331"
+        alt="Multiple Triggers illustration"
+        className={styles.featureSvg}
+      />
+    ),
     description: (
       <>
-        Build multi-step automations by chaining HTTP, Flow, and Liquid requests
-        — no new servers or middleware required.
+        Run any request from Proxy Endpoints, the storefront, Liquid,
+        scheduled Cron Jobs, or incoming Webhooks.
       </>
     ),
   },
