@@ -16,7 +16,7 @@ Requests can be used for a wide variety of purposes, including:
 - Triggering Shopify Flow automations
 - Executing multiple requests in sequence based on API responses
 
-There are two types of requests:
+There are three types of requests:
 
 - **HTTP requests**: Standard API calls to external services. You define the endpoint, method, headers, and body content.
 - **Liquid requests**: Run a Liquid template that can call any APIEase request and shape the output—useful for logic or combining multiple requests without a custom app.

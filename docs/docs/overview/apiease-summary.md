@@ -2,29 +2,22 @@
 title: APIEase Summary
 description: High-level description of what APIEase does for Shopify teams.
 ---
-# APIEase Summary
+# APIEase
 
-Shopify gives you powerful tools to run an online store, but it does not provide a way to securely call external APIs that require confidential parameters. This limitation affects both storefront interactions and automated workflows.
+The API integration and automation platform.
+============================================
 
-APIEase fills this gap by allowing you to make secure, authenticated API requests and integrate with Shopify Flow without needing to build your own Shopify app.
+APIEase is a managed system where your API requests, workflows, and custom logic run, so you don’t have to build or maintain that infrastructure yourself.
 
-All calls from APIEase originate from a [static ip address](../apiease-details/ip-address-whitelisting.md) for external systems that require whitelisted ip addresses.
+**What It Does** - APIEase executes secure HTTP requests, triggers Shopify Flow 
+actions, and runs custom logic defined through Liquid Requests. [Learn more...](./what-it-does.md)
 
-**HTTP API Integration**
+**How It Works** - Add fully configurable HTTP, Shopify Flow, or Liquid Requests 
+to APIEase, and trigger them manually, from your storefront, through webhooks, 
+on a cron schedule, from an external HTTP client, or via a Proxy Endpoint. [Learn more...](./how-it-works.md)
 
-With APIEase, you can securely call third-party APIs directly from your storefront. These requests can include sensitive credentials or parameters that cannot be exposed to the browser.
-
-**Shopify Flow Integration**
-
-APIEase also works seamlessly with Shopify Flow. Integration with Flow allows you to implement logic-based workflows within the APIEase ecosystem.
-
-You can initiate a standalone workflow or execute secure API calls before or after triggering a workflow, with the ability to use the response from each Flow or API request as part of your automation.
-
-**Why It Matters**
-
-Without APIEase, securely connecting Shopify to external systems requires building and hosting a private app. That means more time, more cost, and more maintenance.
-
-APIEase removes that burden. It gives merchants and developers a straightforward way to make secure API calls, connect with third-party systems, and build powerful automations.
-
-[Watch this video for a quick summary of APIEase](https://www.youtube.com/watch?v=-I1ggiJ-DKs&ab_channel=APIEase)
-
+**Why You Need It** - Use APIEase to integrate and serve API calls with custom 
+logic and automation without having to build, maintain, or host the backend. 
+It securely supplies confidential credentials to any request, allowing them 
+to be triggered from your storefront or from external systems without exposing 
+those credentials publicly. [Learn more...](./why-you-need-it.md)

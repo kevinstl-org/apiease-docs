@@ -21,8 +21,9 @@ const sidebars = {
       label: 'Overview',
       items: [
         'overview/apiease-summary',
+        'overview/what-it-does',
         'overview/how-it-works',
-        'overview/secure-requests',
+        'overview/why-you-need-it',
       ],
     },
     {

@@ -4,30 +4,63 @@ description: Outline the core flow for configuring and running APIEase in a Shop
 ---
 # How It Works
 
-In APIEase, you define HTTP requests or Shopify Flow requests that include all required parameters, confidential or otherwise. Both types are created and managed through the same simple interface.
+APIEase runs the requests and logic you define. Each request (HTTP, Flow, or Liquid) is configured in the APIEase admin and executed inside the APIEase runtime, where confidential parameters remain secure.
 
-**HTTP Requests**
+This page describes how requests are configured, how they are triggered, and how these elements combine to create custom functionality.
 
-HTTP requests allow you to call third-party APIs. You enter the full API address in the APIEase admin and define any required parameters, including confidential values that cannot be exposed to the browser.
+---
 
-APIEase securely handles the request and any sensitive data on your behalf, regardless of how the request is triggered.
+## Configuring Requests
 
-**Shopify Flow Requests**
+When you create a request, you choose the type (HTTP Request, Flow Request, or Liquid Request) and define the parameters it needs. These parameters can include:
+- values passed in at trigger time
+- values extracted from earlier requests
+- Liquid based transformations
+- confidential parameters stored securely in APIEase
 
-Flow requests are configured just like HTTP requests. The difference is that Flow handles the logic layer, while APIEase manages the execution and integration with external services.
+Each request is saved as a reusable and callable unit of logic.
 
-You can structure automations where APIEase calls Flow or combines Flow logic with other secure API requests in a sequence.
+---
 
-**Triggering Requests**
+## Triggering Requests
 
-Each request in APIEase can be triggered in four ways:
+A configured request can be invoked through several available trigger types. Each trigger activates the same underlying request definition, allowing the logic to run without duplication.
 
-- Manually from the APIEase admin interface
-- From your storefront using Shopify's API proxy
-- Automatically through Shopify webhooks
-- On a recurring schedule using built-in cron settings
+### Manual Trigger
 
-These flexible options apply to both HTTP and Flow requests. They allow you to integrate APIEase into a wide range of workflows, from interactive storefront experiences to background automation.
+Invoke any request directly from the APIEase admin for testing or on demand execution.
 
-When using the storefront trigger, APIEase provides a customizable HTML/JavaScript snippet. This snippet is used with Shopify's app proxy and can be added to a Custom Liquid section in your storefront. When a customer visits or interacts with the page, APIEase securely executes the associated request.
+### Storefront Trigger
 
+Trigger a request from your storefront using Shopify's app proxy. The storefront sends only non confidential data and APIEase performs the execution on the server side.
+
+### Webhook Trigger
+
+Run a request automatically when Shopify or an external system sends a webhook to APIEase.
+
+### Scheduled Trigger
+
+Use a built in cron schedule to run a request at recurring intervals.
+
+### Proxy Endpoint Trigger
+
+Expose a request as a public API endpoint with an optional shared secret. External systems call the endpoint and APIEase runs the associated request.
+
+### Remote HTTP Client Trigger
+
+Send an HTTP call from any external system to APIEase to initiate a request, with optional authentication.
+
+### Chained Request Trigger
+
+Run a request from within another request. A request can call additional requests and pass outputs downstream, allowing multi step workflows.
+
+---
+
+## Combining Request Types and Triggers
+
+Because each request is modular and can be triggered in any of these ways, users can create custom functionality by combining:
+- the request type (HTTP, Flow, or Liquid)
+- the trigger source
+- any number of chained steps
+
+This supports use cases ranging from simple API calls to multi step workflows that coordinate data across multiple systems, without building or hosting a backend.
