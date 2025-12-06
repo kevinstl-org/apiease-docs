@@ -4,7 +4,7 @@ description: Functional overview of what APIEase executes and manages.
 ---
 # What It Does
 
-APIEase defines and runs three types of requests: HTTP Requests, Flow Requests, and Liquid Requests. Each request type is executed inside APIEase's managed environment, keeping credentials secure and ensuring logic is processed server-side.
+APIEase defines and runs three types of requests: [HTTP Requests](../request-types/http-api-request-configuration.md), [Flow Requests](../request-types/flow-request-configuration.md), and [Liquid Requests](../request-types/liquid-requests.md). Each request type is executed inside APIEase's managed environment, keeping credentials secure and ensuring logic is processed server-side.
 
 ## HTTP Requests
 
@@ -20,4 +20,4 @@ Liquid Requests run custom logic written in Liquid. They let you transform data,
 
 ## Secure Parameter Storage
 
-APIEase stores confidential values -- such as API keys, tokens, and passwords -- on the server and never exposes them to the storefront or external clients. When a request is triggered, APIEase injects these secure parameters into the request at runtime so they are used during execution but never returned or made visible outside the managed environment.
+APIEase stores confidential values -- such as API keys, tokens, and passwords -- on the server and never exposes them to the storefront or external clients. When a request is triggered, APIEase injects these secure parameters into the request at runtime so they are used during execution but never returned or made visible outside the managed environment. Read more in [Why Secure Parameter Handling Matters](./why-you-need-it.md#why-secure-parameter-handling-matters).
