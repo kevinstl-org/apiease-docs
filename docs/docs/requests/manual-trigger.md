@@ -1,12 +1,12 @@
 ---
-title: Manually execute a request
+title: Manual calls
 description: Run any APIEase request directly from the admin for testing or on-demand use.
 ---
-# Manually execute a request
+# Manual calls
 
 You can run any configured APIEase request on demand from the admin interface. This is useful for testing, debugging, or performing one-off actions without setting up a trigger.
 
-## Run a request manually
+## Run a manual call
 1. Open the APIEase admin and go to **Requests**.
 2. Find the request you want to run and click the **Copy and Execute** button in the **Actions** column.
 3. Click the **Execute and Run** button. APIEase executes the request immediately.

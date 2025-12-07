@@ -1,8 +1,8 @@
 ---
-title: Trigger requests via cron schedule
+title: Cron Schedule
 description: Run APIEase requests automatically on a recurring schedule using cron expressions.
 ---
-# Trigger requests via cron schedule
+# Cron Schedule
 
 Use the built-in scheduler when you need a request to run at fixed times without any webhook or manual trigger.
 
@@ -17,4 +17,3 @@ Use the built-in scheduler when you need a request to run at fixed times without
 - Cron uses a 5-field format: minute, hour, day of month, month, day of week.
 - Use `*/15 * * * *` for every 15 minutes, `0 9 * * 1-5` for 9 AM on weekdays, and `0 0 1 * *` for the first day of each month.
 - Make sure the request has all required parameters so the scheduled runs succeed without manual input.
-

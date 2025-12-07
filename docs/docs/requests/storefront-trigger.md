@@ -1,8 +1,8 @@
 ---
-title: Storefront trigger
-description: Trigger APIEase requests from your Shopify storefront through Shopify's app proxy while keeping credentials secure.
+title: Storefont calls
+description: Call APIEase requests from your Shopify storefront through Shopify's app proxy while keeping credentials secure.
 ---
-# Storefront trigger
+# Storefont calls
 
 Run any APIEase request directly from your Shopify storefront using Shopify's app proxy. This lets you start workflows from theme code without exposing credentials or private logic in the browser.
 
@@ -11,13 +11,13 @@ Run any APIEase request directly from your Shopify storefront using Shopify's ap
 - Shopify forwards the call through the app proxy. If the customer is logged in, Shopify passes the customer id to APIEase.
 - APIEase executes the request on the server, injects any sensitive parameters you saved in the admin, and returns the request's final response to the storefront.
 
-## Configure a storefront trigger
+## Configure a storefront call
 1. In the APIEase admin, open the request you want to run from the storefront.
 2. In the **Trigger** column, click the plus icon and choose **Storefront**.
 3. Select the HTTP method you want to allow (GET or POST) and set the proxy path to use.
 4. Save. Note the request's `requestId`; you will pass it from your theme when calling the trigger.
 
-## Call the trigger from your theme
+## Call from your theme
 Use JavaScript or Liquid to call the app proxy path and include any dynamic embedded parameters needed at runtime. APIEase merges these values into the request before execution.
 
 ```javascript

@@ -1,8 +1,8 @@
 ---
-title: Proxy endpoint trigger
+title: Proxy Endpoint
 description: Expose a public API endpoint that runs an APIEase request whenever it is called.
 ---
-# Proxy endpoint trigger
+# Proxy Endpoint
 
 Create a public API endpoint that executes an APIEase request and returns its final response to the caller—no custom server needed.
 
@@ -19,7 +19,7 @@ When someone calls this URL using the HTTP method you specify (GET, POST, etc.),
 ## How it works
 1. The first path segment after `/proxy/` identifies your shop.
 2. The remaining path is the custom endpoint path you configure.
-3. APIEase matches the incoming request to your Proxy Endpoint Trigger.
+3. APIEase matches the incoming request to your Proxy Endpoint.
 4. APIEase runs the configured request using the incoming data.
 5. The request’s final response is returned to the caller.
 
@@ -30,10 +30,9 @@ When someone calls this URL using the HTTP method you specify (GET, POST, etc.),
 ## Configure a proxy endpoint trigger
 1. Open any APIEase request.
 2. Go to **Triggers**.
-3. Add **Proxy Endpoint Trigger**.
+3. Add **Proxy Endpoint**.
 4. Set:
    - **Request Path**: The public endpoint path.
    - **HTTP Method**: The allowed verb for the endpoint.
    - **Authenticated**: `true` or `false`.
 5. Save. Your public API endpoint is ready to use.
-

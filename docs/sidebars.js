@@ -49,15 +49,11 @@ const sidebars = {
             'request-types/liquid-requests',
           ],
         },
+        {
+          type: 'category',
+          label: 'Triggers',
+          items: [
             {
-              type: 'category',
-              label: 'Triggers',
-              items: [
-                {
-                  type: 'doc',
-                  id: 'requests/manual-trigger',
-                },
-                {
               type: 'category',
               label: 'Webhooks',
               items: [
@@ -66,20 +62,37 @@ const sidebars = {
               ],
             },
             {
-              type: 'category',
-              label: 'Cron schedule',
-              items: ['requests/trigger-requests-via-cron-schedule'],
+              type: 'doc',
+              id: 'requests/trigger-requests-via-cron-schedule',
+              label: 'Cron Schedule',
             },
-                {
-                  type: 'doc',
-                  id: 'requests/proxy-endpoint-trigger',
-                },
-                {
-                  type: 'doc',
-                  id: 'requests/storefront-trigger',
-                },
-              ],
+            {
+              type: 'doc',
+              id: 'requests/proxy-endpoint-trigger',
+              label: 'Proxy Endpoint',
             },
+            {
+              type: 'doc',
+              id: 'requests/manual-trigger',
+              label: 'Manual Calls',
+            },
+            {
+              type: 'doc',
+              id: 'requests/storefront-trigger',
+              label: 'Storefont Calls',
+            },
+            {
+              type: 'doc',
+              id: 'requests/calling-requests-remotely',
+              label: 'Remote HTTP Client',
+            },
+            {
+              type: 'doc',
+              id: 'request-parameters/chained-requests',
+              label: 'Chained Request',
+            },
+          ],
+        },
             {
               type: 'category',
               label: 'Shopify Flow integration',

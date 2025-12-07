@@ -26,25 +26,25 @@ For setup steps, see [How to Add Requests](../requests/how-to-add-requests.md).
 
 ## Triggering Requests
 
-A configured request can be invoked through several available trigger types. Each trigger activates the same underlying request definition, allowing the logic to run without duplication.
+A configured request can be invoked through several available trigger types. Each trigger activates the same underlying request definition, allowing the logic to run without duplication. Triggers are available in the following order:
 
-### [Webhook Trigger](../requests/trigger-requests-from-a-webhook.md)
+### [Webhooks](../requests/trigger-requests-from-a-webhook.md)
 
 Run a request automatically when Shopify or an external system sends a webhook to APIEase.
 
-### [Scheduled Trigger](../requests/trigger-requests-via-cron-schedule.md)
+### [Cron Schedule](../requests/trigger-requests-via-cron-schedule.md)
 
 Use a built in cron schedule to run a request at recurring intervals.
 
-### [Proxy Endpoint Trigger](../requests/proxy-endpoint-trigger.md)
+### [Proxy Endpoint](../requests/proxy-endpoint-trigger.md)
 
 Expose a request as a public API endpoint with an optional shared secret. External systems call the endpoint and APIEase runs the associated request.
 
-### [Manual Trigger](../requests/manual-trigger.md)
+### [Manual Calls](../requests/manual-trigger.md)
 
 Invoke any request directly from the APIEase admin for testing or on demand execution.
 
-### [Storefront Trigger](../requests/storefront-trigger.md)
+### [Storefont Calls](../requests/storefront-trigger.md)
 
 Trigger a request from your storefront using Shopify's app proxy. The storefront sends only non confidential data and APIEase performs the execution on the server side.
 
