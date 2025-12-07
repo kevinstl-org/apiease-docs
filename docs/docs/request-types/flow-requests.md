@@ -1,8 +1,8 @@
 ---
-title: Flow request configuration
+title: Flow Requests
 description: Configure APIEase Flow trigger/action requests and parameter mappings.
 ---
-# Flow request configuration
+# Flow Requests
 
 Flow requests allow you to securely trigger or continue a Shopify Flow workflow. You can pass data into the Flow from your storefront, a webhook, or another request, enabling flexible and secure automation without exposing any sensitive information.
 
@@ -21,8 +21,8 @@ Flow requests allow you to securely trigger or continue a Shopify Flow workflow.
 **Triggers ([?](../requests/trigger-requests-from-a-webhook.md))**: Choose how the request should be triggered:
 
 - Automatically via [webhook](../requests/trigger-requests-from-a-webhook.md)
-- On a recurring schedule using [cron](../requests/trigger-requests-via-cron-schedule.md)
-- As an endpoint served by APIEase via [Proxy Endpoints](../requests/proxy-endpoint-trigger.md)
+- On a recurring schedule using [cron](../requests/cron-schedule.md)
+- As an endpoint served by APIEase via [Proxy Endpoints](../requests/proxy-endpoint.md)
 - [Remotely](../requests/calling-requests-remotely.md) from any http client.
 - Manually via the "Copy and Execute" link on the requests admin page
 - From your storefront using Shopify's app proxy

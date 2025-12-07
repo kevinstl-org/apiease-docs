@@ -4,7 +4,7 @@ description: Outline the core flow for configuring and running APIEase in a Shop
 ---
 # How It Works
 
-APIEase runs the requests and logic you define. Each request ([HTTP](../request-types/http-api-request-configuration.md), [Flow](../request-types/flow-request-configuration.md), or [Liquid](../request-types/liquid-requests.md)) is configured in the APIEase admin and executed inside the APIEase runtime, where confidential parameters remain secure.
+APIEase runs the requests and logic you define. Each request ([HTTP](../request-types/http-requests.md), [Flow](../request-types/flow-requests.md), or [Liquid](../request-types/liquid-requests.md)) is configured in the APIEase admin and executed inside the APIEase runtime, where confidential parameters remain secure.
 
 This page describes how requests are configured, how they are triggered, and how these elements combine to create custom functionality.
 
@@ -12,7 +12,7 @@ This page describes how requests are configured, how they are triggered, and how
 
 ## Configuring Requests
 
-When you create a request, you choose the type ([HTTP Request](../request-types/http-api-request-configuration.md), [Flow Request](../request-types/flow-request-configuration.md), or [Liquid Request](../request-types/liquid-requests.md)) and define the parameters it needs. These parameters can include:
+When you create a request, you choose the type ([HTTP Request](../request-types/http-requests.md), [Flow Request](../request-types/flow-requests.md), or [Liquid Request](../request-types/liquid-requests.md)) and define the parameters it needs. These parameters can include:
 - values passed in at trigger time
 - values extracted from earlier requests
 - Liquid based transformations
@@ -32,19 +32,19 @@ A configured request can be invoked through several available trigger types. Eac
 
 Run a request automatically when Shopify or an external system sends a webhook to APIEase.
 
-### [Cron Schedule](../requests/trigger-requests-via-cron-schedule.md)
+### [Cron Schedule](../requests/cron-schedule.md)
 
 Use a built in cron schedule to run a request at recurring intervals.
 
-### [Proxy Endpoint](../requests/proxy-endpoint-trigger.md)
+### [Proxy Endpoint](../requests/proxy-endpoint.md)
 
 Expose a request as a public API endpoint with an optional shared secret. External systems call the endpoint and APIEase runs the associated request.
 
-### [Manual Calls](../requests/manual-trigger.md)
+### [Manual Calls](../requests/manual-calls.md)
 
 Invoke any request directly from the APIEase admin for testing or on demand execution.
 
-### [Storefont Calls](../requests/storefront-trigger.md)
+### [Storefont Calls](../requests/storefont-calls.md)
 
 Trigger a request from your storefront using Shopify's app proxy. The storefront sends only non confidential data and APIEase performs the execution on the server side.
 

@@ -96,7 +96,7 @@ const config = {
             items: [
               {
                 label: 'Overview',
-                to: '/docs/overview/apiease-summary',
+                to: '/docs/overview/apiease',
               },
               {
                 label: 'How it works',
@@ -104,7 +104,7 @@ const config = {
               },
               {
                 label: 'Request description',
-                to: '/docs/requests/request-description',
+                to: '/docs/requests/requests-overview',
               },
             ],
           },

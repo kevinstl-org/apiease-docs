@@ -1,8 +1,8 @@
 ---
-title: Liquid requests
+title: Liquid Requests
 description: Use Liquid to transform data before or between API calls.
 ---
-# Liquid requests
+# Liquid Requests
 
 Liquid requests let you run a Liquid template that can call any APIEase request and shape the output. This is useful when you want logic, variable substitution, or to combine multiple requests into one response without building a custom app.
 
@@ -141,8 +141,8 @@ Assign and capture:
 
 Choose how the request should be triggered:
   - Automatically via [webhook](../requests/trigger-requests-from-a-webhook.md)
-  - On a recurring schedule using [cron](../requests/trigger-requests-via-cron-schedule.md)
-  - As an endpoint served by APIEase via [Proxy Endpoints](../requests/proxy-endpoint-trigger.md)
+  - On a recurring schedule using [cron](../requests/cron-schedule.md)
+  - As an endpoint served by APIEase via [Proxy Endpoints](../requests/proxy-endpoint.md)
   - [Remotely](../requests/calling-requests-remotely.md) from any http client.
   - Manually via the "Copy and Execute" link on the requests admin page
   - From your storefront using Shopify's app proxy
@@ -189,4 +189,3 @@ POST with a dynamic body:
 } as sub %}
 {{ sub.status }}
 ```
-

@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Translate your site
 
-Let's translate `docs/overview/apiease-summary.md` to French.
+Let's translate `docs/overview/apiease.md` to French.
 
 ## Configure i18n
 
@@ -21,15 +21,15 @@ export default {
 
 ## Translate a doc
 
-Copy the `docs/overview/apiease-summary.md` file to the `i18n/fr` folder:
+Copy the `docs/overview/apiease.md` file to the `i18n/fr` folder:
 
 ```bash
 mkdir -p i18n/fr/docusaurus-plugin-content-docs/current/
 
-cp docs/overview/apiease-summary.md i18n/fr/docusaurus-plugin-content-docs/current/overview/apiease-summary.md
+cp docs/overview/apiease.md i18n/fr/docusaurus-plugin-content-docs/current/overview/apiease.md
 ```
 
-Translate `i18n/fr/docusaurus-plugin-content-docs/current/overview/apiease-summary.md` in French.
+Translate `i18n/fr/docusaurus-plugin-content-docs/current/overview/apiease.md` in French.
 
 ## Start your localized site
 

@@ -20,7 +20,7 @@ const sidebars = {
       type: 'category',
       label: 'Overview',
       items: [
-        'overview/apiease-summary',
+        'overview/apiease',
         'overview/what-it-does',
         'overview/how-it-works',
         'overview/why-you-need-it',
@@ -30,23 +30,60 @@ const sidebars = {
       type: 'category',
       label: 'Requests',
       items: [
-        {
-          type: 'category',
-          label: 'Requests overview',
-          items: [
-            'requests/request-description',
-            'requests/how-to-add-requests',
-            'requests/calling-requests-remotely',
-            'requests/customer-authenticated-requests',
-          ],
-        },
+        'requests/requests-overview',
+        'requests/how-to-add-requests',
         {
           type: 'category',
           label: 'Request types',
           items: [
-            'request-types/http-api-request-configuration',
-            'request-types/flow-request-configuration',
-            'request-types/liquid-requests',
+            {
+              type: 'doc',
+              id: 'request-types/http-requests',
+              label: 'HTTP Requests',
+            },
+            {
+              type: 'doc',
+              id: 'request-types/flow-requests',
+              label: 'Flow Requests',
+            },
+            {
+              type: 'doc',
+              id: 'request-types/liquid-requests',
+              label: 'Liquid Requests',
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Request parameters',
+          items: [
+            'request-parameters/request-parameters-overview',
+            'request-parameters/in-app-vs-dynamic',
+            {
+              type: 'category',
+              label: 'In-app parameters',
+              items: [
+                'in-app-parameters/in-app-header-parameters',
+                'in-app-parameters/in-app-body-parameters',
+                'in-app-parameters/in-app-path-parameters',
+                'in-app-parameters/in-app-query-parameters',
+                'in-app-parameters/in-app-system-parameters',
+                'in-app-parameters/in-app-flow-parameters',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Dynamic embedded parameters from storefront',
+              items: [
+                'dynamic-embedded-parameters/overview',
+                'dynamic-embedded-parameters/path-parameters',
+                'dynamic-embedded-parameters/body',
+                'dynamic-embedded-parameters/headers',
+                'dynamic-embedded-parameters/query-parameters',
+                'dynamic-embedded-parameters/flow-parameters',
+              ],
+            },
+            'request-parameters/path-variables',
           ],
         },
         {
@@ -63,22 +100,22 @@ const sidebars = {
             },
             {
               type: 'doc',
-              id: 'requests/trigger-requests-via-cron-schedule',
+              id: 'requests/cron-schedule',
               label: 'Cron Schedule',
             },
             {
               type: 'doc',
-              id: 'requests/proxy-endpoint-trigger',
+              id: 'requests/proxy-endpoint',
               label: 'Proxy Endpoint',
             },
             {
               type: 'doc',
-              id: 'requests/manual-trigger',
+              id: 'requests/manual-calls',
               label: 'Manual Calls',
             },
             {
               type: 'doc',
-              id: 'requests/storefront-trigger',
+              id: 'requests/storefont-calls',
               label: 'Storefont Calls',
             },
             {
@@ -113,45 +150,7 @@ const sidebars = {
             'requests/examples/agify-api',
           ],
         },
-        {
-          type: 'category',
-          label: 'Request parameters',
-          items: [
-            {
-              type: 'category',
-              label: 'Request parameters overview',
-              items: [
-                'request-parameters/in-app-vs-dynamic',
-                'request-parameters/path-variables',
-                'request-parameters/chained-requests',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'In-app parameters',
-              items: [
-                'in-app-parameters/in-app-header-parameters',
-                'in-app-parameters/in-app-body-parameters',
-                'in-app-parameters/in-app-path-parameters',
-                'in-app-parameters/in-app-query-parameters',
-                'in-app-parameters/in-app-system-parameters',
-                'in-app-parameters/in-app-flow-parameters',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Dynamic embedded parameters from storefront',
-              items: [
-                'dynamic-embedded-parameters/overview',
-                'dynamic-embedded-parameters/path-parameters',
-                'dynamic-embedded-parameters/body',
-                'dynamic-embedded-parameters/headers',
-                'dynamic-embedded-parameters/query-parameters',
-                'dynamic-embedded-parameters/flow-parameters',
-              ],
-            },
-          ],
-        },
+        'requests/customer-authenticated-requests',
       ],
     },
     {

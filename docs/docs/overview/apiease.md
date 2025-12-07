@@ -1,5 +1,5 @@
 ---
-title: APIEase Summary
+title: APIEase
 description: High-level description of what APIEase does for Shopify teams.
 ---
 # APIEase

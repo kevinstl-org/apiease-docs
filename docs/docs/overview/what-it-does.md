@@ -4,13 +4,13 @@ description: Functional overview of what APIEase executes and manages.
 ---
 # What It Does
 
-APIEase defines and runs three types of requests: [HTTP Requests](../request-types/http-api-request-configuration.md), [Flow Requests](../request-types/flow-request-configuration.md), and [Liquid Requests](../request-types/liquid-requests.md). Each request type is executed inside APIEase's managed environment, keeping credentials secure and ensuring logic is processed server-side.
+APIEase defines and runs three types of requests: [HTTP Requests](../request-types/http-requests.md), [Flow Requests](../request-types/flow-requests.md), and [Liquid Requests](../request-types/liquid-requests.md). Each request type is executed inside APIEase's managed environment, keeping credentials secure and ensuring logic is processed server-side.
 
-## [HTTP Requests](../request-types/http-api-request-configuration.md)
+## [HTTP Requests](../request-types/http-requests.md)
 
 HTTP Requests let you call external APIs using any method (GET, POST, PUT, PATCH, DELETE). You define the URL, headers, body, and parameters. APIEase executes the call on the server and returns the response to the system that triggered it.
 
-## [Flow Requests](../request-types/flow-request-configuration.md)
+## [Flow Requests](../request-types/flow-requests.md)
 
 Flow Requests allow Shopify Flow to trigger logic that APIEase runs. APIEase receives the Flow input, processes any parameters, executes the defined request or workflow, and returns output data that Flow can use in subsequent steps.
 

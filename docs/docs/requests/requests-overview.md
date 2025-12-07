@@ -1,8 +1,8 @@
 ---
-title: APIEase Requests Description
+title: Requests Overview
 description: Explain what requests are and how they behave inside APIEase.
 ---
-# APIEase Requests Description
+# Requests Overview
 
 Everything that you can accomplish with APIEase starts with a request.
 
@@ -27,4 +27,3 @@ Every request you create can include embedded parameters, dynamic storefront val
 Once created, each request can be triggered in several ways. You can run it manually from the admin, trigger it automatically using a webhook, start it from the storefront using Shopify's app proxy, or schedule it to run on a repeating interval using the built in cron system.
 
 Requests are the core building blocks of APIEase. They give you a simple and secure way to create integrations, automate tasks, and connect your storefront with external services without the need to host your own app.
-
