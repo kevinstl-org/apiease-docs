@@ -28,4 +28,3 @@ Flow requests allow you to securely trigger or continue a Shopify Flow workflow.
 - From your storefront using Shopify's app proxy
 
 **Next Request**: You can specify the name of another request to run after this request finishes. This allows you to build multi-step workflows using [chained requests](../request-parameters/chained-requests.md).
-

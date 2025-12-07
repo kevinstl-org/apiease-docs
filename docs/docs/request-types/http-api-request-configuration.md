@@ -34,4 +34,3 @@ HTTP API requests are highly configurable with many options.  HTTP requests allo
   - From your storefront using Shopify's app proxy
 
 - **Next Request**: You can implement [chained requests](../request-parameters/chained-requests.md) by setting the Next Request field to the name of a request to run after this one completes.
-

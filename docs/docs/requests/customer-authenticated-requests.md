@@ -27,8 +27,3 @@ Include customer id as System parameter with name: "customerId" and value: "indi
 If request parameters are owned by individual customer you will need to add a separate request with each particular customer's parameters and customer id as a System parameter.
 
 If you add customer id to a request that customer must be logged into the store in order for the api call to pass validation and return a response to your storefront.
-
-
-
-
-

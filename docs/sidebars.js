@@ -54,6 +54,10 @@ const sidebars = {
               label: 'Triggers',
               items: [
                 {
+                  type: 'doc',
+                  id: 'requests/manual-trigger',
+                },
+                {
               type: 'category',
               label: 'Webhooks',
               items: [
@@ -66,15 +70,19 @@ const sidebars = {
               label: 'Cron schedule',
               items: ['requests/trigger-requests-via-cron-schedule'],
             },
-            {
-              type: 'doc',
-              id: 'requests/proxy-endpoint-trigger',
+                {
+                  type: 'doc',
+                  id: 'requests/proxy-endpoint-trigger',
+                },
+                {
+                  type: 'doc',
+                  id: 'requests/storefront-trigger',
+                },
+              ],
             },
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Shopify Flow integration',
+            {
+              type: 'category',
+              label: 'Shopify Flow integration',
           items: [
             'requests/shopify-flow-integration/architecture',
             'requests/shopify-flow-integration/add-flow-request',

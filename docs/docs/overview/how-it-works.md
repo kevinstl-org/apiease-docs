@@ -40,11 +40,11 @@ Use a built in cron schedule to run a request at recurring intervals.
 
 Expose a request as a public API endpoint with an optional shared secret. External systems call the endpoint and APIEase runs the associated request.
 
-### Manually
+### [Manual Trigger](../requests/manual-trigger.md)
 
 Invoke any request directly from the APIEase admin for testing or on demand execution.
 
-### From Storefront
+### [Storefront Trigger](../requests/storefront-trigger.md)
 
 Trigger a request from your storefront using Shopify's app proxy. The storefront sends only non confidential data and APIEase performs the execution on the server side.
 
