@@ -4,10 +4,11 @@ description: High-level description of what APIEase does for Shopify teams.
 ---
 # APIEase
 
-The API integration and automation platform.
-============================================
+The API Integration And Automation Platform
+===========================================
 
-APIEase is a managed system where your API requests, workflows, and custom logic run, so you don’t have to build or maintain that infrastructure yourself.
+APIEase is a managed system where your API requests, workflows, and custom logic 
+run, so you don’t have to build or maintain that infrastructure yourself.
 
 **What It Does** - APIEase executes secure HTTP requests, triggers Shopify Flow 
 actions, and runs custom logic defined through Liquid Requests. [Learn more...](./what-it-does.md)

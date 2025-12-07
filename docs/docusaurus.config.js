@@ -117,7 +117,7 @@ const config = {
               },
               {
                 label: 'Product Site',
-                href: 'https://apps.shopify.com/apiease-admin',
+                href: 'https://apiease.com',
               },
             ],
           },
