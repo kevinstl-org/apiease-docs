@@ -95,16 +95,20 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Overview',
+                label: 'APIEase',
                 to: '/docs/overview/apiease',
               },
               {
-                label: 'How it works',
+                label: 'What It Does',
+                to: '/docs/overview/what-it-does',
+              },
+              {
+                label: 'How It Works',
                 to: '/docs/overview/how-it-works',
               },
               {
-                label: 'Request description',
-                to: '/docs/requests/requests-overview',
+                label: 'Why You Need It',
+                to: '/docs/overview/why-you-need-it',
               },
             ],
           },
@@ -118,6 +122,10 @@ const config = {
               {
                 label: 'Product Site',
                 href: 'https://apiease.com',
+              },
+              {
+                label: 'Documentation',
+                href: 'https://docs.apiease.com',
               },
             ],
           },
