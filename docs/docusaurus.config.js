@@ -136,6 +136,14 @@ const config = {
                 label: 'Support',
                 href: 'mailto:support@apiease.com',
               },
+              {
+                html: `
+                  <div class="footer-icon-row">
+                    <a class="footer-icon footer-icon--linkedin" href="https://www.linkedin.com/company/apiease" aria-label="LinkedIn" target="_blank" rel="noreferrer noopener"><span class="sr-only">LinkedIn</span></a>
+                    <a class="footer-icon footer-icon--facebook" href="https://www.facebook.com/APIEasePlatform" aria-label="Facebook" target="_blank" rel="noreferrer noopener"><span class="sr-only">Facebook</span></a>
+                  </div>
+                `,
+              },
             ],
           },
         ],
