@@ -32,6 +32,7 @@ const sidebars = {
       items: [
         'requests/requests-overview',
         'requests/how-to-add-requests',
+        'requests/import-from-postman',
         {
           type: 'category',
           label: 'Request types',
@@ -63,6 +64,7 @@ const sidebars = {
               type: 'category',
               label: 'In-app parameters',
               items: [
+                'in-app-parameters/in-app-parameters-overview',
                 'in-app-parameters/in-app-header-parameters',
                 'in-app-parameters/in-app-body-parameters',
                 'in-app-parameters/in-app-path-parameters',
