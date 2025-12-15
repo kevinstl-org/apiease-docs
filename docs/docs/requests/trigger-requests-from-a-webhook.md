@@ -4,7 +4,7 @@ description: Run an APIEase request whenever Shopify sends a webhook event.
 ---
 # Trigger requests from a webhook
 
-You can configure a request in APIEase to automatically run when a Shopify webhook event is received. This connects real-time store events (orders created, customers updated, carts changed, and more) to external APIs or Flow automations without manual polling. You can add a webhook trigger to any request. See the [Shopify webhook topics](https://shopify.dev/docs/api/admin-graphql/2023-10/enums/WebhookSubscriptionTopic) for available events.
+This guide shows how to configure a webhook trigger in APIEase. Shopify maintains the full list of [webhook topics](https://shopify.dev/docs/api/admin-graphql/2023-10/enums/WebhookSubscriptionTopic).
 
 ![Webhook trigger selection](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/trigger-webhook-http.png?v=1744409941)
 
@@ -63,4 +63,3 @@ When the request is triggered, the webhook payload is passed as the body.
 ```
 
 To pull specific payload values into headers, query params, or body fields, see [Mapping webhook parameters](./mapping-webhook-parameters.md).
-

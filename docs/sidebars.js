@@ -102,6 +102,7 @@ const sidebars = {
               type: 'category',
               label: 'Webhooks',
               items: [
+                'requests/webhooks-overview',
                 'requests/trigger-requests-from-a-webhook',
                 'requests/mapping-webhook-parameters',
               ],
