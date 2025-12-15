@@ -94,6 +94,11 @@ const sidebars = {
           label: 'Triggers',
           items: [
             {
+              type: 'doc',
+              id: 'requests/triggers-overview',
+              label: 'Triggers Overview',
+            },
+            {
               type: 'category',
               label: 'Webhooks',
               items: [
