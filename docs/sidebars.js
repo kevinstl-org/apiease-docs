@@ -37,6 +37,7 @@ const sidebars = {
           type: 'category',
           label: 'Request types',
           items: [
+            'request-types/request-types-overview',
             {
               type: 'doc',
               id: 'request-types/http-requests',
