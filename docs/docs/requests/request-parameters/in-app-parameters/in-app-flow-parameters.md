@@ -30,7 +30,6 @@ If your Flow expects a variable named `customer_data` that contains both an emai
 }
 ```
 
-You can also use [embedded parameters](../dynamic-embedded-parameters/overview.md) to dynamically set parameters from your storefront.
+You can also use [embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) to dynamically set parameters from your storefront.
 
 ![In-app flow parameter fields](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/in-app-flow-parameters.png?v=1744838680)
-

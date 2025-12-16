@@ -44,4 +44,4 @@ If the customer is logged in when the app proxy runs, Shopify includes their cus
 - Require a logged-in customer: add a system parameter named `validateCustomer` with value `true`.
 - Restrict to a specific customer: add a system parameter named `customerId` set to the allowed Shopify customer id.
 
-For detailed setup and screenshots, see [Customer authenticated requests](./customer-authenticated-requests.md). If validation fails, APIEase blocks the call and no response is returned to the storefront.
+For detailed setup and screenshots, see [Customer authenticated requests](../customer-authenticated-requests.md). If validation fails, APIEase blocks the call and no response is returned to the storefront.

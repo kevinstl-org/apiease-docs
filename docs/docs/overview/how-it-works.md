@@ -4,7 +4,7 @@ description: Outline the core flow for configuring and running APIEase in a Shop
 ---
 # How It Works
 
-APIEase runs the requests and logic you define. Each request ([HTTP](../request-types/http-requests.md), [Flow](../request-types/flow-requests.md), or [Liquid](../request-types/liquid-requests.md)) is configured in the APIEase admin and executed inside the APIEase runtime, where confidential parameters remain secure.
+APIEase runs the requests and logic you define. Each request ([HTTP](../requests/request-types/http-requests.md), [Flow](../requests/request-types/flow-requests.md), or [Liquid](../requests/request-types/liquid-requests.md)) is configured in the APIEase admin and executed inside the APIEase runtime, where confidential parameters remain secure.
 
 This page describes how requests are configured, how they are triggered, and how these elements combine to create custom functionality.
 
@@ -12,7 +12,7 @@ This page describes how requests are configured, how they are triggered, and how
 
 ## Configuring Requests
 
-When you create a request, you choose the type ([HTTP Request](../request-types/http-requests.md), [Flow Request](../request-types/flow-requests.md), or [Liquid Request](../request-types/liquid-requests.md)) and define the parameters it needs. These parameters can include:
+When you create a request, you choose the type ([HTTP Request](../requests/request-types/http-requests.md), [Flow Request](../requests/request-types/flow-requests.md), or [Liquid Request](../requests/request-types/liquid-requests.md)) and define the parameters it needs. These parameters can include:
 - values passed in at trigger time
 - values extracted from earlier requests
 - Liquid based transformations
@@ -28,31 +28,31 @@ For setup steps, see [How to Add Requests](../requests/how-to-add-requests.md).
 
 A configured request can be invoked through several available trigger types. Each trigger activates the same underlying request definition, allowing the logic to run without duplication. Triggers are available in the following order:
 
-### [Webhooks](../requests/trigger-requests-from-a-webhook.md)
+### [Webhooks](../requests/triggers/webhooks/trigger-requests-from-a-webhook.md)
 
 Run a request automatically when Shopify or an external system sends a webhook to APIEase.
 
-### [Cron Schedule](../requests/cron-schedule.md)
+### [Cron Schedule](../requests/triggers/cron-schedule.md)
 
 Use a built in cron schedule to run a request at recurring intervals.
 
-### [Proxy Endpoint](../requests/proxy-endpoint.md)
+### [Proxy Endpoint](../requests/triggers/proxy-endpoint.md)
 
 Expose a request as a public API endpoint with an optional shared secret. External systems call the endpoint and APIEase runs the associated request.
 
-### [Manual Calls](../requests/manual-calls.md)
+### [Manual Calls](../requests/triggers/manual-calls.md)
 
 Invoke any request directly from the APIEase admin for testing or on demand execution.
 
-### [Storefont Calls](../requests/storefont-calls.md)
+### [Storefont Calls](../requests/triggers/storefont-calls.md)
 
 Trigger a request from your storefront using Shopify's app proxy. The storefront sends only non confidential data and APIEase performs the execution on the server side.
 
-### [Remote HTTP Client](../requests/calling-requests-remotely.md)
+### [Remote HTTP Client](../requests/triggers/calling-requests-remotely.md)
 
 Send an HTTP call from any external system to APIEase to initiate a request, with optional authentication.
 
-### [Chained Request](../request-parameters/chained-requests.md)
+### [Chained Request](../requests/request-parameters/chained-requests.md)
 
 Run a request from within another request. A request can call additional requests and pass outputs downstream, allowing multi step workflows.
 

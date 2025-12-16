@@ -25,7 +25,6 @@ While editing your request:
 {"arg1":"value1","arg2":"value2","arg3":"value3"}
 ```
 
-You can also use [embedded parameters](../dynamic-embedded-parameters/overview.md) to dynamically set parameters from your storefront.
+You can also use [embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) to dynamically set parameters from your storefront.
 
 ![In-app body parameter entry](https://tawk.link/65552a3acec6a91282103248/kb/attachments/i0yOK5rG4k.png)
-

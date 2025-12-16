@@ -16,7 +16,7 @@ Requests can be used for a wide variety of purposes, including:
 - Triggering Shopify Flow automations
 - Executing multiple requests in sequence based on API responses
 
-There are three [Request types](../request-types/request-types-overview) in APIEase: [HTTP requests](../request-types/http-requests.md), [Flow requests](../request-types/flow-requests.md), and [Liquid requests](../request-types/liquid-requests.md).
+There are three [Request types](./request-types/request-types-overview.md) in APIEase: [HTTP requests](./request-types/http-requests.md), [Flow requests](./request-types/flow-requests.md), and [Liquid requests](./request-types/liquid-requests.md).
 
 Every request you create can include embedded parameters, dynamic storefront values, or confidential credentials stored securely on the server.
 

@@ -25,4 +25,4 @@ In-app parameters are values you configure in the APIEase admin to be injected i
 3. Save the request. APIEase will inject these values whenever the request is executed.
 
 **When to combine with dynamic parameters**
-Use in-app parameters for anything sensitive or static. If you need runtime data from the storefront (such as cart info, page context, or user input), pair them with [dynamic embedded parameters](../dynamic-embedded-parameters/overview.md). Keep credentials and other confidential values in-app and server-side.
+Use in-app parameters for anything sensitive or static. If you need runtime data from the storefront (such as cart info, page context, or user input), pair them with [dynamic embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md). Keep credentials and other confidential values in-app and server-side.

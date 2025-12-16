@@ -16,7 +16,7 @@ Example of APIEase Request for Shopify Product Count
 - **Method**: `POST`
 - **Header parameters:**
   - **Name**: `X-Shopify-Access-Token`  
-    **Value**: `your-shopify-access-token` (see [Shopify access token](../shopify-api/shopify-access-token.md))
+    **Value**: `your-shopify-access-token` (see [Shopify access token](./shopify-access-token.md))
   - **Name**: `Content-Type`  
     **Value**: `application/json`
 - **Body parameters:**
@@ -25,4 +25,3 @@ Example of APIEase Request for Shopify Product Count
 ```json
 { "query": "query { productsCount { count } }" }
 ```
-

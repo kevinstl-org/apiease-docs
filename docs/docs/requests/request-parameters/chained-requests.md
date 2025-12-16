@@ -77,7 +77,7 @@ The curly brace syntax tells APIEase to substitute in the corresponding value fr
 
 If you want to see this in action, we've created a walkthrough of a common use case: authenticating with a service, storing the returned access token, and using it in a follow-up request.
 
-[View Authentication Example](../apiease-details/authentication-example.md)
+[View Authentication Example](../../general/apiease-details/authentication-example.md)
 
 **When to Use Chained Requests**
 
@@ -86,4 +86,3 @@ Use chained requests when:
 - You need to authenticate before calling a protected API
 - You need to transform or fetch dynamic data before continuing
 - You want to build multi-step workflows inside APIEase without building and hosting a custom backend
-

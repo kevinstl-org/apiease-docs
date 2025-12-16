@@ -14,16 +14,16 @@ Flow requests allow you to securely trigger or continue a Shopify Flow workflow.
 - **Type**: Set to `flow` to trigger a Shopify Flow workflow.
 - **Parameters ([?](../request-parameters/in-app-vs-dynamic.md))**:
   - **Flow**: JSON key/value pairs passed to your workflow.
-  - **System**: Used by APIEase in cases such as [Customer Authentication](../requests/customer-authenticated-requests.md).
-  - Supply [in app parameters](../request-parameters/in-app-vs-dynamic.md) or [dynamic embedded parameters](../dynamic-embedded-parameters/overview.md) from the storefront.
+  - **System**: Used by APIEase in cases such as [Customer Authentication](../customer-authenticated-requests.md).
+  - Supply [in app parameters](../request-parameters/in-app-vs-dynamic.md) or [dynamic embedded parameters](../request-parameters/dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) from the storefront.
   - Mark credentials or secrets as **Sensitive** so they are encrypted and never exposed in the storefront or admin UI.
 
-**Triggers ([?](../requests/trigger-requests-from-a-webhook.md))**: Choose how the request should be triggered:
+**Triggers ([?](../triggers/webhooks/trigger-requests-from-a-webhook.md))**: Choose how the request should be triggered:
 
-- Automatically via [webhook](../requests/trigger-requests-from-a-webhook.md)
-- On a recurring schedule using [cron](../requests/cron-schedule.md)
-- As an endpoint served by APIEase via [Proxy Endpoints](../requests/proxy-endpoint.md)
-- [Remotely](../requests/calling-requests-remotely.md) from any http client.
+- Automatically via [webhook](../triggers/webhooks/trigger-requests-from-a-webhook.md)
+- On a recurring schedule using [cron](../triggers/cron-schedule.md)
+- As an endpoint served by APIEase via [Proxy Endpoints](../triggers/proxy-endpoint.md)
+- [Remotely](../triggers/calling-requests-remotely.md) from any http client.
 - Manually via the "Copy and Execute" link on the requests admin page
 - From your storefront using Shopify's app proxy
 

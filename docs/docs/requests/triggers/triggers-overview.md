@@ -6,10 +6,10 @@ description: Summarize how APIEase requests can be invoked and where to learn ea
 
 Every APIEase request uses the same configuration but can be invoked in different ways depending on where the call originates. Choose the trigger that best matches your workflow and follow the linked guides for setup details.
 
-## [Webhooks](./trigger-requests-from-a-webhook.md)
+## [Webhooks](./webhooks/trigger-requests-from-a-webhook.md)
 - Start a request automatically when Shopify emits a webhook event.
 - Ideal for reacting to store activity such as orders, carts, or customers.
-- See also [Mapping webhook parameters](./mapping-webhook-parameters.md) to pass webhook fields into your request.
+- See also [Mapping webhook parameters](./webhooks/mapping-webhook-parameters.md) to pass webhook fields into your request.
 
 ## [Cron Schedule](./cron-schedule.md)
 - Execute a request on a fixed schedule without any external event.
@@ -26,7 +26,7 @@ Every APIEase request uses the same configuration but can be invoked in differen
 ## [Storefont Calls](./storefont-calls.md)
 - Let theme code call a request via Shopify's app proxy without exposing secrets.
 - Great for customer-facing interactions that need server-side execution.
-- Works with [Customer authenticated requests](./customer-authenticated-requests.md) to access customer context securely.
+- Works with [Customer authenticated requests](../customer-authenticated-requests.md) to access customer context securely.
 
 ## [Remote HTTP Client](./calling-requests-remotely.md)
 - Invoke a request from any HTTP client outside Shopify using APIEase's remote caller API.

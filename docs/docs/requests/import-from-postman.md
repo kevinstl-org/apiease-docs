@@ -18,6 +18,6 @@ Bring your existing Postman requests into APIEase so you do not have to recreate
 4. Review the imported rows, replace placeholder auth values (for example `{{POSTMAN_BEARER_TOKEN}}`), and click **Save** to persist them.
 
 ## How requests are mapped
-- Postman variables such as `{{api_base}}` become APIEase placeholders (`{api_base}`) so you can wire them to [in-app parameters](../in-app-parameters/in-app-parameters-overview.md), [dynamic embedded parameters](../dynamic-embedded-parameters/overview.md), or payloads from [chained requests](../request-parameters/chained-requests.md) and [webhook triggers](./mapping-webhook-parameters.md).
+- Postman variables such as `{{api_base}}` become APIEase placeholders (`{api_base}`) so you can wire them to [in-app parameters](./request-parameters/in-app-parameters/in-app-parameters-overview.md), [dynamic embedded parameters](./request-parameters/dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md), or payloads from [chained requests](./request-parameters/chained-requests.md) and [webhook triggers](./triggers/webhooks/mapping-webhook-parameters.md).
 - Path segments like `:id` and Postman URL variables become path parameters.
 - Bearer, Basic, and API key auth blocks become Authorization headers with placeholder values so secrets are not imported; update them after import with your real credentials or secrets.

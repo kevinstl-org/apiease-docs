@@ -4,7 +4,7 @@ description: Configure path parameters stored inside APIEase.
 ---
 # In-app path parameters
 
-You can add path parameters to any APIEase request directly from the request editor. Path parameters are used to replace [path variables](../request-parameters/path-variables.md) within your address.
+You can add path parameters to any APIEase request directly from the request editor. Path parameters are used to replace [path variables](../path-variables.md) within your address.
 
 **How to Add a Path Parameter**
 
@@ -21,7 +21,6 @@ While editing your request:
 
 If your API endpoint is structured as `https://ex.com/products/{pathVariable1}` the system will render the address as `https://ex.com/products/inAppValue1` at runtime.
 
-You can also use [embedded parameters](../dynamic-embedded-parameters/overview.md) to dynamically set parameters from your storefront.
+You can also use [embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) to dynamically set parameters from your storefront.
 
 ![In-app path parameter configuration](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/path-variable-edit.png?v=1744137415)
-

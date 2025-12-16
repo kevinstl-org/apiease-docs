@@ -16,6 +16,5 @@ Example of APIEase Request for Shopify Product Count
 - **Method**: `GET`
 - **Header**:
   - **Name**: `X-Shopify-Access-Token`
-  - **Value**: your access token (see [Shopify access token](../shopify-api/shopify-access-token.md))
-
+  - **Value**: your access token (see [Shopify access token](./shopify-access-token.md))
 

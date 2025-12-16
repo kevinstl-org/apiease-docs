@@ -140,10 +140,10 @@ Assign and capture:
 **Triggers**
 
 Choose how the request should be triggered:
-  - Automatically via [webhook](../requests/trigger-requests-from-a-webhook.md)
-  - On a recurring schedule using [cron](../requests/cron-schedule.md)
-  - As an endpoint served by APIEase via [Proxy Endpoints](../requests/proxy-endpoint.md)
-  - [Remotely](../requests/calling-requests-remotely.md) from any http client.
+  - Automatically via [webhook](../triggers/webhooks/trigger-requests-from-a-webhook.md)
+  - On a recurring schedule using [cron](../triggers/cron-schedule.md)
+  - As an endpoint served by APIEase via [Proxy Endpoints](../triggers/proxy-endpoint.md)
+  - [Remotely](../triggers/calling-requests-remotely.md) from any http client.
   - Manually via the "Copy and Execute" link on the requests admin page
   - From your storefront using Shopify's app proxy
 
