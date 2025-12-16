@@ -35,7 +35,7 @@ The purpose of APIEase is to keep those credentials safe and hidden on the serve
 
 If you need to authenticate with an external system and use a returned authentication code, you can use **APIEase chained requests**. In this setup, the first request performs the authentication, and the second request uses the returned token or session key. This keeps all confidential steps on the server and completely out of the storefront.
 
-You can read more about [chained requests here](../chained-requests.md) and view an [authentication example here](../../../../general/apiease-details/authentication-example.md).
+You can read more about [chained requests here](../chained-requests.md) and view an [authentication example here](../../../general/apiease-details/authentication-example.md).
 
 Always store confidential credentials in the APIEase admin. Use dynamic parameters only for data that is safe to expose and specific to the current customer or page context.
 
