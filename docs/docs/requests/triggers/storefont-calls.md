@@ -1,8 +1,8 @@
 ---
-title: Storefont calls
+title: Storefront calls
 description: Call APIEase requests from your Shopify storefront through Shopify's app proxy while keeping credentials secure.
 ---
-# Storefont calls
+# Storefront calls
 
 Run any APIEase request directly from your Shopify storefront using Shopify's app proxy. This lets you start workflows from theme code without exposing credentials or private logic in the browser.
 
@@ -13,29 +13,26 @@ Run any APIEase request directly from your Shopify storefront using Shopify's ap
 
 ## Configure a storefront call
 1. In the APIEase admin, open the request you want to run from the storefront.
-2. In the **Trigger** column, click the plus icon and choose **Storefront**.
-3. Select the HTTP method you want to allow (GET or POST) and set the proxy path to use.
-4. Save. Note the request's `requestId`; you will pass it from your theme when calling the trigger.
+2. In the **Actions** column, click the **Copy and Execute** icon to open the manual call screen.
+3. In the manual call dialog, click **Copy** to grab the storefront snippet shown there. It contains the request's `requestId` and the correct app proxy path.
+4. Paste the snippet into your custom Liquid or theme code where you want the request to run.
 
 ## Call from your theme
-Use JavaScript or Liquid to call the app proxy path and include any dynamic embedded parameters needed at runtime. APIEase merges these values into the request before execution.
+Use the copied snippet as-is to verify the integration, then extend it with any [dynamic embedded parameters](../request-parameters/dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) you need for runtime data.
 
-```javascript
-const queryParams = new URLSearchParams({
-  requestId: '<your_request_id>',
-  queryParamsEmbedded: JSON.stringify({ handle: {{ product.handle | json }} }),
-  bodyEmbedded: JSON.stringify({ source: 'storefront' }),
-});
-
-fetch('/apps/apiease/integration/caller/call?' + queryParams, { method: 'GET' })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('APIEase response', data);
+```html
+<script>
+  const queryParams = new URLSearchParams({
+    requestId: "e4234d0-5b0a-11ee-9e5d-195679c7ea93b",
   });
+  fetch('/apps/apiease/integration/caller/call?' + queryParams).
+    then(function(response) {return response.json();}).
+    then(function(jsonResponse) {console.log(jsonResponse);});
+</script>
 ```
 
-- `requestId` tells APIEase which request to run.
-- `pathParamsEmbedded`, `queryParamsEmbedded`, `headersEmbedded`, `bodyEmbedded`, and `flowParamsEmbedded` map to the dynamic embedded parameters defined on the request.
+- `requestId` tells APIEase which request to run; this value is filled in when you click **Copy**.
+- Add `pathParamsEmbedded`, `queryParamsEmbedded`, `headersEmbedded`, `bodyEmbedded`, or `flowParamsEmbedded` as needed to pass dynamic embedded parameters from the storefront.
 - Keep confidential values stored in the APIEase request configuration; do not place secrets in storefront code.
 
 ## Customer validation options

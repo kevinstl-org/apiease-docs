@@ -33,6 +33,7 @@ const sidebars = {
         'requests/requests-overview',
         'requests/how-to-add-requests',
         'requests/import-from-postman',
+        'requests/export-to-postman',
         {
           type: 'category',
           label: 'Request types',
