@@ -185,7 +185,7 @@ POST with a dynamic body:
 {% call {
   "requestId": "51bcee90-89ce-11f0-ac46-894599c37",
   "headersEmbedded": { "Content-Type": "application/json" },
-  "bodyEmbedded": { "email": email, "source": "storefront" }
+  "bodyEmbedded": { "email": "{{email}}", "source": "storefront" }
 } as sub %}
 {{ sub.status }}
 ```
