@@ -173,7 +173,7 @@ Call a Flow request with values from the template:
 {% assign orderId = params.order_id %}
 {% call {
   "requestId": "start-order-flow",
-  "flowParamsEmbedded": { "orderId": orderId }
+  "flowParamsEmbedded": { "orderId": "{{orderId}}" }
 } as flowRun %}
 Run started: {{ flowRun.status }}
 ```
