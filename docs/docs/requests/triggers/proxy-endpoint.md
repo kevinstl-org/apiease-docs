@@ -29,8 +29,8 @@ When someone calls this URL using the HTTP method you specify (GET, POST, etc.),
 
 ## Configure a proxy endpoint trigger
 1. Open any APIEase request.
-2. Go to **Triggers**.
-3. Add **Proxy Endpoint**.
+2. Click the plus icon under **Triggers**.
+3. Select the **Proxy Endpoint** radio button.
 4. Set:
    - **Request Path**: The public endpoint path.
    - **HTTP Method**: The allowed verb for the endpoint.
