@@ -28,6 +28,8 @@ those credentials publicly. [Learn more...](./why-you-need-it.md)
 
 **Widgets** - Build reusable storefront widgets with Liquid and JavaScript, then render them using a theme app block. [Learn more...](../widgets/widgets-page.md)
 
+Looking for a quick answer? Choose your task in the [APIEase FAQ](../general/faq/faq.md).
+
 SOURCE
 https://docs.apiease.com/docs/overview/what-it-does
 
@@ -207,6 +209,21 @@ For most teams, the recommended path starts with `apiease-template`, uses `apiea
 
 If you are new to this workflow, start with [Quickstart with apiease-template](./quickstart-with-apiease-template.md).
 
+## Choose an interface
+
+Choose the interface based on where you want the work and its review history to live:
+
+| Interface | Best fit |
+| --- | --- |
+| APIEase admin | Create, edit, test, and run resources interactively. |
+| Apex in APIEase | Ask the in-product assistant to create, update, or delete requests and widgets during a conversation. |
+| `apiease-template` | Establish a repository layout for source-controlled requests, widgets, variables, and functions. |
+| `apiease-cli` | Initialize or upgrade a template project and sync its saved resource definitions with APIEase. |
+| APIEase public API | Build custom HTTP automation for saved resources or execute an existing saved request remotely. |
+| Coding agent in a template repository | Edit version-controlled resource definitions, review them in git, and optionally sync them through `apiease-cli`. |
+
+These are separate workflows. Apex changes APIEase resources directly during the conversation. A coding agent working in an `apiease-template` repository changes local files first, so the git diff can be the review boundary. See [Using APIEase with AI agents](./using-apiease-with-ai-agents.md) for the safety and resource-scope distinctions.
+
 ## Recommended path
 
 Use this reading order when you are getting started:
@@ -230,6 +247,7 @@ Use these pages based on the job you need to do:
 - [apiease-cli](./apiease-cli.md): installation, configuration, CRUD commands, and template upgrade workflow
 - [APIEase Public API](./apiease-public-api.md): authentication, resource routes, remote request execution, and direct HTTP usage
 - [Using APIEase with AI agents](./using-apiease-with-ai-agents.md): repository-first guidance for Codex-style agents
+- [Developer and automation FAQ](../general/faq/developer-and-automation.md): concise answers about public API access, handles, remote execution, source control, the CLI, and AI-assisted workflows
 
 ## How this fits the rest of the docs
 
@@ -722,6 +740,16 @@ Most agent-driven APIEase work should follow this path:
 - sync saved resources through [apiease-cli](./apiease-cli.md)
 - use the [APIEase Public API](./apiease-public-api.md) directly only when the CLI is not the right interface
 
+## Distinguish Apex from a repository agent
+
+Apex is the assistant inside APIEase. It can create, update, and delete requests and widgets directly during the conversation. It does not currently manage Variables, Functions, or every APIEase resource.
+
+Apex resource changes do not have a general preview, approval, undo, or safe-mode step. Review every resource that Apex creates or updates, and treat deletion instructions carefully.
+
+For a request that could change real data, Apex may initially configure request-specific controls such as a dry-run option or a disabled `ALLOW_*` Variable when that pattern fits the integration. Inspect and test the saved request before enabling live behavior. Those execution controls do not postpone or preview Apex's creation, update, or deletion of the APIEase resource itself.
+
+A coding agent such as Codex or Claude Code uses the repository workflow documented on the rest of this page. It can manage requests, widgets, Variables, and Functions through version-controlled files and `apiease-cli`. The local diff provides the review boundary before you sync or commit changes.
+
 ## Start from the template
 
 Agents should work inside a repository initialized with `apiease init`, not from a loose folder of one-off JSON files or ad hoc curl commands.
@@ -930,6 +958,8 @@ curl -X GET 'https://app-admin.apiease.com/api/v1/resources/requests' \
 ```
 
 APIEase resolves the shop from the `x-shop-myshopify-domain` header. Do not rely on shop-identifying fields in the JSON body.
+
+This APIEase API key authenticates the caller to APIEase. It is not a Shopify access token and it is not a credential for the external service used by a saved request. Configure outbound provider credentials on that saved request, normally as [sensitive request parameters](../requests/request-parameters/in-app-parameters/in-app-parameters-overview.md).
 
 ## Resource routes
 
@@ -1142,6 +1172,8 @@ curl -X POST 'https://app-admin.apiease.com/api/remote/caller/call?requestId=pro
 
 Use that route when the request definition already exists in APIEase and you want to trigger it from another system. The query parameter is still named `requestId`, but pass the request handle as the value for new integrations. For more detail, see [Calling APIEase Requests Remotely](../requests/triggers/calling-requests-remotely.md).
 
+This endpoint executes the saved definition. It does not accept an arbitrary destination URL or replace the resource CRUD routes.
+
 ## Response shape
 
 Successful responses follow a simple pattern:
@@ -1221,17 +1253,23 @@ This keeps your APIEase configuration versioned in git while still using the sam
 
 `apiease-cli` requires Node.js 20 or newer.
 
-From the CLI repository:
+Install the published package from npm:
+
+```bash
+npm install -g apiease
+```
+
+The installed command is:
+
+```bash
+apiease
+```
+
+If you are developing the CLI itself from its repository, install its dependencies and link the local package:
 
 ```bash
 npm install
 npm link
-```
-
-After linking, run the installed command as:
-
-```bash
-apiease
 ```
 
 If you are working directly inside the CLI repository without linking it globally, use `./bin/apiease-cli` instead.
@@ -1262,11 +1300,13 @@ Create the home directory:
 mkdir -p ~/.apiease
 ```
 
-Declare the active environment in `~/.apiease/environment`. The supported values are:
+Declare the active environment in `~/.apiease/environment`. Common values are:
 
 - `local`
 - `staging`
 - `production`
+
+Custom environment names such as `qa` are also supported when the matching `~/.apiease/.env.qa` file exists.
 
 Example local setup:
 
@@ -1327,7 +1367,7 @@ apiease init .
 
 Current CLI behavior:
 
-- the template source resolves from the local sibling repository `../apiease-template`
+- the installed CLI retrieves the current `apiease-template`; local CLI development can use a sibling template checkout
 - the command writes project metadata to `.apiease/project.json`
 - metadata includes the template version and a manifest of template-managed files
 - `.git`, `.idea`, and `node_modules` are excluded from the copied template
@@ -1708,6 +1748,113 @@ These management surfaces serve different workflows:
 Do not copy server-generated IDs into repository files. CLI and public API workflows use a resource's stable handle; see [Resource handles](../developers/resource-handles.md) for the identity rules.
 
 SOURCE
+https://docs.apiease.com/docs/requests/troubleshooting-requests
+
+TITLE
+Troubleshoot requests
+
+CONTENT
+# Troubleshoot requests
+
+Troubleshoot one layer at a time. First confirm that the saved request is safe to run and works with a manual call. Then test the trigger or the next request in a chain. This separates APIEase configuration problems from authentication, permission, and external-provider failures.
+
+## 1. Protect live data before testing
+
+Before executing a request, check whether its method or body can create, update, or delete data. Use a provider sandbox, test store, test record, or provider-supported dry-run option when one is available. APIEase does not add a universal dry-run mode to every external API.
+
+Avoid repeatedly testing a write request against production while changing several settings at once. Start with the smallest input that the receiving API documents as valid, and change one part of the request between runs.
+
+## 2. Test the saved request manually
+
+Use a [manual call](./triggers/manual-calls.md) to test the request from APIEase admin before adding a webhook, schedule, remote call, proxy endpoint, storefront call, or Widget Call.
+
+Review the returned status, body, and execution details. Record which configuration produced the result, but do not copy credentials or private response data into support messages or shared logs.
+
+- If the manual call fails, continue with the address, method, parameters, and credentials below.
+- If the manual call works but another entry point fails, keep the working request configuration and skip to [isolate the trigger](#7-isolate-the-trigger).
+- If a chain fails, test each request separately before reconnecting the chain.
+
+## 3. Verify the address and method
+
+Compare the saved **Address** and **Method** with the receiving API's current documentation.
+
+- Use the complete endpoint address, including the documented API version and path.
+- Confirm the host belongs to the intended environment and account.
+- Confirm the operation expects GET, POST, PUT, PATCH, DELETE, or OPTIONS.
+- Keep query values, body fields, and path replacements in their matching [parameter locations](./request-parameters/request-parameters-overview.md).
+
+For Shopify Admin GraphQL, the [address preset](../general/shopify-api/shopify-admin-graphql-address-preset.md) is the safest way to select the current shop endpoint. A `404` or `405` can indicate a wrong path or method, but providers define their own responses; verify the response body and provider documentation before drawing that conclusion.
+
+## 4. Reduce and verify parameters
+
+Start with only the fields the receiving API requires, then add optional fields back one at a time.
+
+Check each value against the provider's contract:
+
+- Put authentication and content-type metadata in headers.
+- Put URL filters and options in query parameters.
+- Match every path parameter to a placeholder in the address.
+- Send the documented body format and content type. Do not send form URL-encoded data when the API expects JSON, or JSON when it expects form data.
+- Check value types, capitalization, date formats, identifiers, and required fields.
+
+Also confirm where the value comes from. [In-app parameters](./request-parameters/in-app-vs-dynamic.md) are saved with the request; dynamic embedded parameters are supplied for one execution and can override a saved parameter with the same name and location. A working saved value can therefore produce a different result when a trigger supplies an override.
+
+## 5. Isolate credentials and permissions
+
+An authentication failure is different from an address, body, or trigger failure. Confirm that the request uses the correct kind of credential and that it is sent exactly where the receiving API requires it.
+
+For `401` and `403` responses, follow [Credentials, authentication, and security](../general/faq/credentials-and-security.md). That page distinguishes rejected credentials from permission problems and links to the Shopify automatic-token and scope checks. External providers can use status codes differently, so their response body and documentation remain authoritative.
+
+Do not replace or expose a sensitive value merely to debug another part of the request. If the original credential is unavailable or no longer valid, create or rotate it at the issuing provider and save the replacement as a sensitive request parameter.
+
+## 6. Separate the provider response from APIEase configuration
+
+Once APIEase reaches the configured endpoint, the external service decides the HTTP status and response body. APIEase cannot reliably diagnose an undocumented provider response or promise that the provider uses a status code in the usual way.
+
+Use the response safely:
+
+1. Read the response body for a provider error code, field name, or request requirement.
+2. Compare the status and body with the provider's current documentation.
+3. Confirm the credential's account, environment, scopes, and access to the requested resource.
+4. Reproduce the smallest documented request, changing one field at a time.
+5. Contact the provider when its documentation does not explain a response from its service.
+
+For a network error or timeout, first recheck the scheme, host, and path and confirm that the provider endpoint is available from a server-side client. Then check the provider's status information, rate limits, and expected response time. A timeout alone does not identify which system is at fault, and retrying a write operation can duplicate side effects.
+
+## 7. Isolate the trigger
+
+If the request works manually, test only the entry point that fails. The [triggers overview](./triggers/triggers-overview.md) links to the prerequisites for every supported trigger.
+
+- **Webhook:** confirm the intended event is selected and map fields from the actual webhook payload.
+- **Cron:** confirm the five-field expression and remember that schedules use UTC.
+- **Remote call:** confirm the request handle, shop-domain header, and APIEase API key.
+- **Proxy endpoint:** confirm the configured path, HTTP method, and authentication choice.
+- **Storefront or Widget Call:** confirm the directly called request has the matching trigger and that the browser call supplies the expected runtime parameters.
+
+Compare the failing trigger's runtime parameters with the values used by the successful manual call. Missing input, a different parameter name or location, or a dynamic override can explain why the same saved request behaves differently.
+
+## 8. Test a chained request one step at a time
+
+For a multi-step workflow, remove or temporarily clear **Next Request**, then run the first request by itself. Confirm that its response contains the exact field the next request references. Test the next request independently with a safe representative value before restoring the chain.
+
+When the individual requests work, reconnect them and check:
+
+- **Next Request** contains the intended request handle.
+- Response placeholders match the previous response's object path and capitalization.
+- The placeholder is in the correct header, query, path, or body field.
+- The first response uses the format the next request expects.
+
+See [Chained requests](./request-parameters/chained-requests.md) for response placeholder syntax. For conditions, loops, or several explicit calls, use a [Liquid request](./request-types/liquid-requests.md) instead of making a linear chain carry workflow logic it was not designed for.
+
+## 9. Re-test the complete path
+
+After the smallest manual request succeeds, add optional parameters back one at a time, reconnect the chain, and test the real trigger. Repeat the live test only after confirming its inputs and side effects.
+
+When asking for help, share the request type, trigger type, sanitized address shape, method, status code, and a redacted provider error. Never share API keys, access tokens, passwords, customer data, or an unredacted private response.
+
+For concise answers to common failure patterns, see the [Troubleshooting requests FAQ](../general/faq/troubleshooting-requests.md).
+
+SOURCE
 https://docs.apiease.com/docs/requests/connect-external-api
 
 TITLE
@@ -1771,6 +1918,8 @@ For data movement patterns and planning questions, see [Synchronize data with an
 APIEase provides saved requests, execution options, parameter handling, and composition tools. The external provider controls whether its API is available, which credentials and permissions it grants, what its data means, and how callers must handle limits or errors. Shopify likewise controls its Admin API contracts and permissions.
 
 If any required provider detail is missing, pause configuration and request that information from the provider. Guessing an endpoint, credential type, identifier, or write payload can produce failed calls or unintended data changes.
+
+For concise answers about capabilities, provider requirements, resource management, and synchronization, see the [Getting started and integrations FAQ](../general/faq/getting-started-and-integrations.md).
 
 SOURCE
 https://docs.apiease.com/docs/requests/synchronize-external-data
@@ -3195,6 +3344,8 @@ Customer-authenticated calls are a restricted form of storefront call, not a sep
 
 After an entry request runs, **Next Request** can continue a simple linear workflow. This is [request chaining](../request-parameters/chained-requests.md), not an external trigger. A [Flow request](../request-types/flow-requests.md) can similarly hand data to Shopify Flow after starting from any suitable entry point.
 
+For quick comparisons and prerequisites, see the [Running requests FAQ](../../general/faq/running-requests.md).
+
 SOURCE
 https://docs.apiease.com/docs/requests/triggers/webhooks/webhooks-overview
 
@@ -3427,8 +3578,9 @@ You can run any configured APIEase request on demand from the admin interface. T
 4. View the response and execution details in the run output.
 
 ## Tips
-- Manual runs use the same configuration as other triggers (storefront, webhook, schedule, etc.), so they are a safe way to validate request logic before exposing it externally.
+- Manual runs use the same saved request configuration as other triggers (storefront, webhook, schedule, etc.), so they are a controlled way to validate request logic before adding another entry point. A manual run can still create, update, or delete live data.
 - If a run fails, use the response details to adjust parameters or request configuration, then run again.
+- Before testing a request that can create, update, or delete data, use a test environment or provider-supported dry run when available. Follow [Troubleshoot requests](../troubleshooting-requests.md) to isolate the request, provider response, trigger, and chained steps.
 
 SOURCE
 https://docs.apiease.com/docs/requests/triggers/storefont-calls
@@ -5011,9 +5163,12 @@ CONTENT
 
 Choose the category that matches what you are trying to do:
 
-- [Getting started and integrations](./getting-started-and-integrations.md)
-- [Building requests](./building-requests.md)
-- [Credentials, authentication, and security](./credentials-and-security.md)
+- [Understand APIEase and connect another system](./getting-started-and-integrations.md): capabilities, request management, external APIs, and data synchronization.
+- [Build a request](./building-requests.md): request types, methods, addresses, parameters, chains, Variables, Functions, Liquid, and System requests.
+- [Manage credentials, authentication, and security](./credentials-and-security.md): APIEase API keys, Shopify access tokens, external credentials, permissions, and sensitive values.
+- [Run a request](./running-requests.md): manual, remote, webhook, scheduled, proxy, storefront, Shopify Flow, and widget execution.
+- [Troubleshoot a request](./troubleshooting-requests.md): safe testing, errors, unexpected responses, trigger differences, and multi-step failures.
+- [Use developer tools and automation](./developer-and-automation.md): the public API, resource handles, `apiease-cli`, `apiease-template`, and AI-assisted workflows.
 
 SOURCE
 https://docs.apiease.com/docs/general/faq/getting-started-and-integrations
@@ -5105,10 +5260,10 @@ SOURCE
 https://docs.apiease.com/docs/general/faq/credentials-and-security
 
 TITLE
-Credentials, authentication, and security
+Credentials, authentication, and security FAQ
 
 CONTENT
-# Credentials, authentication, and security
+# Credentials, authentication, and security FAQ
 
 ## What is the difference between an APIEase API key, a Shopify access token, and an external API credential?
 
@@ -5193,7 +5348,7 @@ Choose the entry point that matches the caller: use a manual call in APIEase adm
 
 ## How do I test or run a request once from APIEase admin?
 
-Use a **Manual Call**. From the Requests page, choose **Copy and Execute**, then **Execute and Run**. Manual execution is useful for a one-off action or for checking the saved configuration before adding another entry point. Follow [Manual calls](../../requests/triggers/manual-calls.md) for the procedure.
+Use a **Manual Call**. From the Requests page, choose **Copy and Execute**, then **Execute and Run**. Manual execution is useful for a one-off action or for checking the saved configuration before adding another entry point. Follow [Manual calls](../../requests/triggers/manual-calls.md) for the procedure and [Troubleshoot requests](../../requests/troubleshooting-requests.md) when the run fails or returns an unexpected result.
 
 ## What is the difference between a remote call and a proxy endpoint?
 
@@ -5226,6 +5381,96 @@ Create a **Flow request** and map the values Flow should receive. Add a trigger 
 ## How do I run several requests in sequence?
 
 Set **Next Request** to the next request's handle and reference fields from the previous response in the next request's parameters. This creates a simple linear request chain; it is not an external trigger. For conditions, loops, response shaping, or several explicit calls, use a Liquid request instead. See [Chained requests](../../requests/request-parameters/chained-requests.md).
+
+SOURCE
+https://docs.apiease.com/docs/general/faq/troubleshooting-requests
+
+TITLE
+Troubleshooting requests FAQ
+
+CONTENT
+# Troubleshooting requests FAQ
+
+## How do I test an APIEase request safely?
+
+Check whether the request can change live data, then use a provider sandbox, test record, or provider-supported dry run when available. Run the smallest valid version as a [manual call](../../requests/triggers/manual-calls.md), change one setting at a time, and add the trigger only after the saved request works. Follow [Troubleshoot requests](../../requests/troubleshooting-requests.md) for the ordered workflow.
+
+## Why is my request not working?
+
+First test it manually, then verify the address and method, required parameters and body format, credentials and permissions, and the external provider's response. If the manual call works, isolate the trigger and its runtime values. The [request troubleshooting guide](../../requests/troubleshooting-requests.md) provides the complete sequence.
+
+## What should I check when the response is unexpected?
+
+Compare the returned status and body with the receiving API's current documentation, then reduce the request to its required fields. Confirm value types, identifiers, content type, and whether a dynamic embedded parameter overrode a saved value. APIEase cannot assign a universal meaning to an undocumented provider response.
+
+## Why does a request work manually but fail from a webhook, schedule, remote call, proxy, storefront, or widget?
+
+The saved request is probably not the first layer to change. Check the failing trigger's prerequisites and compare its runtime parameters with the successful manual run. Missing input, a different name or parameter location, or a runtime override can change the result. Start with the [triggers overview](../../requests/triggers/triggers-overview.md).
+
+## Why does my request return 401 or 403?
+
+A `401` commonly means the receiving API rejected or did not receive the credential; a `403` commonly means the credential lacks permission for the operation. Providers can define these responses differently. Use the response body and provider documentation, then follow [Credentials, authentication, and security](./credentials-and-security.md) for external-provider and Shopify-specific checks.
+
+## How do I troubleshoot a timeout or network error?
+
+Recheck the address scheme, host, and path, then confirm that the provider endpoint is available and review its status information, rate limits, and expected response time. A timeout alone does not show which system caused the delay. Be careful with retries because repeating a write request can create duplicate side effects.
+
+## How do I find which request in a chain failed?
+
+Test each request independently before reconnecting **Next Request**. Confirm that the first response contains the exact field path and capitalization referenced by the next request, then test the completed chain. See [Chained requests](../../requests/request-parameters/chained-requests.md) and the [multi-step troubleshooting workflow](../../requests/troubleshooting-requests.md#8-test-a-chained-request-one-step-at-a-time).
+
+## Can APIEase explain every error returned by an external API?
+
+No. The external service controls its statuses and response bodies, and provider-specific behavior may not follow common HTTP conventions. APIEase can help you isolate the request configuration, but an undocumented provider response must be checked against that provider's documentation or support.
+
+SOURCE
+https://docs.apiease.com/docs/general/faq/developer-and-automation
+
+TITLE
+Developer tools and automation FAQ
+
+CONTENT
+# Developer tools and automation FAQ
+
+## Should I use the APIEase admin, Apex, the CLI, the template, or the public API?
+
+Use the APIEase admin for interactive configuration and testing. Use Apex for conversational changes to requests and widgets inside APIEase. For source-controlled work, start with [`apiease-template`](../../developers/why-use-the-template.md) and use [`apiease-cli`](../../developers/apiease-cli.md) to sync saved resources. Use the [public API](../../developers/apiease-public-api.md) directly for custom HTTP automation that the CLI does not cover.
+
+A coding agent working in a template repository is a separate workflow from Apex. See the [developer overview](../../developers/developer-overview.md) for the complete comparison.
+
+## Is the APIEase public API an arbitrary outbound API proxy?
+
+No. The APIEase public API manages saved request, widget, Variable, and Function resources, and it can execute an existing saved request remotely. Create the saved resource first; you cannot send the remote caller an arbitrary destination URL and use APIEase as a one-off proxy. See the [public API contract](../../developers/apiease-public-api.md).
+
+## How do I authenticate to the APIEase public API?
+
+Send your APIEase API key in `x-apiease-api-key` and the target shop domain in `x-shop-myshopify-domain`. This key authenticates calls into APIEase; it is not a Shopify access token or an external provider credential. Learn how the key is stored and rotated on the [APIEase API Key](../settings/apiease-api-key.md) page.
+
+## How do I run a saved request from another system?
+
+Send a request to `/api/remote/caller/call?requestId={request-handle}` with the APIEase authentication headers. Although the query parameter is named `requestId`, use the saved request's handle as its value for new integrations. Follow [Calling APIEase Requests Remotely](../../requests/triggers/calling-requests-remotely.md) for the complete example and parameter behavior.
+
+## What is a resource handle, and should I store an id in git?
+
+A handle is the stable, user-controlled public identifier for a saved request, widget, Variable, or Function. Use it in source files, CLI commands, and public API item routes. Do not store server-owned `id` values in repository resource definitions. See [Resource handles](../../developers/resource-handles.md) for formats, legacy aliases, and execution surfaces that still call the value `requestId`.
+
+## How do I keep APIEase resources in source control?
+
+Initialize a repository with `apiease init`, store request, widget, Variable, and Function definitions under the directories configured by `apiease.config.js`, and commit those files to git. Use the [template quickstart](../../developers/quickstart-with-apiease-template.md) for setup and the [`apiease-template` reference](../../developers/apiease-template.md) for file ownership and upgrade behavior.
+
+## Does `apiease create` create duplicates when I rerun it?
+
+Not when a request, widget, Variable, or Function file has a valid `handle`. `apiease create <resource> --file <path>` reads the remote resource by handle, updates it when found, and creates it when missing. Lookup failures other than not found stop the command. See [`apiease-cli`](../../developers/apiease-cli.md) for supported resources, flags, and migration options.
+
+## Can an AI agent manage APIEase resources for me?
+
+Yes, but choose the workflow deliberately. Apex can create, update, and delete requests and widgets directly inside APIEase. A coding agent in an `apiease-template` repository can manage requests, widgets, Variables, and Functions as files and sync them with `apiease-cli`, with git diffs providing a review boundary. Follow [Using APIEase with AI agents](../../developers/using-apiease-with-ai-agents.md).
+
+## Does Apex preview or wait for approval before changing a resource?
+
+No. Apex applies request and widget creation, updates, and deletions during the conversation without a general preview, approval, undo, or safe-mode layer. Review created or updated resources afterward and be careful with deletion instructions.
+
+Request execution safety is narrower: Apex may initially use an integration-specific dry-run setting or disabled `ALLOW_*` Variable where appropriate. Inspect and test the request before enabling live behavior. See [Using APIEase with AI agents](../../developers/using-apiease-with-ai-agents.md) for this distinction.
 
 SOURCE
 https://docs.apiease.com/docs/general/settings/apiease-api-key
