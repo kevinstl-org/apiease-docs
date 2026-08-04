@@ -33,7 +33,7 @@ Dynamic embedded parameters are useful for sending runtime information, but they
 
 The purpose of APIEase is to keep those credentials safe and hidden on the server side. If you include them in storefront JavaScript or Liquid, they become visible to anyone who visits your store.
 
-If you need to authenticate with an external system and use a returned authentication code, you can use **APIEase chained requests**. In this setup, the first request performs the authentication, and the second request uses the returned token or session key. This keeps all confidential steps on the server and completely out of the storefront.
+If you need to authenticate with an external system and use a returned authentication code, you can use **APIEase chained requests**. In this setup, the first request performs the authentication, and the second request uses the returned token or session key. Keep the authentication request private, and ensure the final response does not return a token or other confidential data to the storefront.
 
 You can read more about [chained requests here](../chained-requests.md) and view an [authentication example here](../../../general/apiease-details/authentication-example.md).
 

@@ -4,11 +4,11 @@ description: Example flow for authenticating requests with APIEase.
 ---
 # Authentication example
 
-Many external APIs require authentication before you can access their data or services. This usually involves sending a login request to receive an access token, which must then be included in subsequent requests.
+Many external APIs require authentication before you can access their data or services. Some use a static credential. Others require a login or token request followed by a second request that sends the short-lived access token.
 
-With APIEase, you can handle this securely using chained requests - without ever exposing your credentials in the storefront.
+Use the provider's current API documentation to determine the token URL, request fields, response fields, scopes, and required authorization format. APIEase cannot supply or generate provider credentials.
 
-**Step 1: Create the Authentication Request**
+## Step 1: Create the authentication request
 
 Start by setting up your first request to authenticate with the external service. This is typically a POST request with your client credentials in the body.
 
@@ -20,8 +20,8 @@ Example:
 
 ```json
 {
-  "client_id": "your-client-id",
-  "client_secret": "your-client-secret"
+  "client_id": "YOUR_CLIENT_ID",
+  "client_secret": "YOUR_CLIENT_SECRET"
 }
 ```
 
@@ -29,15 +29,17 @@ This request will return an access token in the response. For example:
 
 ```json
 {
-  "auth_token": "abc123xyz"
+  "auth_token": "YOUR_ACCESS_TOKEN"
 }
 ```
 
-**Step 2: Create the Follow-Up Request**
+Mark saved client credentials as **Sensitive**. APIEase masks sensitive request parameters after saving and decrypts them only when it executes the request.
 
-Next, create a second request to access the secured endpoint. Let's call it "SecureRequest".
+## Step 2: Create the follow-up request
 
-This request will use the auth_token returned from the authentication request.
+Next, create a second request to access the secured endpoint. Give it the handle `secure-request`.
+
+This request will use the `auth_token` returned from the authentication request.
 
 For example, you might need to include the token in a header:
 
@@ -56,15 +58,16 @@ Or include it in the body:
 }
 ```
 
-**Step 3: Chain the Requests**
+## Step 3: Chain the requests
 
-Go back to your authentication request and set the Next Request field to the name of your follow-up request (in this case, "SecureRequest").
+Go back to your authentication request and set **Next Request** to the handle of your follow-up request (`secure-request`).
 
 When the authentication request completes successfully, APIEase will automatically execute the next request and insert the token where specified.
 
 ![Chained requests example](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/chained-requests-example.png?v=1744331402)
 
-**Secure by Design**
+## Keep the response private
 
-All credentials and tokens stay on the server and are never exposed to the storefront or customer browser. This ensures a secure authentication flow without needing to build your own app or server.
+Saved sensitive parameters stay in APIEase during request execution, and chained response values can pass directly to the next request. However, APIEase does not remove tokens or private fields from an external API's response. Do not expose this authentication request or a final chained response to a storefront or other public caller if the response can contain credentials or private data.
 
+If the provider uses a static API key or Bearer token instead, you usually need only one request. Save the credential as a sensitive [in-app header parameter](../../requests/request-parameters/in-app-parameters/in-app-header-parameters.md) using the exact header name and format required by the provider.

@@ -73,7 +73,7 @@ APIEase does not provide another company's private API documentation or credenti
 
 ## [Secure Parameter Storage](./why-you-need-it.md#why-secure-parameter-handling-matters)
 
-APIEase stores confidential values -- such as API keys, tokens, and passwords -- on the server and never exposes them to the storefront or external clients. When a request is triggered, APIEase injects these secure parameters into the request at runtime so they are used during execution but never returned or made visible outside the managed environment.
+Sensitive request parameters -- such as API keys, tokens, and passwords -- are masked after saving, omitted from normal read interfaces, and decrypted when APIEase executes the request. This protects the saved request configuration, but it does not filter private data from an external API's response. Sensitive Variables and APIEase API keys have different visibility rules. See [Credentials, authentication, and security](../general/faq/credentials-and-security.md).
 
 SOURCE
 https://docs.apiease.com/docs/overview/how-it-works
@@ -188,9 +188,9 @@ API calls and external services often require confidential values such as API ke
 
 If confidential parameters are exposed in the storefront, they can be used to access external systems, submit unauthorized requests, or retrieve private data. This creates a clear risk for the store, the merchant, and the systems being connected.
 
-APIEase prevents this exposure by storing all confidential parameters securely on the server. When a request runs, APIEase injects sensitive values at execution time so they are never sent to the storefront or to any external caller. Even when a request is triggered from the storefront, the sensitive parts of the request remain inside the APIEase environment.
+APIEase lets you mark confidential request parameters as **Sensitive**. These values are masked after saving, omitted from normal read interfaces, and decrypted only when APIEase executes the request. Even when a request is triggered from the storefront, those saved request parameters remain inside the APIEase environment.
 
-By keeping credentials server side at all times, APIEase ensures that API keys, tokens, and other sensitive values remain protected while still allowing the request to be triggered from any allowed source.
+This protection applies to the saved request configuration; it does not filter an external API's response. Before making a request publicly callable, ensure its response does not contain credentials or other private data. Sensitive Variables and APIEase API keys also have different visibility rules. See [Credentials, authentication, and security](../general/faq/credentials-and-security.md) for the distinctions.
 
 SOURCE
 https://docs.apiease.com/docs/developers/developer-overview
@@ -2542,11 +2542,15 @@ In-app parameters are values you configure in the APIEase admin to be injected i
 
 **How to add**
 1. Open a request in the APIEase admin and click the plus icon in the Parameter column.
-2. Choose the parameter location (Header, Body, Path, or Query), then enter the name and value.
+2. Choose the parameter location (Header, Body, Path, or Query), then enter the name and value. Turn on **Sensitive** for a credential or other confidential value.
 3. Save the request. APIEase will inject these values whenever the request is executed.
+
+After you save a sensitive request parameter, APIEase masks it and does not return its value through normal read interfaces. It decrypts the value only when executing the request. If you lose the original value, obtain or generate a replacement at its issuing provider and replace the saved value; APIEase cannot reveal it.
 
 **When to combine with dynamic parameters**
 Use in-app parameters for anything sensitive or static. If you need runtime data from the storefront (such as cart info, page context, or user input), pair them with [dynamic embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md). Keep credentials and other confidential values in-app and server-side.
+
+Sensitive parameter storage protects the saved request configuration. It does not remove private data from the external API's response. Do not make a request publicly callable if its response can contain credentials or other private data.
 
 SOURCE
 https://docs.apiease.com/docs/requests/request-parameters/in-app-parameters/in-app-header-parameters
@@ -2565,13 +2569,16 @@ While editing your request:
 2. Select the **Header** radio button.
 3. Enter the header name in the **Name** field.
 4. Enter the header value in the **Value** field.
-5. Click **Save** at the top of the request editor.
+5. Turn on **Sensitive** if the header contains an API key, access token, password, or other confidential value.
+6. Click **Save** at the top of the request editor.
 
 **Example Header Parameter:**
 - **Name**: `Content-Type`
 - **Value**: `application/json`
 
 You can also use [embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) to dynamically set parameters from your storefront.
+
+Do not use an embedded parameter for a credential. Store the credential as a sensitive in-app parameter so storefront code never supplies it.
 
 ![In-app header parameter example](https://tawk.link/65552a3acec6a91282103248/kb/attachments/dbGjN5Waw6.png)
 
@@ -2776,7 +2783,7 @@ Dynamic embedded parameters are useful for sending runtime information, but they
 
 The purpose of APIEase is to keep those credentials safe and hidden on the server side. If you include them in storefront JavaScript or Liquid, they become visible to anyone who visits your store.
 
-If you need to authenticate with an external system and use a returned authentication code, you can use **APIEase chained requests**. In this setup, the first request performs the authentication, and the second request uses the returned token or session key. This keeps all confidential steps on the server and completely out of the storefront.
+If you need to authenticate with an external system and use a returned authentication code, you can use **APIEase chained requests**. In this setup, the first request performs the authentication, and the second request uses the returned token or session key. Keep the authentication request private, and ensure the final response does not return a token or other confidential data to the storefront.
 
 You can read more about [chained requests here](../chained-requests.md) and view an [authentication example here](../../../general/apiease-details/authentication-example.md).
 
@@ -4728,6 +4735,8 @@ Important behavior:
 - If you want to replace a sensitive value, type a new value before saving.
 - If you turn off **Sensitive** for an existing masked variable, enter the replacement plain-text value before saving because APIEase does not reveal the stored secret back into the form.
 
+The **Sensitive** setting for a Variable reduces accidental disclosure in the APIEase admin; it is not the same boundary as a sensitive request parameter. The underlying Variable value remains available to authorized runtime and programmatic workflows, including System requests, Liquid workflows, and authenticated external systems. Do not return a sensitive Variable from a publicly callable request.
+
 ## Delete a variable
 
 Use the delete action in the list to remove a variable.
@@ -5006,16 +5015,11 @@ FAQ
 CONTENT
 # FAQ
 
-## Do I need a Shopify access token or API Key to call the Shopify Admin API?
-In many cases, no. APIEase can automatically inject the shop access token for Shopify Admin API calls when the request address triggers token injection.
+Choose the category that matches what you are trying to do:
 
-Two common ways to trigger automatic injection:
-1. Select the [Shopify Admin GraphQL address preset](../shopify-api/shopify-admin-graphql-address-preset.md) in the request address dropdown for an HTTP request. This fills the correct shop admin GraphQL address and triggers APIEase to inject the shop access token, so you do not need to add an `X-Shopify-Access-Token` header manually.
-2. Use a Shopify Admin GraphQL request address that matches your shop domain and api path like this: `https://yourstore.myshopify.com/admin/api/2025-10/graphql.json` so the address pattern triggers APIEase token injection.
-
-## What is my Shopify access token or API Key?
-If you're using APIEase to call the Shopify Admin API, you usually do not need to find a token or API key yourself. APIEase will automatically inject the shop access token when the request address triggers using token injection as described here: [Shopify Admin GraphQL address preset](../shopify-api/shopify-admin-graphql-address-preset.md)).
-If you still want to obtain and use a custom Shopify access token, follow the [Custom access token](../shopify-api/custom-access-token.md) instructions.
+- [Getting started and integrations](./getting-started-and-integrations.md)
+- [Building requests](./building-requests.md)
+- [Credentials, authentication, and security](./credentials-and-security.md)
 
 SOURCE
 https://docs.apiease.com/docs/general/faq/getting-started-and-integrations
@@ -5104,6 +5108,83 @@ Variables are persisted values for the current store; System requests are execut
 A Function is reusable Liquid helper logic that runs inside a parent Liquid request. It has no trigger and is not a standalone request execution. Use a Function to reuse transformations or formatting, and use a Liquid request for the overall executable workflow. See [Functions overview](../../functions/functions-overview.md) and [Using Functions in Liquid requests](../../functions/using-functions-in-liquid-requests.md).
 
 SOURCE
+https://docs.apiease.com/docs/general/faq/credentials-and-security
+
+TITLE
+Credentials, authentication, and security
+
+CONTENT
+# Credentials, authentication, and security
+
+## What is the difference between an APIEase API key, a Shopify access token, and an external API credential?
+
+They authenticate different calls and are not interchangeable:
+
+- An **APIEase API key** authenticates an external system calling APIEase. Create, reveal, copy, and delete these keys from **Settings**. See [APIEase API Key](../settings/apiease-api-key.md).
+- A **Shopify access token** authenticates a call to the Shopify Admin API. APIEase normally uses the shop access token from the Shopify installation automatically. See [Shopify API calls and access tokens](../shopify-api/shopify-api-calls-and-access-tokens.md).
+- An **external-provider credential** authenticates an outbound call from APIEase to another service. The provider supplies the API key, Bearer token, OAuth credential, username, or password and defines how it must be sent. See [Authentication example](../apiease-details/authentication-example.md).
+
+## Can APIEase find, reveal, or generate a credential for another service?
+
+No. APIEase cannot retrieve, reveal, or generate a private API key, token, password, client secret, or other credential owned by Shopify or another provider. Obtain it from that provider's dashboard, authentication endpoint, or support team.
+
+The shop access token installed through APIEase is a separate case: APIEase stores and uses it for eligible Shopify Admin API requests, but you do not retrieve it from APIEase. If you need an explicit Shopify token, create one through Shopify and follow [Custom access token](../shopify-api/custom-access-token.md).
+
+## Where should I put an external API key, Bearer token, or other provider credential?
+
+Save it as a request parameter in the location required by the provider, and mark the parameter **Sensitive**. Common formats include an `Authorization: Bearer YOUR_ACCESS_TOKEN` header or a provider-specific API-key header. Do not put credentials in storefront JavaScript, theme Liquid, widget code, or dynamic embedded parameters.
+
+The provider's documentation is the authority for the header name, prefix, token endpoint, and required permissions. See [In-app header parameters](../../requests/request-parameters/in-app-parameters/in-app-header-parameters.md) and [In-app parameters overview](../../requests/request-parameters/in-app-parameters/in-app-parameters-overview.md).
+
+## Can I recover a sensitive value after I save it?
+
+It depends on the resource:
+
+- A sensitive **request parameter** is masked after saving, omitted from normal read interfaces, and decrypted only when APIEase executes the request. APIEase does not reveal the saved value back to you; replace it if you no longer have the original.
+- A sensitive **Variable** is masked in the APIEase admin, but its value remains available to authorized runtime and programmatic workflows. See [Variables overview](../../variables/variables-overview.md).
+- An **APIEase API key** remains revealable and copyable from **Settings**. See [APIEase API Key](../settings/apiease-api-key.md).
+
+Marking a value sensitive does not remove secrets or private data from an external API's response. A publicly callable request must not return credentials or other private response data.
+
+## How do I authenticate with an external API?
+
+Follow the external provider's current authentication contract. For a static credential, add it as a sensitive header, body, query, or path parameter exactly where the provider requires it. For a short-lived token, create one request that obtains the token and chain it to the request that uses the response value.
+
+APIEase does not perform an unspecified OAuth flow automatically. You need the provider's token URL, credential requirements, scopes, and request format. See the [Authentication example](../apiease-details/authentication-example.md) and [Chained requests](../../requests/request-parameters/chained-requests.md).
+
+## Why does an authenticated request return 401 or 403?
+
+A `401 Unauthorized` response usually means the receiving API did not accept the credential. Check that the credential is present, current, intended for that environment or account, and formatted exactly as the provider requires.
+
+A `403 Forbidden` response usually means the credential was recognized but is not allowed to perform the operation. Check scopes, roles, resource access, account restrictions, and whether the credential belongs to the correct shop or provider account. Providers can use these status codes differently, so inspect the response body and their documentation before changing the request.
+
+For Shopify calls, also confirm the request qualifies for [automatic token usage](../shopify-api/automatic-vs-overridden-shopify-access-tokens.md) and review [shop access token permissions](../shopify-api/manage-shop-access-token-permissions.md).
+
+## Do I need to add a Shopify access token to every Shopify Admin API request?
+
+Usually not. APIEase automatically injects the installed shop access token when an HTTP request targets the current shop's domain, its path starts with `/admin/api`, and the request does not already contain an `X-Shopify-Access-Token` header.
+
+The [Shopify Admin GraphQL address preset](../shopify-api/shopify-admin-graphql-address-preset.md) is the simplest way to use the correct address. See [Automatic vs overridden Shopify access tokens](../shopify-api/automatic-vs-overridden-shopify-access-tokens.md) for all prerequisites.
+
+## How do I override the automatic Shopify access token?
+
+Add an `X-Shopify-Access-Token` header containing `YOUR_ACCESS_TOKEN`. APIEase treats any case-insensitive match for that header name as an explicit override and does not inject the installed shop access token.
+
+Use an override only when you intentionally need a different Shopify token. You are responsible for obtaining, storing, rotating, and granting the required scopes to that token. See [Custom access token](../shopify-api/custom-access-token.md).
+
+## How do I change permissions for the automatic Shopify token?
+
+Open **Settings**, then **Permissions**, select the additional Shopify Admin API scopes, save, and complete Shopify's approval flow. Changing scopes can require reauthorization and does not change the logic of existing requests.
+
+Use the permissions page only for APIEase's installed shop access token. A custom Shopify token or external-provider credential must be managed where it was issued. See [Manage shop access token permissions](../shopify-api/manage-shop-access-token-permissions.md).
+
+## How should I rotate or revoke credentials?
+
+Rotate each credential at its issuing source, update every request or caller that uses it, test the replacement, and then revoke the old credential. For APIEase API keys, create and save a replacement in **Settings**, update external callers, verify them, then delete the old key and save the change. For Shopify or external-provider credentials, use that provider's rotation and revocation workflow.
+
+APIEase cannot rotate a provider-owned credential on your behalf.
+
+SOURCE
 https://docs.apiease.com/docs/general/settings/apiease-api-key
 
 TITLE
@@ -5124,11 +5205,12 @@ See: [Remote Calls](../../requests/triggers/calling-requests-remotely.md)
 ## Add an API key
 
 1. In APIEase, open the **Settings** page.
-2. In **API Key Name**, enter a descriptive name (for example, `production`, `staging`, or `ci`).
-3. Click **Add**.
-4. Copy the generated key and store it securely (for example, in a password manager or secret manager).
+2. Select **Add API Key**.
+3. In **API Key Name**, enter a descriptive name (for example, `production`, `staging`, or `ci`).
+4. Save the change.
+5. Use **Show** or **Copy**, then store the generated key securely (for example, in a password manager or secret manager).
 
-If you lose a key, create a new one and update any systems that use it.
+The key remains available on the **Settings** page. Use **Show** to reveal it or **Copy** to copy it. Anyone with access to this page can reveal or copy the key, so limit admin access appropriately.
 
 ## What it is not
 
@@ -5137,7 +5219,9 @@ This is different from the shop access token APIEase uses to call the Shopify Ad
 
 ## Security
 
-Treat this key like a secret (store securely, create separate keys per system, rotate by deleting/creating keys).
+Treat this key like a secret. Store it securely and create separate keys for separate external systems. To rotate a key, create and save a replacement, update and verify its callers, then delete the old key and save the change.
+
+Deleting a key revokes access for callers that still use it. APIEase API keys are different from sensitive request parameters: API keys remain revealable and copyable in **Settings**, while sensitive request parameters are masked after saving and are not returned through normal read interfaces.
 
 SOURCE
 https://docs.apiease.com/docs/general/apiease-details/ip-address-whitelisting
@@ -5334,11 +5418,11 @@ Authentication example
 CONTENT
 # Authentication example
 
-Many external APIs require authentication before you can access their data or services. This usually involves sending a login request to receive an access token, which must then be included in subsequent requests.
+Many external APIs require authentication before you can access their data or services. Some use a static credential. Others require a login or token request followed by a second request that sends the short-lived access token.
 
-With APIEase, you can handle this securely using chained requests - without ever exposing your credentials in the storefront.
+Use the provider's current API documentation to determine the token URL, request fields, response fields, scopes, and required authorization format. APIEase cannot supply or generate provider credentials.
 
-**Step 1: Create the Authentication Request**
+## Step 1: Create the authentication request
 
 Start by setting up your first request to authenticate with the external service. This is typically a POST request with your client credentials in the body.
 
@@ -5350,8 +5434,8 @@ Example:
 
 ```json
 {
-  "client_id": "your-client-id",
-  "client_secret": "your-client-secret"
+  "client_id": "YOUR_CLIENT_ID",
+  "client_secret": "YOUR_CLIENT_SECRET"
 }
 ```
 
@@ -5359,15 +5443,17 @@ This request will return an access token in the response. For example:
 
 ```json
 {
-  "auth_token": "abc123xyz"
+  "auth_token": "YOUR_ACCESS_TOKEN"
 }
 ```
 
-**Step 2: Create the Follow-Up Request**
+Mark saved client credentials as **Sensitive**. APIEase masks sensitive request parameters after saving and decrypts them only when it executes the request.
 
-Next, create a second request to access the secured endpoint. Let's call it "SecureRequest".
+## Step 2: Create the follow-up request
 
-This request will use the auth_token returned from the authentication request.
+Next, create a second request to access the secured endpoint. Give it the handle `secure-request`.
+
+This request will use the `auth_token` returned from the authentication request.
 
 For example, you might need to include the token in a header:
 
@@ -5386,17 +5472,19 @@ Or include it in the body:
 }
 ```
 
-**Step 3: Chain the Requests**
+## Step 3: Chain the requests
 
-Go back to your authentication request and set the Next Request field to the name of your follow-up request (in this case, "SecureRequest").
+Go back to your authentication request and set **Next Request** to the handle of your follow-up request (`secure-request`).
 
 When the authentication request completes successfully, APIEase will automatically execute the next request and insert the token where specified.
 
 ![Chained requests example](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/chained-requests-example.png?v=1744331402)
 
-**Secure by Design**
+## Keep the response private
 
-All credentials and tokens stay on the server and are never exposed to the storefront or customer browser. This ensures a secure authentication flow without needing to build your own app or server.
+Saved sensitive parameters stay in APIEase during request execution, and chained response values can pass directly to the next request. However, APIEase does not remove tokens or private fields from an external API's response. Do not expose this authentication request or a final chained response to a storefront or other public caller if the response can contain credentials or private data.
+
+If the provider uses a static API key or Bearer token instead, you usually need only one request. Save the credential as a sensitive [in-app header parameter](../../requests/request-parameters/in-app-parameters/in-app-header-parameters.md) using the exact header name and format required by the provider.
 
 SOURCE
 https://docs.apiease.com/docs/general/shopify-api/shopify-api-calls-and-access-tokens
@@ -5484,7 +5572,7 @@ This request includes an `X-Shopify-Access-Token` header. APIEase uses the overr
 - Address: `https://yourstore.myshopify.com/admin/api/2024-07/graphql.json`
 - Method: `POST`
 - Headers:
-  - `X-Shopify-Access-Token`: `your-override-token`
+  - `X-Shopify-Access-Token`: `YOUR_ACCESS_TOKEN`
   - `Content-Type`: `application/json`
 - Body:
 
@@ -5500,7 +5588,7 @@ The Shopify REST Admin API is deprecated. Only use REST if you understand the im
 - Address: `https://yourstore.myshopify.com/admin/api/2024-07/products/count.json`
 - Method: `GET`
 - Headers:
-  - `X-Shopify-Access-Token`: `your-override-token`
+  - `X-Shopify-Access-Token`: `YOUR_ACCESS_TOKEN`
 
 ## What the UI communicates
 When a request targets the Shopify Admin API, the request editor uses labels to show which token is used:
@@ -5513,6 +5601,7 @@ When a request targets the Shopify Admin API, the request editor uses labels to 
 - Missing scope symptoms include access denied errors or empty data where the Admin API expects permissions.
 - Token override mistakes include using the wrong shop domain, using an expired token, or entering the header name or value incorrectly.
 - Confirm granted scopes on [Manage shop access token permissions](./manage-shop-access-token-permissions.md) and reauthorize if you need more access.
+- The Permissions page changes APIEase's installed shop access token. Manage an override token's scopes and rotation through the Shopify app that issued it.
 
 SOURCE
 https://docs.apiease.com/docs/general/shopify-api/shopify-admin-graphql-address-preset
@@ -5546,6 +5635,8 @@ CONTENT
 The shop access token is the Shopify OAuth token issued when a shop installs APIEase. APIEase stores it per shop and uses it to call the Shopify Admin API on that shop's behalf.
 If the shop access token does not have the permissions your request needs, you can adjust its permissions as described in [Manage shop access token permissions](./manage-shop-access-token-permissions.md).
 
+You do not need to retrieve or reveal this installed token to use it. APIEase injects it into eligible requests during execution. APIEase does not provide the stored Shopify OAuth token for copying; if you require an explicit token, obtain a [custom access token](./custom-access-token.md) from Shopify.
+
 ## How APIEase uses it
 - APIEase app usage: internal Shopify Admin API calls that APIEase makes for the shop use the shop access token.
 - Automatic request usage: when a request targets a Shopify Admin API endpoint and you do not provide an override token, APIEase injects the shop access token automatically.
@@ -5561,6 +5652,8 @@ CONTENT
 
 If you decide that you need a custom access token rather than using the [shop access token](./shop-access-token.md) that can be [used automatically](./automatic-vs-overridden-shopify-access-tokens.md#automatic-shop-access-token-usage) follow these instructions to get a custom Shopify access token.
 
+APIEase cannot generate, retrieve, or reveal a custom Shopify access token. Shopify issues the token, and you are responsible for copying it when Shopify displays it, storing it securely, granting its scopes, and rotating or revoking it.
+
 For how APIEase uses custom tokens in requests, see [Overridden custom access token usage](./automatic-vs-overridden-shopify-access-tokens.md#overridden-custom-access-token-usage).
 
 1. In your store admin, go to **Settings**.
@@ -5570,6 +5663,8 @@ For how APIEase uses custom tokens in requests, see [Overridden custom access to
 5. Configure permissions: click **Configure Admin API scopes** or **Configure Storefront API scopes** and choose the permissions required. (You must set scopes before you can install and get a token.)
 6. Click **Install app** (top right).
 7. Click **Reveal token once**. Copy and save your access token—this is the only time it will be shown.
+
+Add the token to the APIEase request as a sensitive `X-Shopify-Access-Token` header with a value such as `YOUR_ACCESS_TOKEN`. Adding this header overrides APIEase's automatically injected shop access token.
 
 SOURCE
 https://docs.apiease.com/docs/general/shopify-api/manage-shop-access-token-permissions
@@ -5581,6 +5676,8 @@ CONTENT
 # Manage shop access token permissions
 
 The Permissions page manages Shopify Admin API permissions for the [shop access token](./shop-access-token.md) that APIEase stores for each shop. Use it to review current permissions, request new scopes, and reauthorize the shop token when access needs change.
+
+These settings do not change a [custom access token](./custom-access-token.md) supplied in an `X-Shopify-Access-Token` header. Manage that token's scopes through the Shopify app that issued it.
 
 ## What the Permissions page is for
 - Manage OAuth scopes for the stored shop access token.

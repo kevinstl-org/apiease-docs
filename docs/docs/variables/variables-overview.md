@@ -70,6 +70,8 @@ Important behavior:
 - If you want to replace a sensitive value, type a new value before saving.
 - If you turn off **Sensitive** for an existing masked variable, enter the replacement plain-text value before saving because APIEase does not reveal the stored secret back into the form.
 
+The **Sensitive** setting for a Variable reduces accidental disclosure in the APIEase admin; it is not the same boundary as a sensitive request parameter. The underlying Variable value remains available to authorized runtime and programmatic workflows, including System requests, Liquid workflows, and authenticated external systems. Do not return a sensitive Variable from a publicly callable request.
+
 ## Delete a variable
 
 Use the delete action in the list to remove a variable.

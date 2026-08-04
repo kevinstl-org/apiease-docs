@@ -40,4 +40,4 @@ APIEase does not provide another company's private API documentation or credenti
 
 ## [Secure Parameter Storage](./why-you-need-it.md#why-secure-parameter-handling-matters)
 
-APIEase stores confidential values -- such as API keys, tokens, and passwords -- on the server and never exposes them to the storefront or external clients. When a request is triggered, APIEase injects these secure parameters into the request at runtime so they are used during execution but never returned or made visible outside the managed environment.
+Sensitive request parameters -- such as API keys, tokens, and passwords -- are masked after saving, omitted from normal read interfaces, and decrypted when APIEase executes the request. This protects the saved request configuration, but it does not filter private data from an external API's response. Sensitive Variables and APIEase API keys have different visibility rules. See [Credentials, authentication, and security](../general/faq/credentials-and-security.md).

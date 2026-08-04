@@ -6,6 +6,8 @@ description: How to manage Shopify Admin API permissions and reauthorize the sho
 
 The Permissions page manages Shopify Admin API permissions for the [shop access token](./shop-access-token.md) that APIEase stores for each shop. Use it to review current permissions, request new scopes, and reauthorize the shop token when access needs change.
 
+These settings do not change a [custom access token](./custom-access-token.md) supplied in an `X-Shopify-Access-Token` header. Manage that token's scopes through the Shopify app that issued it.
+
 ## What the Permissions page is for
 - Manage OAuth scopes for the stored shop access token.
 - Enable future Shopify Admin API calls that require new scopes.

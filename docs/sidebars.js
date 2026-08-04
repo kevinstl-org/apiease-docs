@@ -226,6 +226,7 @@ const sidebars = {
         'general/faq/faq',
         'general/faq/getting-started-and-integrations',
         'general/faq/building-requests',
+        'general/faq/credentials-and-security',
         {
           type: 'category',
           label: 'Settings',

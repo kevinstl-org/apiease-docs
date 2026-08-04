@@ -20,6 +20,6 @@ API calls and external services often require confidential values such as API ke
 
 If confidential parameters are exposed in the storefront, they can be used to access external systems, submit unauthorized requests, or retrieve private data. This creates a clear risk for the store, the merchant, and the systems being connected.
 
-APIEase prevents this exposure by storing all confidential parameters securely on the server. When a request runs, APIEase injects sensitive values at execution time so they are never sent to the storefront or to any external caller. Even when a request is triggered from the storefront, the sensitive parts of the request remain inside the APIEase environment.
+APIEase lets you mark confidential request parameters as **Sensitive**. These values are masked after saving, omitted from normal read interfaces, and decrypted only when APIEase executes the request. Even when a request is triggered from the storefront, those saved request parameters remain inside the APIEase environment.
 
-By keeping credentials server side at all times, APIEase ensures that API keys, tokens, and other sensitive values remain protected while still allowing the request to be triggered from any allowed source.
+This protection applies to the saved request configuration; it does not filter an external API's response. Before making a request publicly callable, ensure its response does not contain credentials or other private data. Sensitive Variables and APIEase API keys also have different visibility rules. See [Credentials, authentication, and security](../general/faq/credentials-and-security.md) for the distinctions.

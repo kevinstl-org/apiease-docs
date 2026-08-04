@@ -49,7 +49,7 @@ This request includes an `X-Shopify-Access-Token` header. APIEase uses the overr
 - Address: `https://yourstore.myshopify.com/admin/api/2024-07/graphql.json`
 - Method: `POST`
 - Headers:
-  - `X-Shopify-Access-Token`: `your-override-token`
+  - `X-Shopify-Access-Token`: `YOUR_ACCESS_TOKEN`
   - `Content-Type`: `application/json`
 - Body:
 
@@ -65,7 +65,7 @@ The Shopify REST Admin API is deprecated. Only use REST if you understand the im
 - Address: `https://yourstore.myshopify.com/admin/api/2024-07/products/count.json`
 - Method: `GET`
 - Headers:
-  - `X-Shopify-Access-Token`: `your-override-token`
+  - `X-Shopify-Access-Token`: `YOUR_ACCESS_TOKEN`
 
 ## What the UI communicates
 When a request targets the Shopify Admin API, the request editor uses labels to show which token is used:
@@ -78,3 +78,4 @@ When a request targets the Shopify Admin API, the request editor uses labels to 
 - Missing scope symptoms include access denied errors or empty data where the Admin API expects permissions.
 - Token override mistakes include using the wrong shop domain, using an expired token, or entering the header name or value incorrectly.
 - Confirm granted scopes on [Manage shop access token permissions](./manage-shop-access-token-permissions.md) and reauthorize if you need more access.
+- The Permissions page changes APIEase's installed shop access token. Manage an override token's scopes and rotation through the Shopify app that issued it.

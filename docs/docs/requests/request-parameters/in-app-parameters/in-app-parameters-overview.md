@@ -21,8 +21,12 @@ In-app parameters are values you configure in the APIEase admin to be injected i
 
 **How to add**
 1. Open a request in the APIEase admin and click the plus icon in the Parameter column.
-2. Choose the parameter location (Header, Body, Path, or Query), then enter the name and value.
+2. Choose the parameter location (Header, Body, Path, or Query), then enter the name and value. Turn on **Sensitive** for a credential or other confidential value.
 3. Save the request. APIEase will inject these values whenever the request is executed.
+
+After you save a sensitive request parameter, APIEase masks it and does not return its value through normal read interfaces. It decrypts the value only when executing the request. If you lose the original value, obtain or generate a replacement at its issuing provider and replace the saved value; APIEase cannot reveal it.
 
 **When to combine with dynamic parameters**
 Use in-app parameters for anything sensitive or static. If you need runtime data from the storefront (such as cart info, page context, or user input), pair them with [dynamic embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md). Keep credentials and other confidential values in-app and server-side.
+
+Sensitive parameter storage protects the saved request configuration. It does not remove private data from the external API's response. Do not make a request publicly callable if its response can contain credentials or other private data.
