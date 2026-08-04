@@ -1,0 +1,46 @@
+{
+  "id": "task-0-update-the-main-webhook-trigger-guide-so-apiease-configuration-examples-316fc2ce",
+  "text": "Update the main webhook trigger guide so APIEase configuration examples use canonical uppercase underscore webhook event constants instead of Shopify slash-format topic strings.",
+  "goalId": "goal-update-apiease-webhook-documentation-so-it-matches-the-actual-apiease-u-59c4b159",
+  "goal": "Update APIEase webhook documentation so it matches the actual APIEase UI and backend contract for webhook event values.\n\nGoal:\nMake the webhook documentation use APIEase webhook event constants such as ORDERS_CREATE, CARTS_UPDATE, and CUSTOMERS_UPDATE instead of Shopify slash-format topic strings such as orders/create, carts/update, and customers/update.\n\nProblem to solve:\nThe current webhook documentation teaches slash-format Shopify topic strings, but the APIEase admin UI presents uppercase underscore enum values and the backend expects those values. This mismatch causes AI-generated examples and request definitions to use the wrong format. The current docs page explicitly shows examples like orders/create, customers/update, and carts/update.  [oai_citation:0‡apiEaseDocsConsolidated.md](sediment://file_00000000fc1c722fb2a19501dd29ac14)\n\nRequired outcome:\nUpdate the webhook trigger documentation page so every APIEase example uses uppercase underscore webhook constants.\nAdd a short clarification that APIEase uses webhook event constants such as ORDERS_CREATE and that these correspond to Shopify topic strings such as orders/create.\nReview nearby webhook documentation for the same mismatch and update any examples or wording that still imply slash-format values should be used in APIEase request definitions.\nKeep the explanation concise and practical so both humans and AI can infer the correct canonical value format from the docs.\n\nTarget areas:\ndocs/requests/triggers/webhooks/trigger-requests-from-a-webhook\nAny closely related webhook docs that repeat example event values or describe how to choose webhook events\n\nImplementation guidance:\nReplace examples like orders/create, customers/update, and carts/update with ORDERS_CREATE, CUSTOMERS_UPDATE, and CARTS_UPDATE where the docs are describing APIEase configuration values.\nPreserve helpful references to Shopify’s webhook topics, but clearly distinguish Shopify topic naming from APIEase event constant naming.\nPrefer wording that makes the APIEase value format unmistakable in machine-readable examples, prose, and screenshots or captions if applicable.\n\nAcceptance criteria:\nThe main webhook trigger doc no longer teaches slash-format event values as the value to use in APIEase.\nThe doc explicitly states that APIEase uses uppercase underscore webhook event constants.\nA reader or AI using only the updated docs would generate event values like ORDERS_CREATE rather than orders/create.",
+  "project": "apiease-docs",
+  "status": "complete",
+  "priority": "high",
+  "tags": [
+    "docs",
+    "webhooks",
+    "docusaurus"
+  ],
+  "createdBy": "kevin",
+  "createdAt": "2026-04-07T16:21:18Z",
+  "updatedAt": "2026-04-07T20:15:56Z",
+  "context": [
+    "Target file: docs/docs/requests/triggers/webhooks/trigger-requests-from-a-webhook.md",
+    "This page currently teaches slash-format examples such as orders/create, customers/update, and carts/update in APIEase-facing setup steps."
+  ],
+  "steps": [
+    "Replace APIEase-facing event examples like `orders/create`, `customers/update`, and `carts/update` with `ORDERS_CREATE`, `CUSTOMERS_UPDATE`, and `CARTS_UPDATE`.",
+    "Add a short clarification that APIEase uses uppercase underscore webhook event constants and that they correspond to Shopify topic strings such as `orders/create`.",
+    "Update the Flow example and any other request-definition wording so the canonical APIEase value format is unmistakable."
+  ],
+  "constraints": [
+    "Keep the explanation concise and practical.",
+    "Preserve helpful references to Shopify webhook topics, but clearly distinguish them from the values used in APIEase."
+  ],
+  "acceptanceCriteria": [
+    "docs/docs/requests/triggers/webhooks/trigger-requests-from-a-webhook.md no longer teaches slash-format topic strings as the value to use in APIEase.",
+    "The file explicitly states that APIEase uses uppercase underscore webhook event constants.",
+    "All APIEase configuration examples in this file use constants such as `ORDERS_CREATE`, `CUSTOMERS_UPDATE`, and `CARTS_UPDATE`."
+  ],
+  "sequenceIndex": 0,
+  "codexSettings": {
+    "workingDirectory": ".",
+    "branchStrategy": "current",
+    "maxRuns": 1
+  },
+  "result": {
+    "summary": "",
+    "notes": [],
+    "completedAt": "2026-04-07T20:15:56Z"
+  }
+}

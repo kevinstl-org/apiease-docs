@@ -1,0 +1,47 @@
+{
+  "id": "task-2-create-docs-docs-developers-apiease-template-md-for-apiease-template",
+  "text": "Create `docs/docs/developers/apiease-template.md` for `apiease-template`.",
+  "goalId": "goal-implement-a-new-top-level-developers-documentation-area-in-this-docusau-2846adf3",
+  "goal": "Implement a new top-level Developers documentation area in this Docusaurus repository and populate it with initial documentation for the APIEase public API, apiease-cli, and apiease-template.\n\nGoals\n\nAdd a new top-level Developers section to the docs sidebar\nMake apiease-template the primary developer entry point\nDo not create separate top-level quickstarts for the public API or apiease-cli\nKeep existing Requests, Functions, Variables, Widgets, and General sections intact\nCross-link to existing conceptual docs instead of duplicating request concepts that already exist in the current docs\nTarget documentation structure\n\nDevelopers\nDeveloper overview\nWhy use the template\nQuickstart with apiease-template\nUsing APIEase with AI agents\nAPIEase public API\napiease-cli\napiease-template\nDocumentation expectations\n\nThe template quickstart should be the canonical start here path for developers and AI agents\nThe quickstart should explain how a user starts from the template, configures auth, uses the CLI from the template repo, versions generated artifacts in git, and syncs or interacts with APIEase through the public API by way of the CLI and template workflow\nThe public API section should explain the public API as an interface, covering core concepts, auth, request conventions, and the most important developer-facing usage patterns\nThe apiease-cli section should explain installation, configuration, command usage, and how it fits into the template-based workflow\nThe apiease-template section should explain the purpose of the template, expected repo layout, artifacts under source control, and the intended developer workflow\nThe AI agents page should explain how AI agents such as Codex should operate inside the template repo, how they should use the CLI and public API, and how source control fits into that workflow\nDo not create separate top-level Workflows or Reference sections unless, during implementation, the content clearly justifies them. Prefer keeping material inside the API, CLI, and template docs unless there is a strong reason to split it out\nResearch requirements\n\nReach into ../apiease to understand how the public API works and document it accurately\nReach into ../apiease-cli to understand how apiease-cli works and document it accurately\nReach into ../apiease-template to understand how apiease-template works and document it accurately\nIf the template directory is actually named ../apiease-tmplate in the local environment, use that actual path, but document the product as apiease-template\nBase the new docs on the real code, commands, configuration, and workflows in those sibling repositories rather than inventing behavior\nImplementation requirements\n\nUpdate docs/sidebars.js to add the new Developers section\nCreate the new markdown or MDX files under docs/docs in a clean Developers-oriented folder structure\nKeep headings short, scannable, and consistent with the repository style\nUse relative links between docs pages\nPrefer concise task-oriented writing for onboarding pages\nLink back to existing Requests docs where request concepts are already documented\nAvoid duplicating detailed request concept explanations that belong in the existing Requests section\nEnsure the new pages build cleanly in Docusaurus\nRun the docs build after changes and fix any issues\nQuality bar\n\nThe new developer docs should feel like a coherent developer entry point, not scattered add-on pages\nThe template should clearly read as the recommended starting path\nThe public API and CLI pages should clearly support the template workflow\nThe AI agent guidance should be explicit enough for Codex-style agents to use the docs effectively\nKeep the first implementation practical and high-signal. Favor solid initial coverage over exhaustive reference material if time or context is limited",
+  "project": "apiease-docs",
+  "status": "complete",
+  "priority": "high",
+  "tags": [
+    "docs",
+    "developers",
+    "template"
+  ],
+  "createdBy": "kevin",
+  "createdAt": "2026-04-01T20:48:52Z",
+  "updatedAt": "2026-04-01T21:50:31Z",
+  "context": [
+    "Use `../apiease-template` as the primary source of truth, or `../apiease-tmplate` if that is the actual local directory name.",
+    "Document the product name as `apiease-template` even if the local folder name contains the typo."
+  ],
+  "steps": [
+    "Inspect the template repository to identify the real repo layout, source-of-truth files, generated artifacts, CLI integration points, and expected developer workflow.",
+    "Write a page that explains the template's purpose, expected repository structure, what belongs in source control, and how developers are expected to work inside it.",
+    "Frame the template as the recommended foundation for both human developers and AI-assisted workflows."
+  ],
+  "constraints": [
+    "Base the documentation on the real template repository structure and behavior.",
+    "Do not invent files, directories, or workflows that are not present in the sibling repository.",
+    "Keep the page aligned with the template-first developer entry point described in the goal."
+  ],
+  "acceptanceCriteria": [
+    "The page explains the purpose of the template, the expected repo layout, which artifacts live under source control, and the intended developer workflow.",
+    "The page reflects the actual template repository found in the sibling directory.",
+    "The page makes it clear why the template is the recommended starting point for development work."
+  ],
+  "sequenceIndex": 2,
+  "codexSettings": {
+    "workingDirectory": ".",
+    "branchStrategy": "current",
+    "maxRuns": 1
+  },
+  "result": {
+    "summary": "",
+    "notes": [],
+    "completedAt": "2026-04-01T21:50:31Z"
+  }
+}

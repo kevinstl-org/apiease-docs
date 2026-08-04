@@ -1,0 +1,46 @@
+{
+  "id": "task-2-document-global-widget-behavior-for-widget-app-embed",
+  "text": "Document global widget behavior for Widget App Embed",
+  "goalId": "goal-update-the-apiease-docs-project-to-document-the-new-global-widget-app-e-698c73f3",
+  "goal": "Update the APIEase docs project to document the new global widget app embed behavior and correct the existing widget theme setup guidance.\n\nContext:\nAPIEase now has two Shopify theme extension surfaces for widgets.\n\nThe Widget App Block is still the normal placement-specific path. Merchants add it to a theme section or template, paste one widget handle into the Widget handle setting, and save. The app block does not require the App embed to be enabled.\n\nThe Widget App Embed now has a real purpose. It includes a Global widget handles setting. Merchants can enter widget handles, separated by new lines or commas. When the App embed is enabled, APIEase loads those registered widgets on every storefront page through the existing storefront widget endpoints. Returned Liquid can render globally, and widget JavaScript can run globally. This is intended for widgets that should run site-wide, such as floating widgets, popups, banners, tracking, or background storefront behavior.\n\nRequired docs changes:\n1. Find the existing widget help docs that currently say to enable APIEase Widget App Embed as part of adding a normal widget to a theme.\n2. Remove that App embed step from the normal Widget App Block setup instructions.\n3. Make the Widget App Block instructions say:\n   - Open Shopify admin and go to Online Store -> Themes.\n   - Select Customize on the theme to update.\n   - Navigate to the page or template where the widget should appear.\n   - Add the APIEase Widget App Block block to the section.\n   - Paste the widget handle into the Widget handle setting.\n   - Save the theme changes.\n4. Add a separate section for site-wide/global widgets using the App embed.\n5. Explain that the App embed is optional and only needed for widgets that should run on every storefront page.\n6. Document that Global widget handles accepts one or more widget handles separated by new lines or commas.\n7. Explain that globally registered widgets should be designed for site-wide use. They may be non-visual background widgets or self-positioned visual widgets such as floating widgets, popups, or banners.\n8. Warn merchants not to register ordinary section/content widgets globally unless they intentionally want them to load on every storefront page.\n9. Update any related navigation/sidebar docs if a new page or section is added.\n10. Keep wording merchant-facing and concise. Avoid implementation jargon except where needed to name Shopify surfaces: Widget App Block, Widget App Embed, and Global widget handles.\n\nSuggested structure:\n- Add a widget to a specific page or template\n- Run widgets globally with the App embed\n- Choosing between App Block and App Embed\n\nAcceptance criteria:\n- Normal widget placement docs no longer tell merchants to enable the App embed.\n- App embed docs clearly describe the new Global widget handles setting.\n- Docs clearly distinguish placement-specific widgets from site-wide/global widgets.\n- Docs mention both newline-separated and comma-separated handles.\n- Docs warn that globally registered widgets run on every storefront page.\n- The docs build or relevant docs validation passes.\n\nValidation:\nRun the docs project formatting, lint, build, or test command that is already standard for the APIEase docs repository. If there is no obvious command, inspect package scripts and run the closest docs build/validation command.",
+  "project": "apiease-docs",
+  "status": "complete",
+  "priority": "high",
+  "tags": [
+    "docs",
+    "widgets",
+    "app-embed"
+  ],
+  "createdBy": "kevin",
+  "createdAt": "2026-05-07T20:47:15Z",
+  "updatedAt": "2026-05-08T05:49:23Z",
+  "context": [
+    "The Widget App Embed supports site-wide widgets through the Global widget handles setting."
+  ],
+  "steps": [
+    "Add a separate section or page section for running widgets globally with the App embed.",
+    "Explain that the App embed is optional and only needed for widgets that should run on every storefront page.",
+    "Document that Global widget handles accepts one or more widget handles separated by new lines or commas.",
+    "Explain that globally registered widgets can render Liquid globally and run widget JavaScript globally through storefront widget endpoints, without overusing implementation jargon."
+  ],
+  "constraints": [
+    "Use the exact Shopify surface names Widget App Embed and Global widget handles.",
+    "Keep wording merchant-facing and concise."
+  ],
+  "acceptanceCriteria": [
+    "The App embed docs clearly describe the Global widget handles setting.",
+    "The docs mention both newline-separated and comma-separated widget handles.",
+    "The docs state that globally registered widgets run on every storefront page."
+  ],
+  "sequenceIndex": 2,
+  "codexSettings": {
+    "workingDirectory": ".",
+    "branchStrategy": "current",
+    "maxRuns": 1
+  },
+  "result": {
+    "summary": "",
+    "notes": [],
+    "completedAt": "2026-05-08T05:49:23Z"
+  }
+}

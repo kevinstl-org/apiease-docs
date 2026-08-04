@@ -1,0 +1,220 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CodexTask",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "text",
+    "goalId",
+    "goal",
+    "project",
+    "status",
+    "priority"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goalId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "initialized",
+        "pending-approval",
+        "approved",
+        "building",
+        "failed",
+        "complete",
+        "aborted"
+      ]
+    },
+    "taskType": {
+      "type": "string",
+      "enum": [
+        "implementation",
+        "metadata",
+        "user-checkup"
+      ],
+      "default": "implementation"
+    },
+    "verificationPrompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ]
+    },
+    "sequenceIndex": {
+      "type": "integer"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "context": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptanceCriteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "codexSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workingDirectory": {
+          "type": "string"
+        },
+        "branchStrategy": {
+          "type": "string",
+          "enum": [
+            "current",
+            "feature_per_task"
+          ]
+        },
+        "maxRetries": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 3
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "validation": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["status", "summary"],
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": ["passed", "failed", "not-run"]
+                },
+                "summary": {"type": "string"}
+              }
+            }
+          ]
+        },
+        "changeKind": {
+          "type": "string",
+          "enum": ["implementation", "metadata-only", "none"]
+        },
+        "noCodeJustification": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "string"}
+          ]
+        },
+        "completedAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["attempt", "failedAt", "code", "reason", "retryable", "validation"],
+            "properties": {
+              "attempt": {"type": "integer", "minimum": 1},
+              "failedAt": {"type": "string", "format": "date-time"},
+              "code": {"type": "string", "minLength": 1},
+              "reason": {"type": "string", "minLength": 1},
+              "retryable": {"type": "boolean"},
+              "validation": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["status", "summary"],
+                "properties": {
+                  "status": {"type": "string", "enum": ["passed", "failed", "not-run"]},
+                  "summary": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "taskType": {"const": "user-checkup"}
+        },
+        "required": ["taskType"]
+      },
+      "then": {
+        "required": ["verificationPrompt"]
+      }
+    }
+  ]
+}
