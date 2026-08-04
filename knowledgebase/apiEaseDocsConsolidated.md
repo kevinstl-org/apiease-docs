@@ -41,6 +41,8 @@ APIEase defines and runs four types of requests: [HTTP Requests](../requests/req
 
 APIEase also includes [Functions](../functions/functions-overview.md) and [Widgets](../widgets/widgets-page.md). Functions are reusable Liquid helpers for Liquid Requests, while Widgets are designed for storefront UI instead of API execution.
 
+You can combine these building blocks to connect an [external API](../requests/connect-external-api.md) or [synchronize data with another system](../requests/synchronize-external-data.md). APIEase executes the saved workflow, while each API provider remains the authority for its endpoints, credentials, permissions, payloads, and usage limits.
+
 ## [HTTP Requests](../requests/request-types/http-requests.md)
 
 HTTP Requests let you call external APIs using any method (GET, POST, PUT, PATCH, DELETE). You define the URL, headers, body, and parameters. APIEase executes the call on the server and returns the response to the system that triggered it.
@@ -64,6 +66,10 @@ Widgets are reusable storefront components that render Liquid templates with opt
 ## [Functions](../functions/functions-overview.md)
 
 Functions are reusable Liquid helpers that run inside a parent Liquid Request. Use them to keep shared formatting, transformation, and response-shaping logic in one place instead of repeating the same Liquid across multiple requests.
+
+## What APIEase does not supply
+
+APIEase does not provide another company's private API documentation or credentials, bypass provider permissions, or decide how records from different systems should be matched. Before building an integration, obtain the provider's current API contract and define the workflow's business rules. See [Connect to an external API](../requests/connect-external-api.md) for the required information.
 
 ## [Secure Parameter Storage](./why-you-need-it.md#why-secure-parameter-handling-matters)
 
@@ -1645,12 +1651,14 @@ SOURCE
 https://docs.apiease.com/docs/requests/how-to-add-requests
 
 TITLE
-How to Add Requests
+Create and manage requests
 
 CONTENT
-# How to Add Requests
+# Create and manage requests
 
-Follow these steps to create a request in APIEase.
+Use the **Requests** page in the APIEase admin to manage requests interactively. If request definitions need to live in source control or be managed by automation, use [`apiease-cli`](../developers/apiease-cli.md) or the [APIEase public API](../developers/apiease-public-api.md) instead.
+
+## Create a request
 
 1. Open **Requests** in Shopify Admin (APIEase Requests submenu on the lower left).
    ![APIEase Requests submenu](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/requests-sub-menu.png?v=1744752589)
@@ -1659,7 +1667,192 @@ Follow these steps to create a request in APIEase.
 3. Configure the request name, handle, request type, parameters, and triggers.
 4. Click **Save**. The request is ready to run based on the triggers you selected.
 
-Keep the request handle stable after other requests, storefront code, `apiease-cli`, or public API integrations start referencing it. For repository-managed resources, see [Resource handles](../developers/resource-handles.md).
+Choose a descriptive name for people and a lowercase, hyphenated handle for integrations. Keep the handle stable after another request, storefront code, `apiease-cli`, or a public API integration starts referencing it. See [Resource handles](../developers/resource-handles.md).
+
+## Find and edit a request
+
+The **Requests** page lists each request by name and shows its handle when the handle differs from the name. Find the request in that list, then select its name or the **Edit** action. Update the configuration and click **Save**.
+
+Before changing a handle, check every place that may call the request, including Liquid requests, chained requests, storefront code, widgets, CLI scripts, and public API integrations.
+
+## Duplicate a request
+
+Use the **Duplicate** action when a new request should start with an existing request's configuration.
+
+1. Find the source request on the **Requests** page and select **Duplicate**.
+2. Review the copied configuration in the new-request editor.
+3. Confirm the new name and assign a unique handle.
+4. Update any provider-specific address, parameters, triggers, or write behavior, and enter any sensitive values required by the new request.
+5. Click **Save** only after the copy is safe to run as a separate request.
+
+Duplicating opens a new draft; it does not change the source request. Do not assume that a saved sensitive value was copied into the draft. Sample requests can also be duplicated into editable drafts.
+
+## Delete a request
+
+1. Find the request and select **Delete**.
+2. Confirm the request in the deletion dialog. The row is marked **Will be deleted**.
+3. Click **Save** to apply the staged deletion, or **Discard** to cancel it.
+
+Before deleting, remove or update callers that use the request handle. Deleting the request does not automatically repair Liquid calls, chained requests, storefront code, widgets, CLI scripts, or other integrations that reference it.
+
+## Admin, CLI, and public API workflows
+
+These management surfaces serve different workflows:
+
+| Surface | Best for | Resources |
+| --- | --- | --- |
+| APIEase admin | Interactive creation and editing in Shopify Admin | Use the resource's page, such as **Requests**, **Widgets**, **Variables**, or **Functions**. |
+| `apiease-cli` | Version-controlled definitions and repeatable environment setup | Requests, widgets, variables, and functions stored as JSON files. |
+| APIEase public API | Direct resource automation from an external system | Request, widget, variable, and function CRUD routes. |
+
+Do not copy server-generated IDs into repository files. CLI and public API workflows use a resource's stable handle; see [Resource handles](../developers/resource-handles.md) for the identity rules.
+
+SOURCE
+https://docs.apiease.com/docs/requests/connect-external-api
+
+TITLE
+Connect to an external API
+
+CONTENT
+# Connect to an external API
+
+APIEase can call an external or third-party HTTP API when the provider exposes the required endpoint and gives you enough information and authorization to use it. This includes supplier, warehouse, ERP, CRM, fulfillment, and other provider APIs that use supported HTTP requests.
+
+APIEase executes the requests you configure. It cannot discover an undocumented API, obtain credentials from a provider, bypass provider permissions, or guarantee that a particular provider permits the workflow you want.
+
+## Gather the provider information first
+
+Get the following from the API provider's current documentation or support team:
+
+- the base URL and exact endpoint for each operation
+- the HTTP method, such as `GET`, `POST`, `PUT`, `PATCH`, or `DELETE`
+- the authentication scheme and credentials issued to you
+- required headers and content type
+- required path, query, and body fields, including their data types
+- example success and error responses
+- pagination behavior for list endpoints
+- rate limits and any retry guidance
+- a sandbox or test account, when the provider offers one
+- webhook event and signature requirements if the provider needs to notify another system
+
+Also define the business operation in concrete terms. For example, "read products changed since a timestamp" is actionable; "connect the supplier" is not enough to identify an endpoint or payload.
+
+Do not send production credentials to APIEase support or place them in documentation examples. Enter credentials only in the intended request configuration after the provider issues them to you.
+
+## Map each operation to an APIEase request
+
+Most provider integrations use one saved [HTTP request](./request-types/http-requests.md) for each external API operation. Configure the provider's method, address, headers, body, and parameters in that request.
+
+For a basic provider call:
+
+1. [Create a request](./how-to-add-requests.md) and choose **HTTP** as the request type.
+2. Enter the documented method and address, such as `https://api.example.com/v1/products`.
+3. Add only the headers and parameters required by the provider. See [Request parameters](./request-parameters/request-parameters-overview.md).
+4. Add the appropriate [trigger](./triggers/triggers-overview.md), or leave the request available for another APIEase request to call.
+5. Save and run the request with non-production data before enabling a workflow that writes real data.
+
+The provider's API documentation remains the authority for endpoint paths, payload shapes, permissions, pagination, and rate limits. A provider-branded example for a different account, API version, or operation may not match your contract.
+
+## Build multi-step integrations from small requests
+
+Keep authentication, data retrieval, transformation, and destination updates separate when they are separate API operations. This makes each step easier to test and reuse.
+
+Use:
+
+- [chained requests](./request-parameters/chained-requests.md) when one request should pass response values directly to the next request
+- [Liquid requests](./request-types/liquid-requests.md) when you need loops, conditions, data shaping, or several named request calls
+- [cron schedules](./triggers/cron-schedule.md) for fixed-time polling
+- [Shopify webhooks](./triggers/webhooks/webhooks-overview.md) to react to supported Shopify events
+
+For data movement patterns and planning questions, see [Synchronize data with an external system](./synchronize-external-data.md).
+
+## Know which system owns each requirement
+
+APIEase provides saved requests, execution options, parameter handling, and composition tools. The external provider controls whether its API is available, which credentials and permissions it grants, what its data means, and how callers must handle limits or errors. Shopify likewise controls its Admin API contracts and permissions.
+
+If any required provider detail is missing, pause configuration and request that information from the provider. Guessing an endpoint, credential type, identifier, or write payload can produce failed calls or unintended data changes.
+
+SOURCE
+https://docs.apiease.com/docs/requests/synchronize-external-data
+
+TITLE
+Synchronize data with an external system
+
+CONTENT
+# Synchronize data with an external system
+
+A synchronization is a workflow built from saved APIEase requests, not a single sync switch. Define which system owns the data, how a change is detected, how records are matched, and which API operation creates or updates the destination record.
+
+Use this pattern for supplier catalogs, warehouse stock feeds, ERP order exports, CRM customer updates, fulfillment updates, and similar integrations.
+
+## Define the synchronization contract
+
+Before creating requests, decide:
+
+1. **Direction:** external system to Shopify, Shopify to external system, or both.
+2. **Source of truth:** which system wins when the same field differs.
+3. **Scope:** the exact objects and fields that move.
+4. **Identity:** the stable key used to match records, such as a SKU, provider record ID, Shopify global ID, or another documented identifier.
+5. **Change detection:** one-time import, scheduled polling, or an event-driven update.
+6. **Write behavior:** create, update, or both; also decide how missing or deleted records should be handled.
+7. **Operational rules:** pagination, rate limits, duplicate-event handling, retries, and partial failures required by the APIs involved.
+
+APIEase does not decide these business rules for you. Confirm them with the owner of each system and use the current provider and Shopify API documentation as the contract.
+
+## Choose an execution pattern
+
+### One-time import
+
+Run a request manually for a bounded migration or initial catalog load. Start with a small, non-production sample and verify identifiers and field mappings before increasing the batch size.
+
+### Scheduled pull
+
+Add a [cron schedule](./triggers/cron-schedule.md) when APIEase should periodically ask a provider for changes. Prefer an endpoint that can filter by an updated timestamp or cursor when the provider supports one; the provider documentation determines the available filter and pagination rules.
+
+### Shopify event-driven update
+
+Use a [Shopify webhook](./triggers/webhooks/webhooks-overview.md) when a supported Shopify event should start the workflow. Map only the event data required by the destination operation.
+
+### Multi-step orchestration
+
+Use a [Liquid request](./request-types/liquid-requests.md) when the workflow must iterate through records, branch, transform data, or call several saved requests. Use a [chained request](./request-parameters/chained-requests.md) for a simpler response-to-next-request sequence.
+
+## Separate source, mapping, and destination operations
+
+A reusable synchronization usually has these parts:
+
+1. A source HTTP request reads changed records.
+2. A Liquid request or another documented transformation maps source fields to destination fields.
+3. A destination HTTP request creates or updates one destination record.
+4. The orchestrating request records or returns enough status information to identify partial failures.
+
+Keeping provider calls separate prevents one large request from mixing authentication, pagination, mapping, and writes. It also lets you test a read operation without performing a destination write.
+
+## Products and inventory
+
+Product and inventory synchronization needs separate identity decisions. A product, variant, SKU, inventory item, and inventory location are not interchangeable identifiers. Confirm which identifier each source field represents and which Shopify Admin API operation accepts it.
+
+For a third-party catalog or stock feed:
+
+- decide whether the workflow creates products, updates existing products, updates inventory, or combines those operations
+- define how provider records map to Shopify products and variants
+- define location mapping before writing inventory quantities
+- preserve the provider cursor or updated timestamp when incremental reads require it
+- make write behavior safe for repeated records according to the destination API contract
+
+See [Import products from a third-party system](../general/apiease-details/importing-third-party-products.md) for the product-specific starting pattern. For Shopify calls and permissions, see [Shopify API calls and access tokens](../general/shopify-api/shopify-api-calls-and-access-tokens.md).
+
+## Orders, customers, and fulfillments
+
+First identify the business event and direction. Common reusable patterns include sending a newly created Shopify order to an external system, periodically pulling fulfillment updates, or updating a customer record after a Shopify event.
+
+Treat orders, customers, fulfillments, and fulfillment orders as distinct API resources. Verify required identifiers, permissions, state transitions, and write constraints in the current API documentation for both systems. Do not assume that an order ID can be used where a fulfillment or customer ID is required.
+
+## Validate before enabling live writes
+
+Use provider sandbox accounts and non-production Shopify data when available. Validate a small read, its mapping, and one destination write separately. Then test pagination and repeated input before enabling a schedule or event trigger.
+
+APIEase executes the workflow as configured; it does not validate whether a write is correct for your business. Back up important data when practical and review any request that can create, update, or delete live records.
 
 SOURCE
 https://docs.apiease.com/docs/requests/import-from-postman
@@ -4800,6 +4993,51 @@ If you're using APIEase to call the Shopify Admin API, you usually do not need t
 If you still want to obtain and use a custom Shopify access token, follow the [Custom access token](../shopify-api/custom-access-token.md) instructions.
 
 SOURCE
+https://docs.apiease.com/docs/general/faq/getting-started-and-integrations
+
+TITLE
+Getting started and integrations FAQ
+
+CONTENT
+# Getting started and integrations FAQ
+
+## What can I build with APIEase?
+
+APIEase lets you save and run HTTP, Flow, Liquid, and System requests, combine requests into workflows, and build storefront widgets. Common uses include third-party API calls, Shopify automations, scheduled data movement, event-driven actions, and server-side storefront integrations. Start with [What APIEase does](../../overview/what-it-does.md) and [Requests overview](../../requests/requests-overview.md).
+
+## Can APIEase connect to any external or third-party API?
+
+APIEase can connect to an external HTTP API when the provider exposes the required operation and gives you the endpoint, authentication, permissions, and payload contract. APIEase cannot guarantee support for every provider or discover a private or undocumented API. Use the [external API setup guide](../../requests/connect-external-api.md) to evaluate a supplier, ERP, CRM, warehouse, or other provider integration.
+
+## What information do I need from an API provider?
+
+You need the endpoint and HTTP method, authentication instructions and issued credentials, required headers and parameters, request and response shapes, permissions, pagination, rate limits, and preferably a test environment. The provider's current documentation or support team must supply provider-specific details. See the complete [provider information checklist](../../requests/connect-external-api.md).
+
+## Can APIEase obtain provider documentation or credentials for me?
+
+No. APIEase cannot retrieve missing provider documentation, issue another company's API key or access token, bypass permissions, or infer a safe write payload from incomplete requirements. Ask the provider for the missing contract or credential, then use [Connect to an external API](../../requests/connect-external-api.md) to map it to APIEase.
+
+## How do I create, find, edit, duplicate, or delete a request?
+
+Open **Requests** in the APIEase admin. Create a request with **Add Request**; find existing requests in the list; select the request name or **Edit** to update it; use **Duplicate** for a new draft based on it; and use **Delete**, then **Save**, to apply a confirmed deletion. The full lifecycle and handle precautions are in [Create and manage requests](../../requests/how-to-add-requests.md).
+
+## Should I manage resources in the admin, with the CLI, or through the public API?
+
+Use the APIEase admin for interactive work. Use `apiease-cli` when requests, widgets, variables, or functions should be JSON files in source control. Use the public API for direct external automation. CLI and public API workflows use stable resource handles and are separate from clicking actions in the admin. Compare the workflows in [Create and manage requests](../../requests/how-to-add-requests.md) and read [Resource handles](../../developers/resource-handles.md).
+
+## How do I synchronize or import products and inventory?
+
+Build a workflow that reads the provider data, maps stable product, variant, SKU, inventory-item, and location identifiers correctly, and calls the appropriate Shopify Admin API operation. Choose a one-time, scheduled, or event-driven pattern based on how changes are exposed. Plan it with [Synchronize data with an external system](../../requests/synchronize-external-data.md), then use the [third-party product import pattern](../apiease-details/importing-third-party-products.md).
+
+## How do I synchronize orders, customers, or fulfillments?
+
+Define the direction, source of truth, matching identifier, business event, and destination operation first. Then combine provider-neutral HTTP requests with a schedule, Shopify webhook, Liquid orchestration, or a simple request chain as needed. Follow the [order, customer, and fulfillment synchronization guidance](../../requests/synchronize-external-data.md).
+
+## Is a one-time import the same as an ongoing synchronization?
+
+No. A one-time import is a bounded run. An ongoing sync also needs change detection, stable record matching, pagination, repeated-input behavior, error handling, and a schedule or event trigger. Use the patterns in [Synchronize data with an external system](../../requests/synchronize-external-data.md) before enabling recurring or event-driven writes.
+
+SOURCE
 https://docs.apiease.com/docs/general/settings/apiease-api-key
 
 TITLE
@@ -4858,55 +5096,41 @@ SOURCE
 https://docs.apiease.com/docs/general/apiease-details/importing-third-party-products
 
 TITLE
-Importing products from a third-party system
+Import products from a third-party system
 
 CONTENT
-# Importing products from a third-party system
+# Import products from a third-party system
 
-You can use [Liquid requests](../../requests/request-types/liquid-requests.md) to automate the import of products and inventory data from third-party systems into your Shopify store. You can also import using [Shopify Flow Integration](../../requests/shopify-flow-integration/architecture.md). Liquid integration is recommended over Flow integration because it can be configured by the APIEase AI assistant. Whether syncing from a warehouse API, supplier feed, or internal catalog, APIEase enables this process without requiring custom app development or hosting.
+Use APIEase to compose the provider read, data mapping, and Shopify write operations required by a third-party product import. This pattern applies to a supplier catalog, warehouse API, stock feed, or internal product system, but the exact endpoints and field mappings come from the provider and Shopify API contracts.
 
-**Recommended: Liquid integration**
-Liquid requests let you fetch products, loop through the response, and post each product into Shopify. This keeps the entire import inside APIEase and makes it easier to adjust the logic with the AI assistant.
+Start with [Synchronize data with an external system](../../requests/synchronize-external-data.md). It covers direction, source of truth, record identity, change detection, pagination, and safe write planning.
 
-**Quick Liquid example**
-1. Create an HTTP request that calls the third-party products API.
-2. Create an HTTP request that calls the Shopify Admin API to create or update products.
-3. Use a Liquid request to connect them:
+## Required information
 
-```liquid
-{% call { "requestId": "third-party-products" } as source %}
+- The provider endpoint that lists products or inventory changes
+- The provider's authentication, pagination, and rate-limit requirements
+- The fields and identifiers returned for products, variants, SKUs, inventory items, and locations
+- The Shopify Admin API operations and permissions required for each write
+- The rule for matching an external record to an existing Shopify record
+- The intended create, update, missing-record, and deletion behavior
 
-{% for product in source.data.products %}
-  {% call {
-    "requestId": "shopify-product-upsert",
-    "bodyEmbedded": {
-      "title": "{{ product.title }}",
-      "vendor": "{{ product.vendor }}",
-      "variants": [
-        { "sku": "{{ product.sku }}", "price": "{{ product.price }}" }
-      ]
-    }
-  } as upsert %}
-  {{ upsert.status }}
-{% endfor %}
-```
+If the provider does not document an endpoint, credential, identifier, or payload, obtain that information before configuring the import. APIEase cannot infer or issue it.
 
-More detailed examples of Liquid integrations are coming soon.
+## Build the import from focused requests
 
-**Flow integration (alternative)**
-1. **Start with an APIEase Request**: Create an APIEase request to fetch product and inventory data from the third-party system. Trigger it manually, on a schedule, or via a Shopify webhook event.
-2. **Pass the Response to Shopify Flow**: Use a chained request to send the data to a Shopify Flow workflow configured by store administrators or developers.
-3. **Process the Data in Flow**: Inside Flow, use a Run Code action to transform, validate, or filter the received data.
-4. **Import into Shopify**: Use the Send Admin API request action in Flow to call Shopify's GraphQL Admin API to create or update products and inventory.
+1. Create an [HTTP request](../../requests/request-types/http-requests.md) that reads a bounded page of provider data.
+2. Create a separate HTTP request for the specific Shopify product or inventory operation.
+3. Use a [Liquid request](../../requests/request-types/liquid-requests.md) when the workflow must loop through records, transform fields, or call several saved requests.
+4. Run the read and one write with test data before processing a larger page.
+5. Add a [cron schedule](../../requests/triggers/cron-schedule.md) only after pagination and repeated records behave as intended.
 
-**Why Use APIEase**
-While Shopify Flow provides native actions for updating product data, most real-world integrations require:
-- Authenticated API calls to third-party systems
-- The ability to schedule imports
-- Access to response data from external APIs
-- Dynamic control over how data flows into Shopify
+For a simple response-to-next-request sequence, a [chained request](../../requests/request-parameters/chained-requests.md) may be enough. Shopify Flow can also participate when the store's workflow should own part of the automation; see [Shopify Flow integration](../../requests/shopify-flow-integration/architecture.md).
 
-APIEase handles these responsibilities, enabling you to build a complete product import pipeline within your Shopify environment.
+## Keep product and inventory identity separate
+
+A product, variant, SKU, inventory item, and location are different concepts. Do not assume one identifier works for every Shopify operation. Define the mapping explicitly and use the identifier required by the current Shopify Admin API operation.
+
+For Shopify authentication and permissions, see [Shopify API calls and access tokens](../shopify-api/shopify-api-calls-and-access-tokens.md).
 
 SOURCE
 https://docs.apiease.com/docs/general/apiease-details/automatic-shopify-customer-id-injection

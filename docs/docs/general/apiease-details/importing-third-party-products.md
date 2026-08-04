@@ -1,50 +1,36 @@
 ---
-title: Importing products from a third-party system
-description: Example for importing external products into Shopify with APIEase.
+title: Import products from a third-party system
+description: Apply the APIEase synchronization pattern to external product and inventory data.
 ---
-# Importing products from a third-party system
+# Import products from a third-party system
 
-You can use [Liquid requests](../../requests/request-types/liquid-requests.md) to automate the import of products and inventory data from third-party systems into your Shopify store. You can also import using [Shopify Flow Integration](../../requests/shopify-flow-integration/architecture.md). Liquid integration is recommended over Flow integration because it can be configured by the APIEase AI assistant. Whether syncing from a warehouse API, supplier feed, or internal catalog, APIEase enables this process without requiring custom app development or hosting.
+Use APIEase to compose the provider read, data mapping, and Shopify write operations required by a third-party product import. This pattern applies to a supplier catalog, warehouse API, stock feed, or internal product system, but the exact endpoints and field mappings come from the provider and Shopify API contracts.
 
-**Recommended: Liquid integration**
-Liquid requests let you fetch products, loop through the response, and post each product into Shopify. This keeps the entire import inside APIEase and makes it easier to adjust the logic with the AI assistant.
+Start with [Synchronize data with an external system](../../requests/synchronize-external-data.md). It covers direction, source of truth, record identity, change detection, pagination, and safe write planning.
 
-**Quick Liquid example**
-1. Create an HTTP request that calls the third-party products API.
-2. Create an HTTP request that calls the Shopify Admin API to create or update products.
-3. Use a Liquid request to connect them:
+## Required information
 
-```liquid
-{% call { "requestId": "third-party-products" } as source %}
+- The provider endpoint that lists products or inventory changes
+- The provider's authentication, pagination, and rate-limit requirements
+- The fields and identifiers returned for products, variants, SKUs, inventory items, and locations
+- The Shopify Admin API operations and permissions required for each write
+- The rule for matching an external record to an existing Shopify record
+- The intended create, update, missing-record, and deletion behavior
 
-{% for product in source.data.products %}
-  {% call {
-    "requestId": "shopify-product-upsert",
-    "bodyEmbedded": {
-      "title": "{{ product.title }}",
-      "vendor": "{{ product.vendor }}",
-      "variants": [
-        { "sku": "{{ product.sku }}", "price": "{{ product.price }}" }
-      ]
-    }
-  } as upsert %}
-  {{ upsert.status }}
-{% endfor %}
-```
+If the provider does not document an endpoint, credential, identifier, or payload, obtain that information before configuring the import. APIEase cannot infer or issue it.
 
-More detailed examples of Liquid integrations are coming soon.
+## Build the import from focused requests
 
-**Flow integration (alternative)**
-1. **Start with an APIEase Request**: Create an APIEase request to fetch product and inventory data from the third-party system. Trigger it manually, on a schedule, or via a Shopify webhook event.
-2. **Pass the Response to Shopify Flow**: Use a chained request to send the data to a Shopify Flow workflow configured by store administrators or developers.
-3. **Process the Data in Flow**: Inside Flow, use a Run Code action to transform, validate, or filter the received data.
-4. **Import into Shopify**: Use the Send Admin API request action in Flow to call Shopify's GraphQL Admin API to create or update products and inventory.
+1. Create an [HTTP request](../../requests/request-types/http-requests.md) that reads a bounded page of provider data.
+2. Create a separate HTTP request for the specific Shopify product or inventory operation.
+3. Use a [Liquid request](../../requests/request-types/liquid-requests.md) when the workflow must loop through records, transform fields, or call several saved requests.
+4. Run the read and one write with test data before processing a larger page.
+5. Add a [cron schedule](../../requests/triggers/cron-schedule.md) only after pagination and repeated records behave as intended.
 
-**Why Use APIEase**
-While Shopify Flow provides native actions for updating product data, most real-world integrations require:
-- Authenticated API calls to third-party systems
-- The ability to schedule imports
-- Access to response data from external APIs
-- Dynamic control over how data flows into Shopify
+For a simple response-to-next-request sequence, a [chained request](../../requests/request-parameters/chained-requests.md) may be enough. Shopify Flow can also participate when the store's workflow should own part of the automation; see [Shopify Flow integration](../../requests/shopify-flow-integration/architecture.md).
 
-APIEase handles these responsibilities, enabling you to build a complete product import pipeline within your Shopify environment.
+## Keep product and inventory identity separate
+
+A product, variant, SKU, inventory item, and location are different concepts. Do not assume one identifier works for every Shopify operation. Define the mapping explicitly and use the identifier required by the current Shopify Admin API operation.
+
+For Shopify authentication and permissions, see [Shopify API calls and access tokens](../shopify-api/shopify-api-calls-and-access-tokens.md).

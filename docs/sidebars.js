@@ -46,6 +46,8 @@ const sidebars = {
       items: [
         'requests/requests-overview',
         'requests/how-to-add-requests',
+        'requests/connect-external-api',
+        'requests/synchronize-external-data',
         'requests/import-from-postman',
         'requests/export-to-postman',
         {
@@ -222,6 +224,7 @@ const sidebars = {
       label: 'General',
       items: [
         'general/faq/faq',
+        'general/faq/getting-started-and-integrations',
         {
           type: 'category',
           label: 'Settings',
