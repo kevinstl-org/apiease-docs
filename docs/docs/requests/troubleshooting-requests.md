@@ -100,3 +100,5 @@ See [Chained requests](./request-parameters/chained-requests.md) for response pl
 After the smallest manual request succeeds, add optional parameters back one at a time, reconnect the chain, and test the real trigger. Repeat the live test only after confirming its inputs and side effects.
 
 When asking for help, share the request type, trigger type, sanitized address shape, method, status code, and a redacted provider error. Never share API keys, access tokens, passwords, customer data, or an unredacted private response.
+
+For concise answers to common failure patterns, see the [Troubleshooting requests FAQ](../general/faq/troubleshooting-requests.md).

@@ -1,9 +1,9 @@
 ---
-title: Credentials, authentication, and security
+title: Credentials, authentication, and security FAQ
 description: Answers about APIEase API keys, Shopify access tokens, external credentials, permissions, sensitive values, and authentication failures.
 ---
 
-# Credentials, authentication, and security
+# Credentials, authentication, and security FAQ
 
 ## What is the difference between an APIEase API key, a Shopify access token, and an external API credential?
 

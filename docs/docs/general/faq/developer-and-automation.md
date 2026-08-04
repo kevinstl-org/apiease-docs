@@ -1,8 +1,8 @@
 ---
-title: Developer tools and automation
+title: Developer tools and automation FAQ
 description: Quick answers about the APIEase public API, API keys, handles, apiease-cli, apiease-template, remote execution, and AI-assisted workflows.
 ---
-# Developer tools and automation
+# Developer tools and automation FAQ
 
 ## Should I use the APIEase admin, Apex, the CLI, the template, or the public API?
 

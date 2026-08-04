@@ -59,3 +59,5 @@ For data movement patterns and planning questions, see [Synchronize data with an
 APIEase provides saved requests, execution options, parameter handling, and composition tools. The external provider controls whether its API is available, which credentials and permissions it grants, what its data means, and how callers must handle limits or errors. Shopify likewise controls its Admin API contracts and permissions.
 
 If any required provider detail is missing, pause configuration and request that information from the provider. Guessing an endpoint, credential type, identifier, or write payload can produce failed calls or unintended data changes.
+
+For concise answers about capabilities, provider requirements, resource management, and synchronization, see the [Getting started and integrations FAQ](../general/faq/getting-started-and-integrations.md).

@@ -19,3 +19,5 @@ Choose the execution mechanism that matches where the run starts and what the ca
 Customer-authenticated calls are a restricted form of storefront call, not a separate general-purpose API. Use [customer validation](../customer-authenticated-requests.md) when a storefront request must require a logged-in customer or allow only selected customer IDs.
 
 After an entry request runs, **Next Request** can continue a simple linear workflow. This is [request chaining](../request-parameters/chained-requests.md), not an external trigger. A [Flow request](../request-types/flow-requests.md) can similarly hand data to Shopify Flow after starting from any suitable entry point.
+
+For quick comparisons and prerequisites, see the [Running requests FAQ](../../general/faq/running-requests.md).

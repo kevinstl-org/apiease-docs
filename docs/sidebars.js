@@ -224,13 +224,22 @@ const sidebars = {
       type: 'category',
       label: 'General',
       items: [
-        'general/faq/faq',
-        'general/faq/getting-started-and-integrations',
-        'general/faq/building-requests',
-        'general/faq/credentials-and-security',
-        'general/faq/running-requests',
-        'general/faq/troubleshooting-requests',
-        'general/faq/developer-and-automation',
+        {
+          type: 'category',
+          label: 'FAQ',
+          link: {
+            type: 'doc',
+            id: 'general/faq/faq',
+          },
+          items: [
+            'general/faq/getting-started-and-integrations',
+            'general/faq/building-requests',
+            'general/faq/credentials-and-security',
+            'general/faq/running-requests',
+            'general/faq/troubleshooting-requests',
+            'general/faq/developer-and-automation',
+          ],
+        },
         {
           type: 'category',
           label: 'Settings',

@@ -24,3 +24,5 @@ to be triggered from your storefront or from external systems without exposing
 those credentials publicly. [Learn more...](./why-you-need-it.md)
 
 **Widgets** - Build reusable storefront widgets with Liquid and JavaScript, then render them using a theme app block. [Learn more...](../widgets/widgets-page.md)
+
+Looking for a quick answer? Choose your task in the [APIEase FAQ](../general/faq/faq.md).
