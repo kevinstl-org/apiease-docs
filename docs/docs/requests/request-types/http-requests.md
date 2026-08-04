@@ -8,17 +8,17 @@ HTTP API requests are highly configurable with many options.  HTTP requests allo
 
 ![HTTP request editor](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/add-http-api-requests.png?v=1744748372)
 
-**HTTP Request Fields**
+## HTTP request fields
 
 - **Name**: Optional display name.
 - **Handle**: Stable identifier used by [chained requests](../request-parameters/chained-requests.md), storefront calls, `apiease-cli`, and the public API.
-- **Type**: Set to `http` for a standard API call to an external service.
-- **Address**: Full endpoint of the external API (for example, `https://api.example.com/data`).
-- **Method**: Choose GET, POST, DELETE, PUT, PATCH, or OPTIONS.
+- **Type**: Choose **HTTP** for a standard API call to an external service.
+- **Address**: Enter the full endpoint URL from the provider's API documentation (for example, `https://api.example.com/data`). Keep values that belong in the query string, path placeholders, or body in their matching parameter locations.
+- **Method**: Choose the operation required by the provider: GET, POST, DELETE, PUT, PATCH, or OPTIONS.
 - **Parameters ([?](../request-parameters/in-app-vs-dynamic.md))**:
   - **Headers**: Add required headers (Authorization, Content-Type, etc.).
   - **Query parameters**: Values to include in the query string.
-  - **Body**: For POST/PUT style calls; accept raw JSON or form fields.
+  - **Body**: Add the payload for methods such as POST, PUT, or PATCH. APIEase supports standard JSON bodies and [form URL-encoded bodies](../request-parameters/form-urlencoded-bodies.md).
   - **Path**: Dynamic [path variables](../request-parameters/path-variables.md) to substitute into the address.
   - **System**: Used by APIEase for features such as [Customer Authentication](../customer-authenticated-requests.md).
   - You can provide [in app parameters](../request-parameters/in-app-vs-dynamic.md) or pass [dynamic embedded parameters](../request-parameters/dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) from the storefront.
@@ -35,3 +35,5 @@ HTTP API requests are highly configurable with many options.  HTTP requests allo
   - From your storefront using Shopify's app proxy
 
 - **Next Request**: You can implement [chained requests](../request-parameters/chained-requests.md) by setting the Next Request field to the handle of a request to run after this one completes.
+
+For a concise comparison of request types, parameter locations, and multi-step options, see the [Building requests FAQ](../../general/faq/building-requests.md).

@@ -225,6 +225,7 @@ const sidebars = {
       items: [
         'general/faq/faq',
         'general/faq/getting-started-and-integrations',
+        'general/faq/building-requests',
         {
           type: 'category',
           label: 'Settings',

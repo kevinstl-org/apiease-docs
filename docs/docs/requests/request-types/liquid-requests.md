@@ -273,6 +273,8 @@ Choose how the request should be triggered:
 
 You can specify the handle of another request to run after this request finishes. This allows you to build multi step workflows using chained requests.
 
+Use [chained requests](../request-parameters/chained-requests.md) for a simple linear handoff. Keep orchestration in Liquid when the workflow needs conditions, loops, response shaping, or several explicit `call` operations.
+
 **Examples**
 
 Hello world:

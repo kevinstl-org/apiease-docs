@@ -12,11 +12,11 @@ For example, you might need to:
 - Receive an access token in the response
 - Use that token to make a second request to retrieve data or perform an action
 
-**Setting Next Request**
+## Set the next request
 
 Set the request handle of the next request you would like to call in the **Next Request** field.
 
-**How Chaining Works in APIEase**
+## How chaining works in APIEase
 
 Each request in APIEase can optionally trigger another request once it completes. The second request can use values from the first request's response body as parameters.
 
@@ -30,7 +30,7 @@ Here's an example of what the JSON response from Request A might look like:
 ```json
 {
   "auth": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+    "token": "YOUR_ACCESS_TOKEN"
   }
 }
 ```
@@ -41,7 +41,7 @@ This tells APIEase to pull the token field from the auth object in the JSON resp
 
 ![Chained request editor overview](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/chained-requests-description.png?v=1744331402)
 
-**Flexible Use of Response Data**
+## Use response data in the next request
 
 You can use response values from Request A in multiple parts of Request B:
 
@@ -73,16 +73,18 @@ You could then use those values in Request B like this:
 ```
 The curly brace syntax tells APIEase to substitute in the corresponding value from the previous response.
 
-**A Real-World Example**
+## Authentication example
 
 If you want to see this in action, we've created a walkthrough of a common use case: authenticating with a service, storing the returned access token, and using it in a follow-up request.
 
 [View Authentication Example](../../general/apiease-details/authentication-example.md)
 
-**When to Use Chained Requests**
+## When to use chained requests
 
 Use chained requests when:
 
 - You need to authenticate before calling a protected API
 - You need to transform or fetch dynamic data before continuing
 - You want to build multi-step workflows inside APIEase without building and hosting a custom backend
+
+Use a chain for a simple linear handoff. If the workflow needs conditions, loops, response shaping, or several explicit calls, use a [Liquid request](../request-types/liquid-requests.md) instead.

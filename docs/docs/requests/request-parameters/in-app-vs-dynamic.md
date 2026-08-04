@@ -4,7 +4,10 @@ description: Explain when to use in-app parameters versus dynamic embedded param
 ---
 # In-app parameters vs dynamic embedded parameters
 
-Parameters that do not change, static parameters, should be set in the app. A classic example of this would be setting the header parameter "Content-Type" to "application/json".
+Use an **in-app parameter** for a value saved with the request. Examples include `Content-Type: application/json`, a stable provider setting, or a sensitive request credential that must stay server-side.
 
-Parameters that might change per call have to be set as dynamic embedded parameters. An example of this would be a request about a particular product that the customer is viewing in the storefront. In this case you would set product id as an embedded parameter directly in the storefront page that needs to request information about a particular product.
+Use a **dynamic embedded parameter** for a runtime value that can change on each call. For example, storefront code can pass the ID of the product currently being viewed instead of saving one product ID on the request. Dynamic embedded parameters are also called runtime parameters or embedded parameters.
 
+Both forms use the same locations: headers, query parameters, path parameters, body, Flow parameters, Liquid parameters, and supported System parameters. If a saved parameter and dynamic embedded parameter have the same name in the same location, the dynamic embedded value overrides the saved value for that execution.
+
+Start with the [request parameters overview](./request-parameters-overview.md), then use the [in-app parameter](./in-app-parameters/in-app-parameters-overview.md) or [dynamic embedded parameter](./dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) pages for setup details.

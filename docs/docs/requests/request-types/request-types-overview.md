@@ -12,3 +12,7 @@ APIEase supports four request types. Pick the one that fits how you want to call
 - **[System requests](./system-requests.md)**: Run internal APIEase functions (for example, set/get/delete persisted variables) without calling an external URL.
 
 Use HTTP requests when you need a direct API call, Flow requests when the action should occur inside Shopify Flow, Liquid requests when you need templating or conditional logic without a custom app, and System requests for internal app-managed actions.
+
+Request type describes what APIEase executes. It is separate from a [trigger](../triggers/triggers-overview.md), which describes how a saved request starts, and from [parameters](../request-parameters/request-parameters-overview.md), which provide its inputs.
+
+For quick answers about choosing a type and combining requests, see the [Building requests FAQ](../../general/faq/building-requests.md).

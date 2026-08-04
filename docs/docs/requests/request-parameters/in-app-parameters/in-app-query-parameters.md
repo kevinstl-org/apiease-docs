@@ -6,7 +6,8 @@ description: Manage query string values within APIEase.
 
 You can add query parameters to any APIEase request directly from the request editor. Query parameters are used to pass key-value pairs in the URL, usually for filtering, identifying, or paginating data in API requests.
 
-**How to Add a Query Parameter**While editing your request, click the plus icon in the Parameter column.Select the Query radio button.Enter the name of your query parameter in the Name field.Enter the parameter value in the Value field.Click the Save button at the top of the request editor.**Query Parameter Example**:To add status=active to a request URL, enter the following:
+## How to add a query parameter
+
 While editing your request:
 1. Click the plus icon in the Parameter column.
 2. Select the **Query** radio button.
@@ -14,11 +15,12 @@ While editing your request:
 4. Enter the parameter value in the **Value** field.
 5. Click **Save** at the top of the request editor.
 
-**Query Parameter Example**  
+## Query parameter example
+
 To add `status=active` to a request URL:
 - **Name**: `status`
 - **Value**: `active`
-Result: `https://ex.com/items?status=active` (additional query params are appended automatically).
+Result: `https://example.com/items?status=active` (additional query parameters are appended automatically).
 
 You can also use [embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) to dynamically set parameters from your storefront.
 

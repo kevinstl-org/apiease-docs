@@ -1926,6 +1926,10 @@ APIEase supports four request types. Pick the one that fits how you want to call
 
 Use HTTP requests when you need a direct API call, Flow requests when the action should occur inside Shopify Flow, Liquid requests when you need templating or conditional logic without a custom app, and System requests for internal app-managed actions.
 
+Request type describes what APIEase executes. It is separate from a [trigger](../triggers/triggers-overview.md), which describes how a saved request starts, and from [parameters](../request-parameters/request-parameters-overview.md), which provide its inputs.
+
+For quick answers about choosing a type and combining requests, see the [Building requests FAQ](../../general/faq/building-requests.md).
+
 SOURCE
 https://docs.apiease.com/docs/requests/request-types/http-requests
 
@@ -1939,17 +1943,17 @@ HTTP API requests are highly configurable with many options.  HTTP requests allo
 
 ![HTTP request editor](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/add-http-api-requests.png?v=1744748372)
 
-**HTTP Request Fields**
+## HTTP request fields
 
 - **Name**: Optional display name.
 - **Handle**: Stable identifier used by [chained requests](../request-parameters/chained-requests.md), storefront calls, `apiease-cli`, and the public API.
-- **Type**: Set to `http` for a standard API call to an external service.
-- **Address**: Full endpoint of the external API (for example, `https://api.example.com/data`).
-- **Method**: Choose GET, POST, DELETE, PUT, PATCH, or OPTIONS.
+- **Type**: Choose **HTTP** for a standard API call to an external service.
+- **Address**: Enter the full endpoint URL from the provider's API documentation (for example, `https://api.example.com/data`). Keep values that belong in the query string, path placeholders, or body in their matching parameter locations.
+- **Method**: Choose the operation required by the provider: GET, POST, DELETE, PUT, PATCH, or OPTIONS.
 - **Parameters ([?](../request-parameters/in-app-vs-dynamic.md))**:
   - **Headers**: Add required headers (Authorization, Content-Type, etc.).
   - **Query parameters**: Values to include in the query string.
-  - **Body**: For POST/PUT style calls; accept raw JSON or form fields.
+  - **Body**: Add the payload for methods such as POST, PUT, or PATCH. APIEase supports standard JSON bodies and [form URL-encoded bodies](../request-parameters/form-urlencoded-bodies.md).
   - **Path**: Dynamic [path variables](../request-parameters/path-variables.md) to substitute into the address.
   - **System**: Used by APIEase for features such as [Customer Authentication](../customer-authenticated-requests.md).
   - You can provide [in app parameters](../request-parameters/in-app-vs-dynamic.md) or pass [dynamic embedded parameters](../request-parameters/dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) from the storefront.
@@ -1966,6 +1970,8 @@ HTTP API requests are highly configurable with many options.  HTTP requests allo
   - From your storefront using Shopify's app proxy
 
 - **Next Request**: You can implement [chained requests](../request-parameters/chained-requests.md) by setting the Next Request field to the handle of a request to run after this one completes.
+
+For a concise comparison of request types, parameter locations, and multi-step options, see the [Building requests FAQ](../../general/faq/building-requests.md).
 
 SOURCE
 https://docs.apiease.com/docs/requests/request-types/flow-requests
@@ -2280,6 +2286,8 @@ Choose how the request should be triggered:
 
 You can specify the handle of another request to run after this request finishes. This allows you to build multi step workflows using chained requests.
 
+Use [chained requests](../request-parameters/chained-requests.md) for a simple linear handoff. Keep orchestration in Liquid when the workflow needs conditions, loops, response shaping, or several explicit `call` operations.
+
 **Examples**
 
 Hello world:
@@ -2470,17 +2478,26 @@ CONTENT
 
 APIEase lets you pass data into requests in several ways so each run has the inputs it needs without exposing sensitive values.
 
-- **In-app parameters**: Static or confidential values stored securely in APIEase. Use these when the value rarely changes or must stay server-side.
-- **Dynamic embedded parameters**: Values provided at runtime from the storefront, webhooks, or other triggers (headers, query, path, body, flow, or Liquid). Use these for request-specific data like customer ids, page context, or user input.
+- **[In-app parameters](./in-app-parameters/in-app-parameters-overview.md)**: Saved values configured on the request. Use these when the value rarely changes or when a sensitive request parameter must remain server-side.
+- **[Dynamic embedded parameters](./dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md)**: Values provided at runtime by a caller, such as storefront code, a widget, or another request. They can supply headers, query values, path values, a body, Flow values, or Liquid values for one execution.
 - **Path variables**: Placeholders in the request URL (`/products/{id}`) that are filled by in-app or dynamic embedded parameters when the request executes.
 - **Chained request parameters**: Data passed from the response of one request into the next request in a sequence.
 
 Choose the parameter type based on where the value comes from and whether it must stay confidential. Combine these options to keep sensitive data secure while still letting each trigger supply the context it needs.
 
+Choose the parameter location from the receiving API's contract:
+
+- **[Headers](./in-app-parameters/in-app-header-parameters.md)** carry request metadata, content type, or authentication.
+- **[Query parameters](./in-app-parameters/in-app-query-parameters.md)** become key-value pairs in the URL query string.
+- **[Path parameters](./in-app-parameters/in-app-path-parameters.md)** replace named [path variables](./path-variables.md) in the address.
+- **[Body](./in-app-parameters/in-app-body-parameters.md)** carries the request payload. Use [form URL-encoded bodies](./form-urlencoded-bodies.md) only when the receiving API requires that content type.
+
 For Liquid requests, distinguish saved Liquid parameters from runtime embedded Liquid parameters:
 
 - **Saved Liquid parameters** are configured on the request and can be substituted with `{parameterName}` before execution. Use saved Liquid parameters for stored defaults, sensitive values, or other server-side configured values.
 - **Runtime embedded Liquid parameters** are supplied by a caller with `liquidParamsEmbedded` and are read in Liquid through `apiEaseParameters.liquidParams.<parameterName>`. Use `liquidParamsEmbedded` for per-call values supplied at runtime.
+
+See [In-app parameters vs dynamic embedded parameters](./in-app-vs-dynamic.md) for the saved-versus-runtime decision and override behavior. For quick request-building answers, see the [Building requests FAQ](../../general/faq/building-requests.md).
 
 SOURCE
 https://docs.apiease.com/docs/requests/request-parameters/in-app-vs-dynamic
@@ -2491,9 +2508,13 @@ In-app parameters vs dynamic embedded parameters
 CONTENT
 # In-app parameters vs dynamic embedded parameters
 
-Parameters that do not change, static parameters, should be set in the app. A classic example of this would be setting the header parameter "Content-Type" to "application/json".
+Use an **in-app parameter** for a value saved with the request. Examples include `Content-Type: application/json`, a stable provider setting, or a sensitive request credential that must stay server-side.
 
-Parameters that might change per call have to be set as dynamic embedded parameters. An example of this would be a request about a particular product that the customer is viewing in the storefront. In this case you would set product id as an embedded parameter directly in the storefront page that needs to request information about a particular product.
+Use a **dynamic embedded parameter** for a runtime value that can change on each call. For example, storefront code can pass the ID of the product currently being viewed instead of saving one product ID on the request. Dynamic embedded parameters are also called runtime parameters or embedded parameters.
+
+Both forms use the same locations: headers, query parameters, path parameters, body, Flow parameters, Liquid parameters, and supported System parameters. If a saved parameter and dynamic embedded parameter have the same name in the same location, the dynamic embedded value overrides the saved value for that execution.
+
+Start with the [request parameters overview](./request-parameters-overview.md), then use the [in-app parameter](./in-app-parameters/in-app-parameters-overview.md) or [dynamic embedded parameter](./dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) pages for setup details.
 
 SOURCE
 https://docs.apiease.com/docs/requests/request-parameters/in-app-parameters/in-app-parameters-overview
@@ -2629,7 +2650,8 @@ CONTENT
 
 You can add query parameters to any APIEase request directly from the request editor. Query parameters are used to pass key-value pairs in the URL, usually for filtering, identifying, or paginating data in API requests.
 
-**How to Add a Query Parameter**While editing your request, click the plus icon in the Parameter column.Select the Query radio button.Enter the name of your query parameter in the Name field.Enter the parameter value in the Value field.Click the Save button at the top of the request editor.**Query Parameter Example**:To add status=active to a request URL, enter the following:
+## How to add a query parameter
+
 While editing your request:
 1. Click the plus icon in the Parameter column.
 2. Select the **Query** radio button.
@@ -2637,11 +2659,12 @@ While editing your request:
 4. Enter the parameter value in the **Value** field.
 5. Click **Save** at the top of the request editor.
 
-**Query Parameter Example**  
+## Query parameter example
+
 To add `status=active` to a request URL:
 - **Name**: `status`
 - **Value**: `active`
-Result: `https://ex.com/items?status=active` (additional query params are appended automatically).
+Result: `https://example.com/items?status=active` (additional query parameters are appended automatically).
 
 You can also use [embedded parameters](../dynamic-embedded-parameters/dynamic-embedded-parameters-overview.md) to dynamically set parameters from your storefront.
 
@@ -3546,11 +3569,11 @@ For example, you might need to:
 - Receive an access token in the response
 - Use that token to make a second request to retrieve data or perform an action
 
-**Setting Next Request**
+## Set the next request
 
 Set the request handle of the next request you would like to call in the **Next Request** field.
 
-**How Chaining Works in APIEase**
+## How chaining works in APIEase
 
 Each request in APIEase can optionally trigger another request once it completes. The second request can use values from the first request's response body as parameters.
 
@@ -3564,7 +3587,7 @@ Here's an example of what the JSON response from Request A might look like:
 ```json
 {
   "auth": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+    "token": "YOUR_ACCESS_TOKEN"
   }
 }
 ```
@@ -3575,7 +3598,7 @@ This tells APIEase to pull the token field from the auth object in the JSON resp
 
 ![Chained request editor overview](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/chained-requests-description.png?v=1744331402)
 
-**Flexible Use of Response Data**
+## Use response data in the next request
 
 You can use response values from Request A in multiple parts of Request B:
 
@@ -3607,19 +3630,21 @@ You could then use those values in Request B like this:
 ```
 The curly brace syntax tells APIEase to substitute in the corresponding value from the previous response.
 
-**A Real-World Example**
+## Authentication example
 
 If you want to see this in action, we've created a walkthrough of a common use case: authenticating with a service, storing the returned access token, and using it in a follow-up request.
 
 [View Authentication Example](../../general/apiease-details/authentication-example.md)
 
-**When to Use Chained Requests**
+## When to use chained requests
 
 Use chained requests when:
 
 - You need to authenticate before calling a protected API
 - You need to transform or fetch dynamic data before continuing
 - You want to build multi-step workflows inside APIEase without building and hosting a custom backend
+
+Use a chain for a simple linear handoff. If the workflow needs conditions, loops, response shaping, or several explicit calls, use a [Liquid request](../request-types/liquid-requests.md) instead.
 
 SOURCE
 https://docs.apiease.com/docs/requests/shopify-flow-integration/architecture
@@ -5036,6 +5061,47 @@ Define the direction, source of truth, matching identifier, business event, and 
 ## Is a one-time import the same as an ongoing synchronization?
 
 No. A one-time import is a bounded run. An ongoing sync also needs change detection, stable record matching, pagination, repeated-input behavior, error handling, and a schedule or event trigger. Use the patterns in [Synchronize data with an external system](../../requests/synchronize-external-data.md) before enabling recurring or event-driven writes.
+
+SOURCE
+https://docs.apiease.com/docs/general/faq/building-requests
+
+TITLE
+Building requests FAQ
+
+CONTENT
+# Building requests FAQ
+
+## Which request type should I choose?
+
+Choose **HTTP** to call an external API, **Flow** to start or continue Shopify Flow, **Liquid** to apply template logic or orchestrate other saved requests, and **System** to manage APIEase Variables without calling an external URL. See the [request types overview](../../requests/request-types/request-types-overview.md) for a focused comparison.
+
+## Where do I set the HTTP method and endpoint URL?
+
+Set **Method** and **Address** on an HTTP request. The method is the operation the provider documents, such as GET, POST, PUT, PATCH, DELETE, or OPTIONS; the address is the provider's full endpoint URL. Do not put query parameters or a request body into the Address field when APIEase provides a matching parameter location. See [HTTP requests](../../requests/request-types/http-requests.md).
+
+## Should a value be a header, query parameter, path parameter, or body?
+
+Put the value where the receiving API's contract requires it: headers carry metadata or authentication, query parameters appear after `?` in the URL, path parameters replace placeholders such as `{productId}`, and the body carries the request payload. These locations are not interchangeable. Use the [request parameters overview](../../requests/request-parameters/request-parameters-overview.md) to reach the setup page for each location, including JSON and form URL-encoded bodies.
+
+## What is the difference between an in-app parameter and a dynamic embedded parameter?
+
+An **in-app parameter** is saved on the request; a **dynamic embedded parameter** is supplied for one execution by a caller such as storefront code, a widget, or another request. Use a saved value for stable configuration or a sensitive request parameter, and a runtime or embedded value for per-call input. When both provide the same parameter, the dynamic embedded value overrides the saved value. See [In-app parameters vs dynamic embedded parameters](../../requests/request-parameters/in-app-vs-dynamic.md).
+
+## How do I run a second request with data from the first response?
+
+Set the first request's **Next Request** to the second request's handle, then use `{field}` or `{object.field}` placeholders in the second request to read values from the previous response body. This is a chained request, also called a request chain or multi-step request. Follow [Chained requests](../../requests/request-parameters/chained-requests.md) for supported parameter locations and an authentication example.
+
+## When should I use a Liquid request instead of a request chain?
+
+Use a simple request chain for a linear handoff from one response to the next. Use a Liquid request when the workflow needs conditions, loops, response shaping, several explicit `call` operations, or reusable Function calls. Liquid requests are executable workflows; they do not replace the HTTP requests that perform external API calls. See [Liquid requests](../../requests/request-types/liquid-requests.md).
+
+## What is the difference between Variables and System requests?
+
+Variables are persisted values for the current store; System requests are executable requests that get, set, or delete those values during a workflow. Manage a value manually on the [Variables page](../../variables/variables-overview.md), or use a [System request](../../requests/request-types/system-requests.md) when automation must manage it. A System request does not call an external API.
+
+## What is a Function, and how is it different from a Liquid request?
+
+A Function is reusable Liquid helper logic that runs inside a parent Liquid request. It has no trigger and is not a standalone request execution. Use a Function to reuse transformations or formatting, and use a Liquid request for the overall executable workflow. See [Functions overview](../../functions/functions-overview.md) and [Using Functions in Liquid requests](../../functions/using-functions-in-liquid-requests.md).
 
 SOURCE
 https://docs.apiease.com/docs/general/settings/apiease-api-key
