@@ -46,6 +46,7 @@ const sidebars = {
       items: [
         'requests/requests-overview',
         'requests/how-to-add-requests',
+        'requests/troubleshooting-requests',
         'requests/connect-external-api',
         'requests/synchronize-external-data',
         'requests/import-from-postman',
@@ -228,6 +229,7 @@ const sidebars = {
         'general/faq/building-requests',
         'general/faq/credentials-and-security',
         'general/faq/running-requests',
+        'general/faq/troubleshooting-requests',
         {
           type: 'category',
           label: 'Settings',

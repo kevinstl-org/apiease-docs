@@ -13,5 +13,6 @@ You can run any configured APIEase request on demand from the admin interface. T
 4. View the response and execution details in the run output.
 
 ## Tips
-- Manual runs use the same configuration as other triggers (storefront, webhook, schedule, etc.), so they are a safe way to validate request logic before exposing it externally.
+- Manual runs use the same saved request configuration as other triggers (storefront, webhook, schedule, etc.), so they are a controlled way to validate request logic before adding another entry point. A manual run can still create, update, or delete live data.
 - If a run fails, use the response details to adjust parameters or request configuration, then run again.
+- Before testing a request that can create, update, or delete data, use a test environment or provider-supported dry run when available. Follow [Troubleshoot requests](../troubleshooting-requests.md) to isolate the request, provider response, trigger, and chained steps.

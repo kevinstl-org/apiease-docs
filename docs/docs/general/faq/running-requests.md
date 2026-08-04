@@ -11,7 +11,7 @@ Choose the entry point that matches the caller: use a manual call in APIEase adm
 
 ## How do I test or run a request once from APIEase admin?
 
-Use a **Manual Call**. From the Requests page, choose **Copy and Execute**, then **Execute and Run**. Manual execution is useful for a one-off action or for checking the saved configuration before adding another entry point. Follow [Manual calls](../../requests/triggers/manual-calls.md) for the procedure.
+Use a **Manual Call**. From the Requests page, choose **Copy and Execute**, then **Execute and Run**. Manual execution is useful for a one-off action or for checking the saved configuration before adding another entry point. Follow [Manual calls](../../requests/triggers/manual-calls.md) for the procedure and [Troubleshoot requests](../../requests/troubleshooting-requests.md) when the run fails or returns an unexpected result.
 
 ## What is the difference between a remote call and a proxy endpoint?
 
