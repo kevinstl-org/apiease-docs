@@ -34,17 +34,23 @@ This keeps your APIEase configuration versioned in git while still using the sam
 
 `apiease-cli` requires Node.js 20 or newer.
 
-From the CLI repository:
+Install the published package from npm:
+
+```bash
+npm install -g apiease
+```
+
+The installed command is:
+
+```bash
+apiease
+```
+
+If you are developing the CLI itself from its repository, install its dependencies and link the local package:
 
 ```bash
 npm install
 npm link
-```
-
-After linking, run the installed command as:
-
-```bash
-apiease
 ```
 
 If you are working directly inside the CLI repository without linking it globally, use `./bin/apiease-cli` instead.
@@ -75,11 +81,13 @@ Create the home directory:
 mkdir -p ~/.apiease
 ```
 
-Declare the active environment in `~/.apiease/environment`. The supported values are:
+Declare the active environment in `~/.apiease/environment`. Common values are:
 
 - `local`
 - `staging`
 - `production`
+
+Custom environment names such as `qa` are also supported when the matching `~/.apiease/.env.qa` file exists.
 
 Example local setup:
 
@@ -140,7 +148,7 @@ apiease init .
 
 Current CLI behavior:
 
-- the template source resolves from the local sibling repository `../apiease-template`
+- the installed CLI retrieves the current `apiease-template`; local CLI development can use a sibling template checkout
 - the command writes project metadata to `.apiease/project.json`
 - metadata includes the template version and a manifest of template-managed files
 - `.git`, `.idea`, and `node_modules` are excluded from the copied template

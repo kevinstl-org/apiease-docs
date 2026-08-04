@@ -230,6 +230,7 @@ const sidebars = {
         'general/faq/credentials-and-security',
         'general/faq/running-requests',
         'general/faq/troubleshooting-requests',
+        'general/faq/developer-and-automation',
         {
           type: 'category',
           label: 'Settings',

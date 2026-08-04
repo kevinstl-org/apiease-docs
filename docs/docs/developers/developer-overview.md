@@ -10,6 +10,21 @@ For most teams, the recommended path starts with `apiease-template`, uses `apiea
 
 If you are new to this workflow, start with [Quickstart with apiease-template](./quickstart-with-apiease-template.md).
 
+## Choose an interface
+
+Choose the interface based on where you want the work and its review history to live:
+
+| Interface | Best fit |
+| --- | --- |
+| APIEase admin | Create, edit, test, and run resources interactively. |
+| Apex in APIEase | Ask the in-product assistant to create, update, or delete requests and widgets during a conversation. |
+| `apiease-template` | Establish a repository layout for source-controlled requests, widgets, variables, and functions. |
+| `apiease-cli` | Initialize or upgrade a template project and sync its saved resource definitions with APIEase. |
+| APIEase public API | Build custom HTTP automation for saved resources or execute an existing saved request remotely. |
+| Coding agent in a template repository | Edit version-controlled resource definitions, review them in git, and optionally sync them through `apiease-cli`. |
+
+These are separate workflows. Apex changes APIEase resources directly during the conversation. A coding agent working in an `apiease-template` repository changes local files first, so the git diff can be the review boundary. See [Using APIEase with AI agents](./using-apiease-with-ai-agents.md) for the safety and resource-scope distinctions.
+
 ## Recommended path
 
 Use this reading order when you are getting started:
@@ -33,6 +48,7 @@ Use these pages based on the job you need to do:
 - [apiease-cli](./apiease-cli.md): installation, configuration, CRUD commands, and template upgrade workflow
 - [APIEase Public API](./apiease-public-api.md): authentication, resource routes, remote request execution, and direct HTTP usage
 - [Using APIEase with AI agents](./using-apiease-with-ai-agents.md): repository-first guidance for Codex-style agents
+- [Developer and automation FAQ](../general/faq/developer-and-automation.md): concise answers about public API access, handles, remote execution, source control, the CLI, and AI-assisted workflows
 
 ## How this fits the rest of the docs
 

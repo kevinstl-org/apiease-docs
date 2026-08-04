@@ -13,6 +13,16 @@ Most agent-driven APIEase work should follow this path:
 - sync saved resources through [apiease-cli](./apiease-cli.md)
 - use the [APIEase Public API](./apiease-public-api.md) directly only when the CLI is not the right interface
 
+## Distinguish Apex from a repository agent
+
+Apex is the assistant inside APIEase. It can create, update, and delete requests and widgets directly during the conversation. It does not currently manage Variables, Functions, or every APIEase resource.
+
+Apex resource changes do not have a general preview, approval, undo, or safe-mode step. Review every resource that Apex creates or updates, and treat deletion instructions carefully.
+
+For a request that could change real data, Apex may initially configure request-specific controls such as a dry-run option or a disabled `ALLOW_*` Variable when that pattern fits the integration. Inspect and test the saved request before enabling live behavior. Those execution controls do not postpone or preview Apex's creation, update, or deletion of the APIEase resource itself.
+
+A coding agent such as Codex or Claude Code uses the repository workflow documented on the rest of this page. It can manage requests, widgets, Variables, and Functions through version-controlled files and `apiease-cli`. The local diff provides the review boundary before you sync or commit changes.
+
 ## Start from the template
 
 Agents should work inside a repository initialized with `apiease init`, not from a loose folder of one-off JSON files or ad hoc curl commands.

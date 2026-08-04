@@ -44,6 +44,8 @@ curl -X GET 'https://app-admin.apiease.com/api/v1/resources/requests' \
 
 APIEase resolves the shop from the `x-shop-myshopify-domain` header. Do not rely on shop-identifying fields in the JSON body.
 
+This APIEase API key authenticates the caller to APIEase. It is not a Shopify access token and it is not a credential for the external service used by a saved request. Configure outbound provider credentials on that saved request, normally as [sensitive request parameters](../requests/request-parameters/in-app-parameters/in-app-parameters-overview.md).
+
 ## Resource routes
 
 The current resource base path is `/api/v1/resources`.
@@ -254,6 +256,8 @@ curl -X POST 'https://app-admin.apiease.com/api/remote/caller/call?requestId=pro
 ```
 
 Use that route when the request definition already exists in APIEase and you want to trigger it from another system. The query parameter is still named `requestId`, but pass the request handle as the value for new integrations. For more detail, see [Calling APIEase Requests Remotely](../requests/triggers/calling-requests-remotely.md).
+
+This endpoint executes the saved definition. It does not accept an arbitrary destination URL or replace the resource CRUD routes.
 
 ## Response shape
 
