@@ -1,35 +1,33 @@
 ---
-title: Customer authenticated requests
-description: Cover how APIEase supports customer-authenticated calls and what headers are required.
+title: Customer-authenticated requests
+description: Require a logged-in Shopify customer or allow selected customers to run a storefront request.
 ---
-# Customer authenticated requests
+# Customer-authenticated requests
 
-You can authenticate request calls from your storefront.
-
-Http calls from your storefront to APIEase are made using the [Shopify App Proxy](https://shopify.dev/docs/apps/online-store/app-proxies). If the customer is logged into your store then the customer id is sent to APIEase.
+Customer validation restricts a [storefront call](./triggers/storefont-calls.md) using the logged-in customer ID that Shopify sends through its app proxy. It does not authenticate remote calls or proxy endpoints, and it does not accept a customer ID supplied directly by browser code as proof of identity.
 
 ## Automatic customer ID injection
 
 Need to inject the logged-in customer ID into request values? See [Automatic Shopify Customer ID Injection](../general/apiease-details/automatic-shopify-customer-id-injection.md).
 
-## Customer Validation Options
+## Customer validation options
 
-You can restrict api calls to a particular request in APIEase by logged in customer in one of 2 ways:
+Choose one of these options on the directly called request.
 
-1. Automatically validate all logged in customers.
+### Require any logged-in customer
 
-Set "validateCustomer" to true as a System parameter.
+Add a System parameter named `validateCustomer` with value `true`.
 
 ![Validate customer system parameter toggle](https://tawk.link/65552a3acec6a91282103248/kb/attachments/zy4MAt-qUF.png)
 
-With "validateCustomer" set to true the customer must be logged into your store in order for the api call to pass validation and return a response to your storefront.
+The call passes only when Shopify's app proxy supplies a logged-in customer ID.
 
-2. Validate individual customer ids by associating requests with individual customer ids.
+### Allow selected customer IDs
 
-Include customer id as System parameter with name: "customerId" and value: "individual customer id".
+Add a System parameter named `customerId` with the allowed Shopify customer ID as its value. To allow multiple customers, add one `customerId` System parameter for each allowed ID. Do not enter a JSON array into one parameter value.
 
 ![Customer id system parameter example](https://tawk.link/65552a3acec6a91282103248/kb/attachments/zFgy2rIovc.png)
 
-If request parameters are owned by individual customer you will need to add a separate request with each particular customer's parameters and customer id as a System parameter.
+An allowlisted customer must also be logged in so Shopify can supply the matching ID. Use separate requests only when the request configuration itself must differ by customer.
 
-If you add customer id to a request that customer must be logged into the store in order for the api call to pass validation and return a response to your storefront.
+If validation fails, APIEase blocks the request instead of executing it or returning its normal response to the storefront.

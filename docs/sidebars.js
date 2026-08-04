@@ -149,7 +149,7 @@ const sidebars = {
             {
               type: 'doc',
               id: 'requests/triggers/storefont-calls',
-              label: 'Storefont Calls',
+              label: 'Storefront Calls',
             },
             {
               type: 'doc',
@@ -227,6 +227,7 @@ const sidebars = {
         'general/faq/getting-started-and-integrations',
         'general/faq/building-requests',
         'general/faq/credentials-and-security',
+        'general/faq/running-requests',
         {
           type: 'category',
           label: 'Settings',

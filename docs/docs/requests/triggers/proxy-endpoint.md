@@ -1,10 +1,10 @@
 ---
-title: Proxy Endpoint
+title: Proxy endpoint
 description: Expose a public API endpoint that runs an APIEase request whenever it is called.
 ---
-# Proxy Endpoint
+# Proxy endpoint
 
-Create a public API endpoint that executes an APIEase request and returns its final response to the caller—no custom server needed.
+Create a purpose-built HTTP endpoint that executes an APIEase request and returns its final response to the caller--no custom server needed. Unlike a [remote call](./calling-requests-remotely.md), a proxy endpoint has its own configured path and method and can be authenticated or unauthenticated.
 
 ## Endpoint format
 Your proxy endpoint URL looks like:
@@ -24,8 +24,11 @@ When someone calls this URL using the HTTP method you specify (GET, POST, etc.),
 5. The request’s final response is returned to the caller.
 
 ## Authentication options
-- **Authenticated**: Caller must authenticate using the same scheme as Remote API Calls.
-- **Unauthenticated**: Open access for anyone with the URL.
+
+- **Authenticated**: The caller supplies an APIEase API key. The shop is already identified by the `<shop-name>` segment in the proxy URL.
+- **Unauthenticated**: Anyone who can reach the URL can call it. Treat all incoming values as untrusted and do not return credentials or private data.
+
+Proxy endpoints are intended for external HTTP callers. For code running on the Shopify storefront, use a [storefront call](./storefont-calls.md) through Shopify's app proxy instead.
 
 ## Configure a proxy endpoint trigger
 1. Open any APIEase request.

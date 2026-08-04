@@ -6,10 +6,13 @@ description: Call APIEase requests from your Shopify storefront through Shopify'
 
 Run any APIEase request directly from your Shopify storefront using Shopify's app proxy. This lets you start workflows from theme code without exposing credentials or private logic in the browser.
 
-If you want a more convenient and reusable way to make storefront calls, use [Widget Calls](./widget-calls.md) and trigger the request from an APIEase widget instead of pasting snippets into theme Liquid.
+If you want a reusable storefront component, use [Widget Calls](./widget-calls.md) instead of pasting request code into theme Liquid.
 
-## Caution
-Use caution with Storefront App Proxy requests. Anyone from anywhere can call Storefront App Proxy requests. APIEase verifies that Storefront App Proxy requests have been routed through the Shopify App Proxy and that a Storefront App Proxy trigger has been added to the directly called request. However, anyone can call this request via the Shopify App Proxy just as you can from your storefront.
+## Storefront access boundary
+
+APIEase verifies that the call was routed through Shopify's app proxy and that the directly called request has a Storefront App Proxy trigger. That does not make the request customer-authenticated: anyone who can use the storefront route can call it unless you add [customer validation](../customer-authenticated-requests.md).
+
+The same-origin app-proxy path lets theme code avoid a direct browser call to APIEase. This is the documented APIEase storefront route, but it is not a guarantee that arbitrary browser requests to external services will avoid CORS restrictions. Browser-origin and CORS behavior still depends on the route being called and the response headers returned by that service.
 
 ## How it works
 - Your theme calls the APIEase app proxy path (for example `/apps/apiease/integration/caller/call`) and includes the request handle as the `requestId` value for the request to run.
@@ -50,6 +53,6 @@ Do not add a Storefront App Proxy trigger to helper requests that are only invok
 If the customer is logged in when the app proxy runs, Shopify includes their customer id in the call.
 
 - Require a logged-in customer: add a system parameter named `validateCustomer` with value `true`.
-- Restrict to a specific customer: add a system parameter named `customerId` set to the allowed Shopify customer id.
+- Restrict to selected customers: add one system parameter named `customerId` for each allowed Shopify customer ID.
 
 For detailed setup and screenshots, see [Customer authenticated requests](../customer-authenticated-requests.md). If validation fails, APIEase blocks the call and no response is returned to the storefront.

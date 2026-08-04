@@ -60,7 +60,7 @@ Expose a request as a public API endpoint with an optional shared secret. Extern
 
 Invoke any request directly from the APIEase admin for testing or on demand execution.
 
-### [Storefont Calls](../requests/triggers/storefont-calls.md)
+### [Storefront calls](../requests/triggers/storefont-calls.md)
 
 Trigger a request from your storefront using Shopify's app proxy. The storefront sends only non confidential data and APIEase performs the execution on the server side.
 

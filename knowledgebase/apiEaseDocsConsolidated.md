@@ -140,7 +140,7 @@ Expose a request as a public API endpoint with an optional shared secret. Extern
 
 Invoke any request directly from the APIEase admin for testing or on demand execution.
 
-### [Storefont Calls](../requests/triggers/storefont-calls.md)
+### [Storefront calls](../requests/triggers/storefont-calls.md)
 
 Trigger a request from your storefront using Shopify's app proxy. The storefront sends only non confidential data and APIEase performs the execution on the server side.
 
@@ -1982,7 +1982,7 @@ Flow Requests
 CONTENT
 # Flow Requests
 
-Flow requests allow you to securely trigger or continue a Shopify Flow workflow. You can pass data into the Flow from your storefront, a webhook, or another request, enabling flexible and secure automation without exposing any sensitive information.
+Flow requests hand data from APIEase to a Shopify Flow workflow. A Flow request is a request type, not an execution mechanism: add a suitable trigger when it is the entry request, or select its handle as **Next Request** when another APIEase request should continue into Flow.
 
 ![Flow request editor](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/add-http-api-requests.png?v=1744748372)
 
@@ -2005,6 +2005,8 @@ Flow requests allow you to securely trigger or continue a Shopify Flow workflow.
 - [Remote Calls](../triggers/calling-requests-remotely.md) from outside Shopify.
 - Manually via the "Copy and Execute" link on the requests admin page
 - From your storefront using Shopify's app proxy
+
+See [Triggers overview](../triggers/triggers-overview.md) to choose an entry point and understand its prerequisite.
 
 **Next Request**: You can specify the handle of another request to run after this request finishes. This allows you to build multi-step workflows using [chained requests](../request-parameters/chained-requests.md).
 
@@ -3177,42 +3179,21 @@ Triggers overview
 CONTENT
 # Triggers overview
 
-Every APIEase request uses the same configuration but can be invoked in different ways depending on where the call originates. Choose the trigger that best matches your workflow and follow the linked guides for setup details.
+Choose the execution mechanism that matches where the run starts and what the caller can provide.
 
-## [Webhooks](./webhooks/trigger-requests-from-a-webhook.md)
-- Start a request automatically when Shopify emits a webhook event.
-- Ideal for reacting to store activity such as orders, carts, or customers.
-- See also [Mapping webhook parameters](./webhooks/mapping-webhook-parameters.md) to pass webhook fields into your request.
+| Objective | Use | Main prerequisite |
+| --- | --- | --- |
+| Test or run a one-off action in APIEase admin | [Manual call](./manual-calls.md) | A saved request |
+| React to a Shopify event | [Shopify webhook](./webhooks/trigger-requests-from-a-webhook.md) | A webhook trigger for the required event |
+| Run at recurring times | [Cron schedule](./cron-schedule.md) | A valid five-field cron expression; schedules use UTC |
+| Call a saved request from a server or external automation | [Remote call](./calling-requests-remotely.md) | The request handle, shop domain, and an APIEase API key |
+| Publish a purpose-built HTTP route | [Proxy endpoint](./proxy-endpoint.md) | A unique path and method; choose whether authentication is required |
+| Call from Shopify theme code | [Storefront call](./storefont-calls.md) | A Storefront App Proxy trigger on the directly called request |
+| Call from reusable storefront UI | [Widget call](./widget-calls.md) | A saved widget and a request configured for Widget Calls |
 
-## [Cron Schedule](./cron-schedule.md)
-- Execute a request on a fixed schedule without any external event.
-- Use for regular syncs, polling, or time-based jobs.
+Customer-authenticated calls are a restricted form of storefront call, not a separate general-purpose API. Use [customer validation](../customer-authenticated-requests.md) when a storefront request must require a logged-in customer or allow only selected customer IDs.
 
-## [Proxy Endpoint](./proxy-endpoint.md)
-- Expose a stable endpoint that forwards incoming HTTP calls to a configured request.
-- Helpful when another system needs to call APIEase with a stable request handle instead of an internal id.
-
-## [Manual Calls](./manual-calls.md)
-- Run a request directly from the admin for testing or one-off actions.
-- Best for validating configuration before exposing the request to any external source.
-
-## [Storefont Calls](./storefont-calls.md)
-- Let theme code call a request via Shopify's app proxy without exposing secrets.
-- Great for customer-facing interactions that need server-side execution.
-- Works with [Customer authenticated requests](../customer-authenticated-requests.md) to access customer context securely.
-
-## [Widget Calls](./widget-calls.md)
-- Trigger requests from APIEase widgets on the storefront.
-- A reusable alternative to pasting request snippets into theme code.
-- See [Using Requests in Widgets](../../widgets/using-requests-in-widgets.md) for the widget-side configuration.
-
-## [Remote Calls](./calling-requests-remotely.md)
-- Invoke a request from outside Shopify using APIEase's remote caller API.
-- Use when automation or third-party systems must trigger requests directly.
-
-## [Chained Request](../request-parameters/chained-requests.md)
-- Trigger a follow-on request using the output of a previous one.
-- Useful for multi-step flows such as authenticate-then-call or data enrichment.
+After an entry request runs, **Next Request** can continue a simple linear workflow. This is [request chaining](../request-parameters/chained-requests.md), not an external trigger. A [Flow request](../request-types/flow-requests.md) can similarly hand data to Shopify Flow after starting from any suitable entry point.
 
 SOURCE
 https://docs.apiease.com/docs/requests/triggers/webhooks/webhooks-overview
@@ -3363,10 +3344,10 @@ SOURCE
 https://docs.apiease.com/docs/requests/triggers/cron-schedule
 
 TITLE
-Cron Schedule
+Cron schedule
 
 CONTENT
-# Cron Schedule
+# Cron schedule
 
 Use the built-in scheduler when you need a request to run at fixed times without any webhook or manual trigger.
 
@@ -3379,6 +3360,7 @@ Use the built-in scheduler when you need a request to run at fixed times without
 
 ## Tips
 - Cron uses a 5-field format: minute, hour, day of month, month, day of week.
+- Cron schedules use UTC. Convert the intended local time to UTC and account for daylight-saving changes when applicable.
 - Use `*/15 * * * *` for every 15 minutes, `0 9 * * 1-5` for 9 AM on weekdays, and `0 0 1 * *` for the first day of each month.
 - Make sure the request has all required parameters so the scheduled runs succeed without manual input.
 
@@ -3386,12 +3368,12 @@ SOURCE
 https://docs.apiease.com/docs/requests/triggers/proxy-endpoint
 
 TITLE
-Proxy Endpoint
+Proxy endpoint
 
 CONTENT
-# Proxy Endpoint
+# Proxy endpoint
 
-Create a public API endpoint that executes an APIEase request and returns its final response to the caller—no custom server needed.
+Create a purpose-built HTTP endpoint that executes an APIEase request and returns its final response to the caller--no custom server needed. Unlike a [remote call](./calling-requests-remotely.md), a proxy endpoint has its own configured path and method and can be authenticated or unauthenticated.
 
 ## Endpoint format
 Your proxy endpoint URL looks like:
@@ -3411,8 +3393,11 @@ When someone calls this URL using the HTTP method you specify (GET, POST, etc.),
 5. The request’s final response is returned to the caller.
 
 ## Authentication options
-- **Authenticated**: Caller must authenticate using the same scheme as Remote API Calls.
-- **Unauthenticated**: Open access for anyone with the URL.
+
+- **Authenticated**: The caller supplies an APIEase API key. The shop is already identified by the `<shop-name>` segment in the proxy URL.
+- **Unauthenticated**: Anyone who can reach the URL can call it. Treat all incoming values as untrusted and do not return credentials or private data.
+
+Proxy endpoints are intended for external HTTP callers. For code running on the Shopify storefront, use a [storefront call](./storefont-calls.md) through Shopify's app proxy instead.
 
 ## Configure a proxy endpoint trigger
 1. Open any APIEase request.
@@ -3456,10 +3441,13 @@ CONTENT
 
 Run any APIEase request directly from your Shopify storefront using Shopify's app proxy. This lets you start workflows from theme code without exposing credentials or private logic in the browser.
 
-If you want a more convenient and reusable way to make storefront calls, use [Widget Calls](./widget-calls.md) and trigger the request from an APIEase widget instead of pasting snippets into theme Liquid.
+If you want a reusable storefront component, use [Widget Calls](./widget-calls.md) instead of pasting request code into theme Liquid.
 
-## Caution
-Use caution with Storefront App Proxy requests. Anyone from anywhere can call Storefront App Proxy requests. APIEase verifies that Storefront App Proxy requests have been routed through the Shopify App Proxy and that a Storefront App Proxy trigger has been added to the directly called request. However, anyone can call this request via the Shopify App Proxy just as you can from your storefront.
+## Storefront access boundary
+
+APIEase verifies that the call was routed through Shopify's app proxy and that the directly called request has a Storefront App Proxy trigger. That does not make the request customer-authenticated: anyone who can use the storefront route can call it unless you add [customer validation](../customer-authenticated-requests.md).
+
+The same-origin app-proxy path lets theme code avoid a direct browser call to APIEase. This is the documented APIEase storefront route, but it is not a guarantee that arbitrary browser requests to external services will avoid CORS restrictions. Browser-origin and CORS behavior still depends on the route being called and the response headers returned by that service.
 
 ## How it works
 - Your theme calls the APIEase app proxy path (for example `/apps/apiease/integration/caller/call`) and includes the request handle as the `requestId` value for the request to run.
@@ -3500,7 +3488,7 @@ Do not add a Storefront App Proxy trigger to helper requests that are only invok
 If the customer is logged in when the app proxy runs, Shopify includes their customer id in the call.
 
 - Require a logged-in customer: add a system parameter named `validateCustomer` with value `true`.
-- Restrict to a specific customer: add a system parameter named `customerId` set to the allowed Shopify customer id.
+- Restrict to selected customers: add one system parameter named `customerId` for each allowed Shopify customer ID.
 
 For detailed setup and screenshots, see [Customer authenticated requests](../customer-authenticated-requests.md). If validation fails, APIEase blocks the call and no response is returned to the storefront.
 
@@ -3508,14 +3496,14 @@ SOURCE
 https://docs.apiease.com/docs/requests/triggers/widget-calls
 
 TITLE
-Widget Calls
+Widget calls
 
 CONTENT
-# Widget Calls
+# Widget calls
 
 Widgets are reusable storefront components managed inside APIEase. They can render UI and call requests. If you have not used widgets before, start with [Widgets overview](../../widgets/widgets-overview.md).
 
-Widget Calls are a trigger type for APIEase requests. They are a more convenient, reusable way to make [Storefront Calls](./storefont-calls.md), and they replace manually pasting request snippets into theme Liquid.
+Widget Calls are a trigger type for APIEase requests. Use one when an APIEase widget should call the request from the storefront. This is the reusable-UI alternative to pasting a [storefront call](./storefont-calls.md) into theme Liquid.
 
 ## How it works
 - The widget runs in the browser.
@@ -3523,6 +3511,8 @@ Widget Calls are a trigger type for APIEase requests. They are a more convenient
 - The request executes on the server and returns a response.
 
 To configure the widget-side request call, see [Using Requests in Widgets](../../widgets/using-requests-in-widgets.md).
+
+A widget is the reusable Liquid, CSS, and JavaScript component. The request remains a separate server-side resource, and **Widget Calls** authorizes that widget-side entry point. Choose a [Widget App Block](../../widgets/widget-app-block.md) to place the widget on a specific page or section, or a [Widget App Embed](../../widgets/widget-app-embed.md) for a widget that should load across the storefront.
 
 ## Passing values to Liquid requests
 Widget JavaScript uses the same APIEase integration endpoint as storefront calls. For Liquid requests, set `requestId` to the request handle and pass per-call values with `liquidParamsEmbedded`.
@@ -3536,28 +3526,32 @@ SOURCE
 https://docs.apiease.com/docs/requests/triggers/calling-requests-remotely
 
 TITLE
-Calling APIEase Requests Remotely
+Calling APIEase requests remotely
 
 CONTENT
-# Calling APIEase Requests Remotely
+# Calling APIEase requests remotely
 
-You can call any APIEase request from any http client by making a direct HTTP request to the APIEase platform. This allows you to run your configured requests from outside Shopify, such as from custom servers, external apps, or third-party platforms.
+Use a remote call when a trusted server, automation, or external application needs to run an existing request by its handle. The caller authenticates directly to APIEase with an APIEase API key and identifies the target shop in a header.
 
-**Step 1**: Create an API Key
+A remote call is different from a [Proxy Endpoint](./proxy-endpoint.md): a proxy endpoint gives a request a purpose-built path and HTTP method and can be public, while the remote caller uses APIEase's shared caller URL and always requires the APIEase remote-call headers. Neither is the Shopify app-proxy route used by [storefront calls](./storefont-calls.md).
+
+## 1. Create an APIEase API key
 
 1. Navigate to the Settings page in the APIEase admin.
 2. Click **Generate API Key**.
 3. Copy and store the key securely. You will use this key to authenticate your external calls.
 
-**Step 2**: Make the Remote Call
+## 2. Make the remote call
 
 **Address**: `https://app-admin.apiease.com/api/remote/caller/call?requestId=<your-request-handle>`
 
 **Headers:**
-- `x-shop-myshopify-domain`: `yourstore.myshopify.com`
-- `x-apiease-api-key`: `<your_generated_api_key>`
+- `x-shop-myshopify-domain`: `your-store.myshopify.com`
+- `x-apiease-api-key`: `YOUR_API_KEY`
 
 Replace `<your-request-handle>` with the handle of the request you want to call. The query parameter is still named `requestId`, but the value should be the request handle for new integrations.
+
+Keep the APIEase API key in the trusted external system. Do not put it in storefront JavaScript, theme Liquid, or widget code.
 
 SOURCE
 https://docs.apiease.com/docs/requests/request-parameters/chained-requests
@@ -3568,7 +3562,7 @@ Chained requests
 CONTENT
 # Chained requests
 
-Chained requests allow you to call one request after another, using the response from the first request as input to the second. This is especially useful when working with systems that require multi-step interactions, such as authentication followed by data access.
+Chained requests allow you to call one request after another, using the response from the first request as input to the second. Chaining is a continuation after an entry request runs, not a trigger that external callers invoke directly.
 
 For example, you might need to:
 
@@ -4328,40 +4322,38 @@ SOURCE
 https://docs.apiease.com/docs/requests/customer-authenticated-requests
 
 TITLE
-Customer authenticated requests
+Customer-authenticated requests
 
 CONTENT
-# Customer authenticated requests
+# Customer-authenticated requests
 
-You can authenticate request calls from your storefront.
-
-Http calls from your storefront to APIEase are made using the [Shopify App Proxy](https://shopify.dev/docs/apps/online-store/app-proxies). If the customer is logged into your store then the customer id is sent to APIEase.
+Customer validation restricts a [storefront call](./triggers/storefont-calls.md) using the logged-in customer ID that Shopify sends through its app proxy. It does not authenticate remote calls or proxy endpoints, and it does not accept a customer ID supplied directly by browser code as proof of identity.
 
 ## Automatic customer ID injection
 
 Need to inject the logged-in customer ID into request values? See [Automatic Shopify Customer ID Injection](../general/apiease-details/automatic-shopify-customer-id-injection.md).
 
-## Customer Validation Options
+## Customer validation options
 
-You can restrict api calls to a particular request in APIEase by logged in customer in one of 2 ways:
+Choose one of these options on the directly called request.
 
-1. Automatically validate all logged in customers.
+### Require any logged-in customer
 
-Set "validateCustomer" to true as a System parameter.
+Add a System parameter named `validateCustomer` with value `true`.
 
 ![Validate customer system parameter toggle](https://tawk.link/65552a3acec6a91282103248/kb/attachments/zy4MAt-qUF.png)
 
-With "validateCustomer" set to true the customer must be logged into your store in order for the api call to pass validation and return a response to your storefront.
+The call passes only when Shopify's app proxy supplies a logged-in customer ID.
 
-2. Validate individual customer ids by associating requests with individual customer ids.
+### Allow selected customer IDs
 
-Include customer id as System parameter with name: "customerId" and value: "individual customer id".
+Add a System parameter named `customerId` with the allowed Shopify customer ID as its value. To allow multiple customers, add one `customerId` System parameter for each allowed ID. Do not enter a JSON array into one parameter value.
 
 ![Customer id system parameter example](https://tawk.link/65552a3acec6a91282103248/kb/attachments/zFgy2rIovc.png)
 
-If request parameters are owned by individual customer you will need to add a separate request with each particular customer's parameters and customer id as a System parameter.
+An allowlisted customer must also be logged in so Shopify can supply the matching ID. Use separate requests only when the request configuration itself must differ by customer.
 
-If you add customer id to a request that customer must be logged into the store in order for the api call to pass validation and return a response to your storefront.
+If validation fails, APIEase blocks the request instead of executing it or returning its normal response to the storefront.
 
 SOURCE
 https://docs.apiease.com/docs/functions/functions-overview
@@ -4984,6 +4976,8 @@ CONTENT
 
 Widgets can call APIEase requests. The widget runs in the browser, but the request runs on the server. This separation keeps integrations secure by keeping credentials and private logic off the storefront.
 
+Before adding the call, add the **Widget Calls** trigger to the request. The widget, request, and theme placement are separate: the widget contains the storefront UI, the request performs the server-side work, and an [App Block or App Embed](./widget-app-extensions.md) determines where the widget loads.
+
 ## Configure a request call
 1. Get the handle for the request you want to run.
 2. In the widget edit page, the **Liquid** field is required; you can use a simple placeholder like `<div></div>`.
@@ -5183,6 +5177,55 @@ Use the permissions page only for APIEase's installed shop access token. A custo
 Rotate each credential at its issuing source, update every request or caller that uses it, test the replacement, and then revoke the old credential. For APIEase API keys, create and save a replacement in **Settings**, update external callers, verify them, then delete the old key and save the change. For Shopify or external-provider credentials, use that provider's rotation and revocation workflow.
 
 APIEase cannot rotate a provider-owned credential on your behalf.
+
+SOURCE
+https://docs.apiease.com/docs/general/faq/running-requests
+
+TITLE
+Running requests FAQ
+
+CONTENT
+# Running requests FAQ
+
+## How should I run a request?
+
+Choose the entry point that matches the caller: use a manual call in APIEase admin, a webhook for a Shopify event, cron for a recurring schedule, a remote call from a trusted external system, a proxy endpoint for a purpose-built HTTP route, a storefront call from theme code, or a Widget Call from an APIEase widget. The [triggers overview](../../requests/triggers/triggers-overview.md) compares prerequisites for each option.
+
+## How do I test or run a request once from APIEase admin?
+
+Use a **Manual Call**. From the Requests page, choose **Copy and Execute**, then **Execute and Run**. Manual execution is useful for a one-off action or for checking the saved configuration before adding another entry point. Follow [Manual calls](../../requests/triggers/manual-calls.md) for the procedure.
+
+## What is the difference between a remote call and a proxy endpoint?
+
+Use a **remote call** to run a saved request by handle through APIEase's shared caller URL; it requires an APIEase API key and shop-domain header. Use a **proxy endpoint** when you need a configured path and HTTP method that can be authenticated or unauthenticated. Neither is the Shopify app-proxy route used by storefront code. See [Calling APIEase requests remotely](../../requests/triggers/calling-requests-remotely.md) and [Proxy endpoint](../../requests/triggers/proxy-endpoint.md).
+
+## How do I run a request when a Shopify event occurs?
+
+Add a **Webhook** trigger and choose the APIEase event constant that corresponds to the Shopify topic, such as `ORDERS_CREATE`. APIEase passes the webhook payload as the body, and you can map payload fields into other request parameters. See [Trigger requests from a webhook](../../requests/triggers/webhooks/trigger-requests-from-a-webhook.md) and [Mapping webhook parameters](../../requests/triggers/webhooks/mapping-webhook-parameters.md).
+
+## How do I run a request on a recurring schedule?
+
+Add a **Cron** trigger with a five-field cron expression. APIEase evaluates cron schedules in UTC, so convert the intended local time and account for daylight-saving changes where applicable. See [Cron schedule](../../requests/triggers/cron-schedule.md).
+
+## How should storefront theme code call an APIEase request?
+
+Use a **Storefront App Proxy** trigger on the request that theme code calls directly, then call APIEase through Shopify's app-proxy path. This keeps saved credentials out of browser code, but the route is callable unless you add customer validation. It also does not promise that arbitrary browser calls to other services will avoid CORS restrictions. See [Storefront calls](../../requests/triggers/storefont-calls.md).
+
+## How do I require a logged-in customer or allow only selected customers?
+
+For a storefront call, add `validateCustomer=true` as a System parameter to require any logged-in customer. To allow selected customers, add one `customerId` System parameter for each allowed Shopify customer ID--not a JSON array in one value. Customer validation relies on the identity Shopify supplies through its app proxy; it is not authentication for remote calls or proxy endpoints. See [Customer-authenticated requests](../../requests/customer-authenticated-requests.md).
+
+## What is the difference between a widget, a Widget Call, an App Block, and an App Embed?
+
+A **widget** is reusable storefront Liquid, CSS, and JavaScript; **Widget Calls** lets its browser code run a separate APIEase request on the server. An **App Block** places a widget in a specific theme section or template, while an **App Embed** loads selected widgets across the storefront. See [Widget calls](../../requests/triggers/widget-calls.md) and [Widget App Extensions](../../widgets/widget-app-extensions.md).
+
+## How do I send APIEase data into Shopify Flow?
+
+Create a **Flow request** and map the values Flow should receive. Add a trigger if the Flow request is the entry point, or set the Flow request as **Next Request** after an HTTP, Liquid, or other APIEase request. See [How to add a Flow request](../../requests/shopify-flow-integration/add-flow-request.md) and the [APIEase + Shopify Flow architecture](../../requests/shopify-flow-integration/architecture.md).
+
+## How do I run several requests in sequence?
+
+Set **Next Request** to the next request's handle and reference fields from the previous response in the next request's parameters. This creates a simple linear request chain; it is not an external trigger. For conditions, loops, response shaping, or several explicit calls, use a Liquid request instead. See [Chained requests](../../requests/request-parameters/chained-requests.md).
 
 SOURCE
 https://docs.apiease.com/docs/general/settings/apiease-api-key

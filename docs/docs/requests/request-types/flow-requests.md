@@ -4,7 +4,7 @@ description: Configure APIEase Flow trigger/action requests and parameter mappin
 ---
 # Flow Requests
 
-Flow requests allow you to securely trigger or continue a Shopify Flow workflow. You can pass data into the Flow from your storefront, a webhook, or another request, enabling flexible and secure automation without exposing any sensitive information.
+Flow requests hand data from APIEase to a Shopify Flow workflow. A Flow request is a request type, not an execution mechanism: add a suitable trigger when it is the entry request, or select its handle as **Next Request** when another APIEase request should continue into Flow.
 
 ![Flow request editor](https://cdn.shopify.com/s/files/1/0733/1820/3680/files/add-http-api-requests.png?v=1744748372)
 
@@ -27,5 +27,7 @@ Flow requests allow you to securely trigger or continue a Shopify Flow workflow.
 - [Remote Calls](../triggers/calling-requests-remotely.md) from outside Shopify.
 - Manually via the "Copy and Execute" link on the requests admin page
 - From your storefront using Shopify's app proxy
+
+See [Triggers overview](../triggers/triggers-overview.md) to choose an entry point and understand its prerequisite.
 
 **Next Request**: You can specify the handle of another request to run after this request finishes. This allows you to build multi-step workflows using [chained requests](../request-parameters/chained-requests.md).

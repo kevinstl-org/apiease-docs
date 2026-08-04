@@ -4,7 +4,7 @@ description: How to link multiple requests and pass data between them.
 ---
 # Chained requests
 
-Chained requests allow you to call one request after another, using the response from the first request as input to the second. This is especially useful when working with systems that require multi-step interactions, such as authentication followed by data access.
+Chained requests allow you to call one request after another, using the response from the first request as input to the second. Chaining is a continuation after an entry request runs, not a trigger that external callers invoke directly.
 
 For example, you might need to:
 
